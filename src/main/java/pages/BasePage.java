@@ -9,14 +9,14 @@ import java.time.Duration;
 
 public abstract class BasePage {
 
-    protected final WebDriver DRIVER = DriverManager.getDriver();
+	protected final WebDriver DRIVER = DriverManager.getDriver();
 
-    protected WebDriverWait wait = new WebDriverWait(DRIVER, Duration.ofSeconds(10));
+	protected WebDriverWait wait = new WebDriverWait(DRIVER, Duration.ofSeconds(10));
 
-    public BasePage() {
-        PageFactory.initElements(DRIVER, this);
+	public BasePage() {
+		PageFactory.initElements(DRIVER, this);
 
-        DRIVER.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-    }
+		DRIVER.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	}
 
 }
