@@ -95,7 +95,7 @@ public class FlightHomePage extends BasePage {
 
     public void clickOnDayByIndex(int index) {
         List<WebElement> filterButton = dayButtons.stream().filter(button -> !button.getAttribute("class").contains("rdrDayPassive") && !button.getAttribute("class").contains("rdrDayDisplayed")).toList();
-        filterButton.get(index-1).click();
+        filterButton.get(index - 1).click();
     }
 
     public void clickOnPassengersOptionsItem() {
@@ -146,9 +146,12 @@ public class FlightHomePage extends BasePage {
     public void clickOnDoneButtonForPassengerField() {
         doneButton.click();
     }
-    public void clickOnPrevButton(){
+
+    public void clickOnPrevButton() {
         prevButton.click();
-    } public void clickOnNextButton(){
+    }
+
+    public void clickOnNextButton() {
         nextButton.click();
     }
 
@@ -156,5 +159,16 @@ public class FlightHomePage extends BasePage {
         searchFlightsBarInputFields.get(4).click();
     }
 
+    public void selectFirstDate(String firstDateStr) {
+        firstDate.click();
+        firstDate.clear();
+        firstDate.sendKeys(firstDateStr);
+    }
+
+    public void selectLastDate(String lastDateStr) {
+        lastDate.click();
+        lastDate.clear();
+        lastDate.sendKeys(lastDateStr);
+    }
 
 }
