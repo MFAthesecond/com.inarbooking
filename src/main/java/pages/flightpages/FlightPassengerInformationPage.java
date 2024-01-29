@@ -145,6 +145,7 @@ public class FlightPassengerInformationPage extends BasePage {
         return dividedPrice[dividedPrice.length - 1];
     }
 
+
     public Double getCalculatedTotalPrice() {
         double ticketPrice = Double.parseDouble(getTicketPrice());
         double taxesAndFeesPercentage = Double.parseDouble(getTaxesAndFeesPercentage());
