@@ -1,27 +1,31 @@
 package utils;
-import pages.flightpages.FlightHomePage;
-import lombok.Getter;
-import pages.CarRentalPage;
-import pages.HomePage;
 
+import lombok.Data;
+import pages.InarBookingHomePage;
+import pages.carpages.CarPages;
+import pages.carpages.CarRentalPage;
+import pages.HomePage;
+import pages.flightpages.FlightPages;
+import pages.hotelpages.HotelPages;
+
+@Data
 public class Pages {
 
-    CarRentalPage carRentalPage;
     private HomePage homePage;
+    private InarBookingHomePage inarBookingHomePage;
+    private FlightPages flightPages;
+    private CarPages carPages;
+    private HotelPages hotelPages;
 
 
     public Pages() {
         homePage = new HomePage();
-        carRentalPage = new CarRentalPage();
+        inarBookingHomePage = new InarBookingHomePage();
+        hotelPages = new HotelPages();
+        flightPages = new FlightPages();
+        carPages = new CarPages();
     }
 
-    public HomePage getHomePage() {
-        return homePage;
-    }
-
-    public CarRentalPage getCarRentalPage() {
-        return carRentalPage;
-    }
 
 }
 

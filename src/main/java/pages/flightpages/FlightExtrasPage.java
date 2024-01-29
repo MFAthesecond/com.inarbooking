@@ -64,12 +64,39 @@ public class FlightExtrasPage extends BasePage {
     }
 
     public String getTicketPrice(){
-       return priceCalculationContainer.findElement(By.cssSelector(".col-5 .flight-reserve-card .mb-3:nth-child(1) > div > span:nth-child(1)")).getText().substring(2);
+       return priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(1) > div > span:nth-child(1)")).getText().substring(2);
     }
 
+    public String getTaxesAndFeesPercentage(){
+        String taxesAndFees = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(2)  > span:nth-child(1)")).getText();
+        String[] dividedTaxesAndFees = taxesAndFees.split("%");
+        String percentage = dividedTaxesAndFees[dividedTaxesAndFees.length - 1];
+        return percentage.substring(0 , percentage.length() - 1);
+    }
 
+    public String getThirdPartyFeePercentage(){
+        String thirdPartyFee = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(3)  > span:nth-child(1)")).getText();
+        String[] dividedThirdPartyFee = thirdPartyFee.substring(thirdPartyFee.indexOf("%") + 1).split(" ");
+        return dividedThirdPartyFee[0];
+    }
 
+    public String getTotalPrice(){
+        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1")).getText().split("\\$");
+        return dividedPrice[dividedPrice.length - 1];
+    }
 
+    public Double getCalculatedTotalPrice(){
+        double ticketPrice = Double.parseDouble(getTicketPrice());
+        double taxesAndFeesPercentage = Double.parseDouble(getTaxesAndFeesPercentage());
+        double thirdPartyFeePercentage = Double.parseDouble(getThirdPartyFeePercentage());
+        double totalPrice = ticketPrice + ((ticketPrice * taxesAndFeesPercentage) / 100) + ((ticketPrice * thirdPartyFeePercentage) / 100);
+        return totalPrice;
+    }
 
-
+    public void clickOnBackButton(){
+        extrasContainer.findElement(By.cssSelector("button:nth-child(1)")).click();
+    }
+    public void clickOnGoToCheckOutButton(){
+        extrasContainer.findElement(By.cssSelector("button:nth-child(2)")).click();
+    }
 }
