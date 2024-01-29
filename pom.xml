@@ -86,12 +86,16 @@ cucumber-java -->
             <artifactId>extentreports-cucumber7-adapter</artifactId>
             <version>1.14.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.masterthought/maven-cucumber-reporting -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>maven-cucumber-reporting</artifactId>
             <version>5.7.7</version>
         </dependency>
+
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
