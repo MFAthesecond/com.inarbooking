@@ -1,5 +1,9 @@
 package utils;
 
-public class Pages {
+import pages.flightpages.FlightHomePage;
 
+public class Pages {
 }
+
+
+
