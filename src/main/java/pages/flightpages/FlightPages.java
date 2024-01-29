@@ -11,6 +11,7 @@ public class FlightPages {
     private FlightCheckAndPayPage flightCheckAndPayPage;
     private FlightFarePage flightFarePage;
     private FlightPassengerInformationPage flightPassengerInformationPage;
+    private FlightConfirmationPage flightConfirmationPage;
 
     public FlightPages() {
         flightHomePage = new FlightHomePage();
@@ -19,5 +20,7 @@ public class FlightPages {
         flightCheckAndPayPage = new FlightCheckAndPayPage();
         flightFarePage = new FlightFarePage();
         flightPassengerInformationPage = new FlightPassengerInformationPage();
+        flightConfirmationPage = new FlightConfirmationPage();
+
     }
 }
