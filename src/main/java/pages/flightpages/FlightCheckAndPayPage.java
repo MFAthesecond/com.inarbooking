@@ -3,7 +3,7 @@ package pages.flightpages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CheckAndPayPage {
+public class FlightCheckAndPayPage {
     @FindBy(css = "input[placeholder=\"Cardholder's Name\"]")
     private WebElement cardHolderNameField;
     @FindBy(css = "input[placeholder='**** **** **** ****']")
