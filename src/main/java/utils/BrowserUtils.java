@@ -1,10 +1,7 @@
 package utils;
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
@@ -122,6 +119,12 @@ public class BrowserUtils {
             actions.keyDown(Keys.PAGE_UP).build().perform();
             BrowserUtils.wait(1);
         }
+    }
+
+    public static void scrollDownWithJavaScript(int x, int y) {
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript("window.scrollBy(" + x + "," + y + ");");
+        wait(2);
     }
 
 

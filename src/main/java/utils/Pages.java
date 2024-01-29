@@ -3,7 +3,7 @@ package utils;
 import lombok.Data;
 import pages.InarBookingHomePage;
 import pages.carpages.CarPages;
-import pages.carpages.CarRentalPage;
+
 import pages.HomePage;
 import pages.flightpages.FlightPages;
 import pages.hotelpages.HotelPages;
