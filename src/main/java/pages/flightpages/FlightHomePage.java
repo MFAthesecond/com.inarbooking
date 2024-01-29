@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class FlightHomePage extends BasePage {
     @FindBy(xpath = "//span[normalize-space()='Flights']")
     private WebElement flightTab;
 
-    @FindBy(css = "div[class='h-100 d-flex justify-content-start align-items-center'] label")
+    @FindBy(css = "div[class=' h-100 d-flex justify-content-start align-items-center'] label")
     private List<WebElement> roundTripAndOneWayRadioButton;
 
     @FindBy(xpath = "//select[@class='headerSearchInput w-100 form-select fs-4']")
@@ -127,7 +128,7 @@ public class FlightHomePage extends BasePage {
         }
     }
 
-    public void adjustChildrenCounter(int input) {
+    public void clickOnChildrenCounterNumber(int input) {
         int currentNumber = Integer.parseInt(getTextOfChildrenCounterNumber());
 
         if (input > currentNumber) {
