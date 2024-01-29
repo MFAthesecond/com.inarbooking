@@ -1,13 +1,10 @@
 package utils;
-
+import pages.flightpages.FlightHomePage;
 import lombok.Getter;
 import pages.CarRentalPage;
 import pages.HomePage;
 
 public class Pages {
-
-
-
 
     CarRentalPage carRentalPage;
     private HomePage homePage;
@@ -27,3 +24,6 @@ public class Pages {
     }
 
 }
+
+
+
