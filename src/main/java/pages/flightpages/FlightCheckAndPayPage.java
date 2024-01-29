@@ -1,9 +1,11 @@
 package pages.flightpages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.BasePage;
 
-public class FlightCheckAndPayPage {
+public class FlightCheckAndPayPage extends BasePage {
     @FindBy(css = "input[placeholder=\"Cardholder's Name\"]")
     private WebElement cardHolderNameField;
     @FindBy(css = "input[placeholder='**** **** **** ****']")
@@ -20,37 +22,70 @@ public class FlightCheckAndPayPage {
     private WebElement backButton;
     @FindBy(xpath = "//span[normalize-space()='Complete Booking']")
     private WebElement completeBookingButton;
+    @FindBy(css = ".col-5 .flight-reserve-card")
+    private WebElement priceCalculationContainer;
 
-    public void clickOnBackButton(){
+    public void clickOnBackButton() {
         backButton.click();
     }
-    public void clickOnCompleteBookingButton(){
+
+    public void clickOnCompleteBookingButton() {
         completeBookingButton.click();
     }
 
-    public void fillCardHolderName(String name){
+    public void fillCardHolderName(String name) {
         cardHolderNameField.sendKeys(name);
     }
 
-    public void fillCardNumber(String number){
+    public void fillCardNumber(String number) {
         cardNumberField.sendKeys(number);
     }
 
-    public void fillExpirationDate(String date){
+    public void fillExpirationDate(String date) {
         expirationDateField.sendKeys(date);
     }
 
-    public void fillCvcCode(String code){
+    public void fillCvcCode(String code) {
         cvcCodeField.sendKeys(code);
     }
 
-    public void clickOnEmailConsentCheckbox(){
+    public void clickOnEmailConsentCheckbox() {
         emailConsentCheckbox.click();
     }
 
-    public void clickOnTransportDealsConsentCheckbox(){
+    public void clickOnTransportDealsConsentCheckbox() {
         transportDealsConsentCheckbox.click();
     }
-    
+
+    public String getTicketPrice() {
+        return priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(1) > div > span:nth-child(1)")).getText().substring(2);
+    }
+
+    public String getTaxesAndFeesPercentage() {
+        String taxesAndFees = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(2)  > span:nth-child(1)")).getText();
+        String[] dividedTaxesAndFees = taxesAndFees.split("%");
+        String percentage = dividedTaxesAndFees[dividedTaxesAndFees.length - 1];
+        return percentage.substring(0, percentage.length() - 1);
+    }
+
+    public String getThirdPartyFeePercentage() {
+        String thirdPartyFee = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(3)  > span:nth-child(1)")).getText();
+        String[] dividedThirdPartyFee = thirdPartyFee.substring(thirdPartyFee.indexOf("%") + 1).split(" ");
+        return dividedThirdPartyFee[0];
+    }
+
+    public String getTotalPrice() {
+        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1")).getText().split("\\$");
+        return dividedPrice[dividedPrice.length - 1];
+    }
+
+    public Double getCalculatedTotalPrice() {
+        double ticketPrice = Double.parseDouble(getTicketPrice());
+        double taxesAndFeesPercentage = Double.parseDouble(getTaxesAndFeesPercentage());
+        double thirdPartyFeePercentage = Double.parseDouble(getThirdPartyFeePercentage());
+        double totalPrice = ticketPrice + ((ticketPrice * taxesAndFeesPercentage) / 100) + ((ticketPrice * thirdPartyFeePercentage) / 100);
+        return totalPrice;
+    }
+
 
 }
