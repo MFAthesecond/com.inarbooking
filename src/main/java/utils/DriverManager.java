@@ -49,9 +49,8 @@ public class DriverManager {
 	}
 
 	public static void closeDriver() {
-		WebDriver currentDriver = DRIVER_THREAD_LOCAL.get();
-		if (currentDriver != null) {
-			currentDriver.quit();
+		if (DRIVER_THREAD_LOCAL.get() != null) {
+			DRIVER_THREAD_LOCAL.get().quit();
 			DRIVER_THREAD_LOCAL.remove();
 		}
 	}
