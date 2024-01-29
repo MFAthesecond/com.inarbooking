@@ -1,6 +1,8 @@
 package pages.hotelpages;
 
-public class HotelPages {
+import pages.BasePage;
+
+public class HotelPages  extends BasePage {
 
 
 }
