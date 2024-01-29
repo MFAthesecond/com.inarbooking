@@ -1,5 +1,7 @@
 package stepdefinitions;
 
-public class CarRentalSteps {
+public class CarRentalSteps extends BaseStep{
+
+
 
 }
