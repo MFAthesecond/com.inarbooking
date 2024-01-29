@@ -1,4 +1,4 @@
-package pages;
+package pages.hotelpages;
 
 public class HotelPage {
 

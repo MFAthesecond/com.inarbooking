@@ -1,3 +1,8 @@
+### Version 1.0.2 (2024-01-28)
+#### **Added**
+- [The flight fare page created.](https://inar-academy-team4.atlassian.net/browse/T4-66)
+
+
 ### Version 1.0.1 (2024-01-28)
 #### **Added**
 - Page object model implementation created.

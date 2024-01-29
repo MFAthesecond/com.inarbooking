@@ -1,9 +1,10 @@
-package pages;
+package pages.carpages;
 
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.BasePage;
 
 import java.util.List;
 import java.util.Random;
