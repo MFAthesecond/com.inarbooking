@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class FlightPassengerInformationPage extends BasePage {
 
 
     public void clickOnFreeTextMessageField() {
-        freeTextMessageField.click();
+        BrowserUtils.clickOnElement(freeTextMessageField);
     }
 
     public void fillTravelerCard(int index, String firstName, String lastName, String gender, String year, String month, String day) {
@@ -115,11 +116,11 @@ public class FlightPassengerInformationPage extends BasePage {
     }
 
     public void clickOnBackButton() {
-        backButton.click();
+        BrowserUtils.clickOnElement(backButton);
     }
 
     public void clickOnSelectExtrasButton() {
-        selectExtrasButton.click();
+        BrowserUtils.clickOnElement(selectExtrasButton);
     }
 
 
