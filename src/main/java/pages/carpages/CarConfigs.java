@@ -67,8 +67,19 @@ public class CarConfigs extends BasePage {
         for (int i = startPriceElement; i < endPriceElement; i++) {
             priceOptions.get(i).click();
             BrowserUtils.wait(0.25);
-
         }
+    }
+
+    public String getTheSelectedMaxPrice() {
+        List<WebElement> priceOptions = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxInput"));
+        List<WebElement> prices = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxText"));
+
+        for (int i = priceOptions.size() - 1; i >= 0; i--) {
+            if (priceOptions.get(i).isSelected()) {
+                return prices.get(i).getText().substring(prices.get(i).getText().indexOf("-"));
+            }
+        }
+        return prices.get(prices.size()).getText().substring(prices.get(prices.size()).getText().indexOf("-")+1);
     }
 
     public void setTheCarSpecs(String numberOfCarSpecs) {
@@ -101,4 +112,15 @@ public class CarConfigs extends BasePage {
             case "suv" -> carCategoryOptions.get(4).click();
         }
     }
+
+    //sort bY section
+    @FindBy(css = "div[class='search-btn-car-rental'] button")
+    private WebElement searchButton;
+
+    public void clickOnSearchButton(){
+        searchButton.click();
+        BrowserUtils.wait(2);
+    }
+
+
 }
