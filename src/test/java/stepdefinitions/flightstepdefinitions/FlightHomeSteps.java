@@ -34,8 +34,8 @@ public class FlightHomeSteps extends BaseStep {
     }
     @And("Select {string} for flight class")
     public void select_for_flight_class(String string) {
-        PAGES.getFlightPages().getFlightHomePage().selectFlightClassesDropDown(string);
         try {
+            PAGES.getFlightPages().getFlightHomePage().selectFlightClassesDropDown(string);
             LOGGER.debug("The trip type is selected");
         }catch (RuntimeException ex){
             LOGGER.error("The checkbox element could not be clicked" + ex.getClass());
@@ -65,11 +65,6 @@ public class FlightHomeSteps extends BaseStep {
         PAGES.getFlightPages().getFlightHomePage().clickOnChildrenCounterNumber(childNum);
         PAGES.getFlightPages().getFlightHomePage().clickOnSearchFlightButton();
     }
-    @Then("Validate the user is on flight selection page")
-    public void validate_the_user_is_on_flight_selection_page() {
-       then(DRIVER.getCurrentUrl()).isEqualTo("https://InarAcademy:Fk160621.@test.inar-academy.com/booking/flights");
-    }
-
     @And("Select date as {string} and {string} days of next month")
     public void selectDateAsAndDaysOfNextMonth(String day1, String day2) {
         PAGES.getFlightPages().getFlightHomePage().clickOnDatePicker();
@@ -99,6 +94,9 @@ public class FlightHomeSteps extends BaseStep {
     public void clickOnSearchFlightButton() {
         PAGES.getFlightPages().getFlightHomePage().clickOnSearchFlightButton();
     }
-
+    @Then("Validate the user is on flight selection page")
+    public void validate_the_user_is_on_flight_selection_page() {
+        then(DRIVER.getCurrentUrl()).isEqualTo("https://InarAcademy:Fk160621.@test.inar-academy.com/booking/flights");
+    }
 
 }
