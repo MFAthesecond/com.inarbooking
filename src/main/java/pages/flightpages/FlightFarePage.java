@@ -67,5 +67,8 @@ public class FlightFarePage extends BasePage {
         returnContainer.findElement(By.cssSelector("button:nth-child(2)"));
     }
 
+    public String getContainerInstruction(String containerName){
+        return getContainer(containerName).findElement(By.cssSelector("h3")).getText();
+    }
 
 }

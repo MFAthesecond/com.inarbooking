@@ -100,4 +100,7 @@ public class FlightSelectionPage extends BasePage {
         WebElement durationHours = durationList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(durationHoursName)).findFirst().get();
         durationHours.findElement(By.cssSelector("input")).click();
     }
+    public void clickOnSearchButton(){
+        searchButton.click();
+    }
 }
