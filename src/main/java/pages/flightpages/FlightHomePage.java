@@ -57,7 +57,7 @@ public class FlightHomePage extends BasePage {
     private WebElement doneButton;
 
     public void clickOnFlightTab() {
-        flightTab.click();
+        BrowserUtils.clickOnElement(flightTab);
     }
 
     public void selectFlightClassesDropDown(String flightClassesSelectionText) {
@@ -67,7 +67,7 @@ public class FlightHomePage extends BasePage {
 
     public void clickOnRoundTripAndOneWayRadioButton(String buttonName) {
         WebElement element = roundTripAndOneWayRadioButton.stream().filter(webElement -> webElement.findElement(By.cssSelector("span")).getText().equals(buttonName)).findFirst().get();
-        element.click();
+        BrowserUtils.clickOnElement(element);
     }
 
     public void selectFromDropDown(String fromSelectionText) {
@@ -81,7 +81,7 @@ public class FlightHomePage extends BasePage {
     }
 
     public void clickOnDatePicker() {
-        searchFlightsBarInputFields.get(2).click();
+        BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(2));
     }
 
     public void selectMonthDropDown(String monthSelectionText) {
@@ -96,12 +96,11 @@ public class FlightHomePage extends BasePage {
 
     public void clickOnDayByIndex(int index) {
         List<WebElement> filterButton = dayButtons.stream().filter(button -> !button.getAttribute("class").contains("rdrDayPassive") && !button.getAttribute("class").contains("rdrDayDisplayed")).toList();
-        filterButton.get(index - 1).click();
+        BrowserUtils.clickOnElement(filterButton.get(index - 1));
     }
 
     public void clickOnPassengersOptionsItem() {
         BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(3));
-//        searchFlightsBarInputFields.get(3).click();
 
     }
 
@@ -118,12 +117,12 @@ public class FlightHomePage extends BasePage {
 
         if (input > currentNumber) {
             while (currentNumber < input) {
-                counterButtons.get(1).click();
+                BrowserUtils.clickOnElement(counterButtons.get(1));
                 currentNumber++;
             }
         } else if (input < currentNumber) {
             while (currentNumber > input) {
-                counterButtons.get(0).click();
+                BrowserUtils.clickOnElement(counterButtons.get(0));
                 currentNumber--;
             }
         }
@@ -134,19 +133,19 @@ public class FlightHomePage extends BasePage {
 
         if (input > currentNumber) {
             while (currentNumber < input) {
-                counterButtons.get(3).click();
+                BrowserUtils.clickOnElement(counterButtons.get(3));
                 currentNumber++;
             }
         } else if (input < currentNumber) {
             while (currentNumber > input) {
-                counterButtons.get(2).click();
+                BrowserUtils.clickOnElement(counterButtons.get(2));
                 currentNumber--;
             }
         }
     }
 
     public void clickOnDoneButtonForPassengerField() {
-        doneButton.click();
+        BrowserUtils.clickOnElement(doneButton);
     }
 
     public void clickOnPrevButton() {
@@ -154,21 +153,20 @@ public class FlightHomePage extends BasePage {
     }
 
     public void clickOnNextButton() {
-        nextButton.click();
+        BrowserUtils.clickOnElement(nextButton);
     }
-
     public void clickOnSearchFlightButton() {
-        searchFlightsBarInputFields.get(4).click();
+        BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(4));
     }
 
     public void selectFirstDate(String firstDateStr) {
-        firstDate.click();
+        BrowserUtils.clickOnElement(firstDate);
         firstDate.clear();
         firstDate.sendKeys(firstDateStr);
     }
 
     public void selectLastDate(String lastDateStr) {
-        lastDate.click();
+        BrowserUtils.clickOnElement(lastDate);
         lastDate.clear();
         lastDate.sendKeys(lastDateStr);
     }
