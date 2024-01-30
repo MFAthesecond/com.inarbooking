@@ -4,8 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class CarRentalCheckOut extends BasePage {
 
@@ -15,8 +19,10 @@ public class CarRentalCheckOut extends BasePage {
     @FindBy(css = ".form-control")
     private List<WebElement> customesInfos;
 
-    @FindBy(css = ".form-select")
-    private WebElement countryPhoneNumber;
+    @FindBy(css = "option")
+    private List<WebElement> countryPhoneNumber;
+    @FindBy(css = "select[name='phoneCountry']")
+    private WebElement counrty;
 
     public void setFirstName(String firstName) {
         customesInfos.get(0).sendKeys(firstName);
@@ -63,8 +69,15 @@ public class CarRentalCheckOut extends BasePage {
     }
 
     public void setOnCountriesPhoneNumber(String countryName) {
-        countryPhoneNumber.click();
-        List<WebElement> countries = countryPhoneNumber.findElements(By.cssSelector(" > option")).stream().toList();
+        counrty.click();
+        BrowserUtils.wait(1);
+        for (int i = 0; i < 7; i++) {
+            if (countryName.contains(countryPhoneNumber.get(i).getAttribute("value").toLowerCase(Locale.ROOT))) {
+                BrowserUtils.wait(0.50);
+                countryPhoneNumber.get(i).click();
+                break;
+            }
+        }
     }
 
 

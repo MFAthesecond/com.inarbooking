@@ -29,7 +29,6 @@ public class CarConfigsRight {
     private List<WebElement> carsAppeared;
     public List<String> pricesOfCarsInPage() {
         List<String> pricesOfCarsInThePage = new ArrayList<>();
-        pricesOfCarsInThePage.add("bilal");
         System.out.println(carsAppeared.size());
         return pricesOfCarsInThePage;
     }
