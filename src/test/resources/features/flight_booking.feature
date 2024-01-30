@@ -27,6 +27,7 @@ Feature: Flight Filtering
       | Economy      | USA            | China    | 20      | 25      | 3        | 7        |
       | First Class  | United Kingdom | Spain    | 8       | 11      | 15       | 7        |
 
+
   Scenario: Validate that the flight selection process
 
     When Click on the Flight Tab
@@ -37,7 +38,7 @@ Feature: Flight Filtering
     And Select "Airline C" for airlines
     And Select "6 hours" for duration (hours)
     And Click on search button
-    And Click on select ticket button for "<Airline C - FL287790>"
+    And Click on select ticket button for #1 flight
 #    Then Verify that the user on flight fare page
 
 
