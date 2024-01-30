@@ -1,17 +1,15 @@
 package pages.carpages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import utils.BrowserUtils;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 
-public class CarConfigs extends BasePage {
+public class gitCarConfigs extends BasePage {
     @FindBy(css = ".listSearch-car-rental > div")
     private WebElement carRentalConfigurations;
 
