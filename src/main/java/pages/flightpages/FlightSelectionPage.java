@@ -35,9 +35,9 @@ public class FlightSelectionPage extends BasePage {
     @FindBy(css = ".lsItem-flights:nth-child(8) .d-flex")
     private List<WebElement> tripTypeListForRoundTripAndCabinClassListForOneWay;
     @FindBy(css = ".lsItem-flights:nth-child(9) .lsCheckboxItem")
-    private List<WebElement> cabinClassList;
+    private List<WebElement> cabinClassListForRoundTripAndAirlinesListForOneWay;
     @FindBy(css = ".lsItem-flights:nth-child(10) .lsCheckboxItem")
-    private List<WebElement> airlinesList;
+    private List<WebElement> airlinesListForRoundTripAndDurationListForOneWay;
     @FindBy(css = ".lsItem-flights:nth-child(11) .lsCheckboxItem")
     private List<WebElement> durationList;
     @FindBy(css = ".search-btn-flight button")
@@ -97,15 +97,15 @@ public class FlightSelectionPage extends BasePage {
         tripType.findElement(By.cssSelector("input")).click();
         BrowserUtils.clickOnElement(tripType.findElement(By.cssSelector("input")));
     }
-    public void selectCabinClass(String cabinClassName){
-        WebElement cabinClass = cabinClassList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(cabinClassName)).findFirst().get();
+    public void selectCabinClassForRoundTrip(String cabinClassName){
+        WebElement cabinClass = cabinClassListForRoundTripAndAirlinesListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(cabinClassName)).findFirst().get();
         BrowserUtils.clickOnElement(cabinClass.findElement(By.cssSelector("input")));
     }
-    public void selectAirlines(String airlinesName){
-        WebElement airlines = airlinesList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(airlinesName)).findFirst().get();
+    public void selectAirlinesForRoundTrip(String airlinesName){
+        WebElement airlines = airlinesListForRoundTripAndDurationListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(airlinesName)).findFirst().get();
         BrowserUtils.clickOnElement(airlines.findElement(By.cssSelector("input")));
     }
-    public void selectDurationHours(String durationHoursName){
+    public void selectDurationHoursForRoundTrip(String durationHoursName){
         WebElement durationHours = durationList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(durationHoursName)).findFirst().get();
         BrowserUtils.clickOnElement(durationHours.findElement(By.cssSelector("input")));
     }
@@ -127,5 +127,20 @@ public class FlightSelectionPage extends BasePage {
         tripType.findElement(By.cssSelector("input")).click();
         BrowserUtils.clickOnElement(tripType.findElement(By.cssSelector("input")));
     }
+    public void selectCabinClassForOneWay(String cabinClassName){
+        WebElement cabinClass = tripTypeListForRoundTripAndCabinClassListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(cabinClassName)).findFirst().get();
+        BrowserUtils.clickOnElement(cabinClass.findElement(By.cssSelector("input")));
+    }
+    public void selectAirlinesForOneWay(String airlinesName){
+        WebElement airlines = cabinClassListForRoundTripAndAirlinesListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(airlinesName)).findFirst().get();
+        BrowserUtils.clickOnElement(airlines.findElement(By.cssSelector("input")));
+    }
+    public void selectDurationHoursForOneWay(String durationHoursName){
+        WebElement durationHours = airlinesListForRoundTripAndDurationListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(durationHoursName)).findFirst().get();
+        BrowserUtils.clickOnElement(durationHours.findElement(By.cssSelector("input")));
+    }
+
+
+
 
 }

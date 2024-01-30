@@ -34,8 +34,8 @@ public class FlightHomeSteps extends BaseStep {
     }
     @And("Select {string} for flight class")
     public void select_for_flight_class(String string) {
-        PAGES.getFlightPages().getFlightHomePage().selectFlightClassesDropDown(string);
         try {
+            PAGES.getFlightPages().getFlightHomePage().selectFlightClassesDropDown(string);
             LOGGER.debug("The trip type is selected");
         }catch (RuntimeException ex){
             LOGGER.error("The checkbox element could not be clicked" + ex.getClass());

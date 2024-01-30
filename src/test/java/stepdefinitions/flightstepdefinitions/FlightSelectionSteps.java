@@ -11,18 +11,18 @@ public class FlightSelectionSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightSelectionSteps.class);
     @And("Unselect {string} and Unselect {string} for cabin class")
     public void unselectAndUnselectForCabinClass(String classType1, String classType2) {
-        PAGES.getFlightPages().getFlightSelectionPage().selectCabinClass(classType1);
-        PAGES.getFlightPages().getFlightSelectionPage().selectCabinClass(classType2);
+        PAGES.getFlightPages().getFlightSelectionPage().selectCabinClassForRoundTrip(classType1);
+        PAGES.getFlightPages().getFlightSelectionPage().selectCabinClassForRoundTrip(classType2);
     }
 
     @And("Select {string} for airlines")
     public void selectForAirlines(String airlinesType) {
-        PAGES.getFlightPages().getFlightSelectionPage().selectAirlines(airlinesType);
+        PAGES.getFlightPages().getFlightSelectionPage().selectAirlinesForRoundTrip(airlinesType);
     }
 
     @And("Select {string} for duration \\(hours)")
     public void selectForDurationHours(String duration) {
-        PAGES.getFlightPages().getFlightSelectionPage().selectDurationHours(duration);
+        PAGES.getFlightPages().getFlightSelectionPage().selectDurationHoursForRoundTrip(duration);
     }
 
     @And("Click on search button")
