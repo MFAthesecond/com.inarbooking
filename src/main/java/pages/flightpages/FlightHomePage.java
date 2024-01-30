@@ -95,7 +95,7 @@ public class FlightHomePage extends BasePage {
     }
 
     public void clickOnDayByIndex(int index) {
-        List<WebElement> filterButton = dayButtons.stream().filter(button -> !button.getAttribute("class").contains("rdrDayPassive") && !button.getAttribute("class").contains("rdrDayDisplayed")).toList();
+        List<WebElement> filterButton = dayButtons.stream().filter(button -> !button.getAttribute("class").contains("rdrDayPassive") && !button.getAttribute("class").contains("rdrDayDisabled")).toList();
         BrowserUtils.clickOnElement(filterButton.get(index - 1));
     }
 
