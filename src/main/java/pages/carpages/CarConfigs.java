@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.Random;
 
 
-public class gitCarConfigs extends BasePage {
+public class CarConfigs extends BasePage {
     @FindBy(css = ".listSearch-car-rental > div")
     private WebElement carRentalConfigurations;
 
