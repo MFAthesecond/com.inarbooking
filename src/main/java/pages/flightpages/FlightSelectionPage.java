@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class FlightSelectionPage extends BasePage {
     }
 
     public void clickOnPaginationButton(int buttonIndex){
-        paginationButtons.get(buttonIndex - 1).click();
+        BrowserUtils.clickOnElement(paginationButtons.get(buttonIndex - 1));
     }
     public void selectFromOriginDropDown(String originName){
         Select select = new Select(originDropDown);
@@ -87,20 +88,21 @@ public class FlightSelectionPage extends BasePage {
     public void selectTripType(String tripTypeName){
         WebElement tripType = tripTypeList.stream().filter(element -> element.findElement(By.cssSelector(".ms-2")).getText().equals(tripTypeName)).findFirst().get();
         tripType.findElement(By.cssSelector("input")).click();
+        BrowserUtils.clickOnElement(tripType.findElement(By.cssSelector("input")));
     }
     public void selectCabinClass(String cabinClassName){
         WebElement cabinClass = cabinClassList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(cabinClassName)).findFirst().get();
-        cabinClass.findElement(By.cssSelector("input")).click();
+        BrowserUtils.clickOnElement(cabinClass.findElement(By.cssSelector("input")));
     }
     public void selectAirlines(String airlinesName){
         WebElement airlines = airlinesList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(airlinesName)).findFirst().get();
-        airlines.findElement(By.cssSelector("input")).click();
+        BrowserUtils.clickOnElement(airlines.findElement(By.cssSelector("input")));
     }
     public void selectDurationHours(String durationHoursName){
         WebElement durationHours = durationList.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(durationHoursName)).findFirst().get();
-        durationHours.findElement(By.cssSelector("input")).click();
+        BrowserUtils.clickOnElement(durationHours.findElement(By.cssSelector("input")));
     }
     public void clickOnSearchButton(){
-        searchButton.click();
+        BrowserUtils.clickOnElement(searchButton);
     }
 }

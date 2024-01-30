@@ -58,8 +58,8 @@ public class FlightHomeSteps extends BaseStep {
     }
     @And("Select {int} adults and {int} child and click on search flight button")
     public void select_adults_and_child_and_click_on_search_flight_button(Integer adultNum, Integer childNum) {
-        BrowserUtils.scrollDownWithJavaScript(0 , -400);
-        BrowserUtils.wait(2);
+//        BrowserUtils.scrollDownWithJavaScript(0 , -400);
+//        BrowserUtils.wait(2);
         PAGES.getFlightPages().getFlightHomePage().clickOnPassengersOptionsItem();
         PAGES.getFlightPages().getFlightHomePage().clickOnAdultCounterNumber(adultNum);
         PAGES.getFlightPages().getFlightHomePage().clickOnChildrenCounterNumber(childNum);
