@@ -31,13 +31,14 @@ public class CarConfigs extends BasePage {
 
     }
 
-    //
+    @FindBy(css = ".w-auto.h-auto")
+    WebElement isDriverAgedBetween30And65CheckBoxElement;
     public void clickOnDriverAgedBetween30And65() {
-        carRentalConfigurations.findElement(By.cssSelector(" .w-auto")).click();
+        isDriverAgedBetween30And65CheckBoxElement.click();
     }
 
     public boolean isDriverAged30And65CheckBoxSelected() {
-        return carRentalConfigurations.findElement(By.cssSelector(" .w-auto")).isSelected();
+       return isDriverAgedBetween30And65CheckBoxElement.isSelected();
     }
 
     //bunları bulamadım
