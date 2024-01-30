@@ -89,4 +89,16 @@ public class FlightHomeSteps extends BaseStep {
         PAGES.getFlightPages().getFlightHomePage().clickOnChildrenCounterNumber(Integer.parseInt(childNum));
         PAGES.getFlightPages().getFlightHomePage().clickOnSearchFlightButton();
     }
+
+    @And("Click on {string} trip checkbox")
+    public void clickOnTripCheckbox(String tripType) {
+        PAGES.getFlightPages().getFlightHomePage().clickOnRoundTripAndOneWayRadioButton(tripType);
+    }
+
+    @And("Click on search flight button")
+    public void clickOnSearchFlightButton() {
+        PAGES.getFlightPages().getFlightHomePage().clickOnSearchFlightButton();
+    }
+
+
 }

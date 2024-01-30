@@ -27,4 +27,27 @@ Feature: Flight Filtering
       | Economy      | USA            | China    | 20      | 25      | 3        | 7        |
       | First Class  | United Kingdom | Spain    | 8       | 11      | 15       | 7        |
 
+  Scenario: Validate that the flight selection process
+
+    When Click on the Flight Tab
+    And Click on "Round Trip" trip checkbox
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Click on search flight button
+    And Unselect "Business" and Unselect "Economy" for cabin class
+    And Select "Airline Y" for airlines
+    And Select "1 hours" for duration (hours)
+    And Click on search button
+    And Click on select ticket button for "<Airline Y - FL248669>"
+#    Then Verify that the user on flight fare page
+
+
+
+
+
+
+
+
+
+
+
 
