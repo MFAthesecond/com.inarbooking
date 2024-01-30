@@ -6,7 +6,7 @@ Feature: Car Rental page verification
     Given Click on the Booking Link
     And Navigation to the Car Rentals page
 
-  Scenario Outline: e: Tests Car Rentals On The Inar Booking HomePage
+  Scenario Outline: Tests Car Rentals On The Inar Booking HomePage
     When Enter Pickup Location As '<Pickup Location>'
     And Click on Pickup Date
     And Click On Pickup Hour And Choose '<Pick up Hour>'
@@ -25,6 +25,20 @@ Feature: Car Rental page verification
       | Heathrow Airport | 00:00        | 00:30         |
       | Grand Bazaar     | 15:00        | 20:30         |
       | Taj Mahal        | 22:30        | 06:30         |
+
+
+  Scenario: Tests Car Rentals Page For Some Configurations
+    When click On Search Button On The Inar Booking HomePage
+
+    When Select The Drivers Age as '35'
+    Then Verify That Driver Aged Button Clicked 'true'
+
+    When Select The Price Range from '20' to '350'
+    And Select '4' Car Specs
+    And Select Transmission as 'Automatic'
+    And Select From Car Category The 'small'
+
+
 
 
 
