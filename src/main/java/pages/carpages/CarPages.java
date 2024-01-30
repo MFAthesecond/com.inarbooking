@@ -1,8 +1,9 @@
 package pages.carpages;
 
 import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class CarPages {
     //list olarak tut
     //.CarRentalItem
@@ -11,9 +12,15 @@ public class CarPages {
 
     private CarConfigs carConfigs;
     private CarRentalsHomePage carRentalsHomePage;
+    private CarConfigsRight carConfigsRight;
+    private CarRentalCheckOut carRentalCheckOut;
 
     public CarPages() {
         carConfigs = new CarConfigs();
         carRentalsHomePage = new CarRentalsHomePage();
+        carConfigsRight = new CarConfigsRight();
+        carRentalCheckOut = new CarRentalCheckOut();
     }
+
+
 }
