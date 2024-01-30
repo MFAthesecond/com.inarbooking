@@ -56,7 +56,7 @@ public class HotelPage {
     @FindBy(css = ".optionCounterButton:nth-child(3)")
     List<WebElement> addButtons;
 
-    @FindBy(css = "//button[text()='Done']")
+    @FindBy(xpath = "//button[text()='Done']")
     WebElement doneButton;
 
     public void selectAdultNumber(String strAdultNumber) {
