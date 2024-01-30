@@ -1,28 +1,40 @@
 package pages.carpages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CarRentalsHomePage extends BasePage {
     @FindBy(css = ".headerList :nth-child(3)")
     private WebElement carRentalsElement;
+    @FindBy(css = ".headerBtn")
+    private WebElement searchCarsElement;
+    @FindBy(css = "input[placeholder='Enter Pickup Location']")
+    private WebElement pickUpLocationElement;
+    @FindBy(css = ".location-li-rentcar")
+    private List<WebElement> locationSuggestion;
+    @FindBy(css = ".headerDateInput")
+    private List<WebElement> pickAndDropDates;
+    @FindBy(css = ".form-select > option")
+    private List<WebElement> pickHourAndDropHour;
+    @FindBy(css = ".form-select")
+    private List<WebElement> pickHourAndDropHourSelection;
+
 
     public void clickOnCarRentalsElementsInHomePage() {
         carRentalsElement.click();
     }
 
-    //
-    @FindBy(css = "input[placeholder='Enter Pickup Location']")
-    private WebElement pickUpLocationElement;
-    @FindBy(css = ".location-li-rentcar")
-    private List<WebElement> locationSuggestion;
+    public void setPickupLocationByFullAddress(String pickUpLocation) {
+        pickUpLocationElement.sendKeys(pickUpLocation);
+        if (locationSuggestion != null) {
+            locationSuggestion.get(0).click();
+        }
+    }
 
-    public void enterPickupLocation(String pickUpLocation, String numberOfSuggestion) {
+    public void setPickupLocation(String pickUpLocation, String numberOfSuggestion) {
         pickUpLocationElement.sendKeys(pickUpLocation);
         int numberOfSuggestionAsInteger = Integer.parseInt(numberOfSuggestion);
         if (locationSuggestion != null) {
@@ -34,15 +46,7 @@ public class CarRentalsHomePage extends BasePage {
         }
     }
 
-    public boolean isPickUpLocationSelected() {
-        return !pickUpLocationElement.getAttribute("placeholder").equalsIgnoreCase("Enter Pickup Location");
-    }
-
-    //bunlar hatalı olabilir mi
-    @FindBy(css = "headerDateInput")
-    private List<WebElement> pickAndDropDates;
-
-    public void setThePickUpDate(String date) {
+    public void setThePickUpDate() {
         pickAndDropDates.get(0).click();
     }
 
@@ -50,25 +54,45 @@ public class CarRentalsHomePage extends BasePage {
         pickAndDropDates.get(1).click();
     }
 
-    //
-    @FindBy(css = "form-select")
-    private List<WebElement> pickHourAndDropHour;
-
-    public void setThePickupHour(String pickUpHourHalfHourInterval) {
-        List<WebElement> pickupHours = Stream.of(pickHourAndDropHour.get(0).findElement(By.cssSelector(" > option"))).toList();
-        pickupHours.get(Integer.parseInt(pickUpHourHalfHourInterval)).click();
+    public void setThePickupHour(String pickUpHour_hh_mm_30min_intervals) {
+        pickHourAndDropHourSelection.get(0).click();
+        for (int i = 0; i < pickHourAndDropHour.size() / 2; i++) {
+            if (pickUpHour_hh_mm_30min_intervals.equals(pickHourAndDropHour.get(i).getText())) {
+                pickHourAndDropHour.get(i).click();
+            }
+        }
     }
 
-    public void setTheDropOffHour(String dropOffHourHalfHourInterval) {
-        List<WebElement> pickupHours = Stream.of(pickHourAndDropHour.get(1).findElement(By.cssSelector(" > option"))).toList();
-        pickupHours.get(Integer.parseInt(dropOffHourHalfHourInterval)).click();
+    public void setTheDropOffHour(String dropOffHour_hh_mm_30min_intervals) {
+        pickHourAndDropHourSelection.get(1).click();
+        for (int i = pickHourAndDropHour.size() / 2; i < pickHourAndDropHour.size(); i++) {
+            if (dropOffHour_hh_mm_30min_intervals.equals(pickHourAndDropHour.get(i).getText())) {
+                pickHourAndDropHour.get(i).click();
+            }
+        }
     }
-
-    //
-    @FindBy(css = ".headerBtn")
-    private WebElement searchCarsElement;
 
     public void clickOnSearchCarsElements() {
         searchCarsElement.click();
+    }
+
+    public String getThePickUpLocation() {
+        return pickUpLocationElement.getAttribute("value");
+    }
+
+    public String getThePickupDate() {
+        return pickAndDropDates.get(0).getAttribute("value");
+    }
+
+    public String getTheDropOffDate() {
+        return pickAndDropDates.get(1).getAttribute("value");
+    }
+
+    public String getThePickupHour() {
+        return pickHourAndDropHourSelection.get(0).getText();
+    }
+
+    public String getTheDropOffHour() {
+        return pickHourAndDropHourSelection.get(1).getText();
     }
 }

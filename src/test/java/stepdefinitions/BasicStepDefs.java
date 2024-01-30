@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.NoSuchElementException;
+import utils.BrowserUtils;
 
 public class BasicStepDefs extends BaseStep{
     private static final Logger LOGGER = LogManager.getLogger(BasicStepDefs.class);
@@ -18,6 +19,7 @@ public class BasicStepDefs extends BaseStep{
        PAGES.getHomePage().clickBookingLink();
        try {
            LOGGER.debug("Navigated to the Inar Booking Link");
+           BrowserUtils.wait(3);
        }catch (NoSuchElementException ex){
            LOGGER.error("The link could not found");
            throw ex;
