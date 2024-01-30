@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class FlightExtrasPage extends BasePage {
 
     public void selectExtra(String extraName){
         WebElement extra = extrasCheckBoxList.stream().filter(element -> element.findElement(By.cssSelector("label")).getText().contains(extraName)).findFirst().get();
-        extra.findElement(By.cssSelector("input")).click();
+        BrowserUtils.clickOnElement(extra.findElement(By.cssSelector("input")));
     }
 
     public String getExtraPrice(String extraName){
@@ -94,9 +95,9 @@ public class FlightExtrasPage extends BasePage {
     }
 
     public void clickOnBackButton(){
-        extrasContainer.findElement(By.cssSelector("button:nth-child(1)")).click();
+        BrowserUtils.clickOnElement(extrasContainer.findElement(By.cssSelector("button:nth-child(1)")));
     }
     public void clickOnGoToCheckOutButton(){
-        extrasContainer.findElement(By.cssSelector("button:nth-child(2)")).click();
+       BrowserUtils.clickOnElement(extrasContainer.findElement(By.cssSelector("button:nth-child(2)")));
     }
 }

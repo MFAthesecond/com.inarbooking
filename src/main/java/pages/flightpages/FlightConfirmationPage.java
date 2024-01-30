@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +50,7 @@ public class FlightConfirmationPage extends BasePage {
         return containerInfo;
     }
     public void clickOnCloseButton(){
-        closeButton.click();
+        BrowserUtils.clickOnElement(closeButton);
     }
 
     public List<String> getReservationInfo(){
@@ -57,7 +58,7 @@ public class FlightConfirmationPage extends BasePage {
         return reservationInfo.stream().map(WebElement::getText).toList();
     }
     public void clickOnGetPrintVersion(String containerName){
-        getContainer(containerName).findElement(By.cssSelector("button")).click();
+        BrowserUtils.clickOnElement(getContainer(containerName).findElement(By.cssSelector("button")));
     }
 
 }
