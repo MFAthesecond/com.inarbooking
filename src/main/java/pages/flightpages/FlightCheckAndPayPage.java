@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 public class FlightCheckAndPayPage extends BasePage {
     @FindBy(css = "input[placeholder=\"Cardholder's Name\"]")
@@ -26,11 +27,11 @@ public class FlightCheckAndPayPage extends BasePage {
     private WebElement priceCalculationContainer;
 
     public void clickOnBackButton() {
-        backButton.click();
+        BrowserUtils.clickOnElement(backButton);
     }
 
     public void clickOnCompleteBookingButton() {
-        completeBookingButton.click();
+        BrowserUtils.clickOnElement(completeBookingButton.);
     }
 
     public void fillCardHolderName(String name) {
@@ -50,13 +51,12 @@ public class FlightCheckAndPayPage extends BasePage {
     }
 
     public void clickOnEmailConsentCheckbox() {
-        emailConsentCheckbox.click();
+        BrowserUtils.clickOnElement(emailConsentCheckbox);
     }
 
     public void clickOnTransportDealsConsentCheckbox() {
-        transportDealsConsentCheckbox.click();
+        BrowserUtils.clickOnElement(transportDealsConsentCheckbox);
     }
-
     public String getTicketPrice() {
         return priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(1) > div > span:nth-child(1)")).getText().substring(2);
     }
