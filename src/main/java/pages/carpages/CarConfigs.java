@@ -1,9 +1,12 @@
 package pages.carpages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import utils.BrowserUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -31,12 +34,13 @@ public class CarConfigs extends BasePage {
 
     @FindBy(css = ".w-auto.h-auto")
     WebElement isDriverAgedBetween30And65CheckBoxElement;
+
     public void clickOnDriverAgedBetween30And65() {
         isDriverAgedBetween30And65CheckBoxElement.click();
     }
 
     public boolean isDriverAged30And65CheckBoxSelected() {
-       return isDriverAgedBetween30And65CheckBoxElement.isSelected();
+        return isDriverAgedBetween30And65CheckBoxElement.isSelected();
     }
 
     //bunları bulamadım
@@ -78,26 +82,38 @@ public class CarConfigs extends BasePage {
                 return prices.get(i).getText().substring(prices.get(i).getText().indexOf("-"));
             }
         }
-        return prices.get(prices.size()).getText().substring(prices.get(prices.size()).getText().indexOf("-")+1);
+        return prices.get(prices.size()).getText().substring(prices.get(prices.size()).getText().indexOf("-") + 1);
     }
 
-    public void setTheCarSpecs(String numberOfCarSpecs) {
+    public void setTheCarSpecs(String args1, String arg2, String arg3, String arg4) {
+        List<String> list = new ArrayList<>(List.of(new String[]{args1, arg2, arg3, arg4}));
         List<WebElement> carSpecsOptions = getTheOptionsInConfigurationPage.get(1).findElements(By.cssSelector(".lsCheckboxInput"));
-        for (int i = 0; i < Integer.parseInt(numberOfCarSpecs); i++) {
-            Random random = new Random();
-            int pickOptionRandomly = random.nextInt(carSpecsOptions.size());
-            if (!carSpecsOptions.get(pickOptionRandomly).isSelected()) {
-                carSpecsOptions.get(pickOptionRandomly).click();
-                BrowserUtils.wait(0.25);
-            } else {
-                i--;
+        for (String nameOfProduct : list) {
+            if (nameOfProduct != null) {
+                for (WebElement carSpecsOption : carSpecsOptions) {
+                    if (carSpecsOption.getAttribute("value").equals(nameOfProduct) && !carSpecsOption.isSelected()) {
+                        carSpecsOption.click();
+                    }
+                }
             }
         }
+
+
     }
 
     public void setTheTransmission(String automaticOrManual) {
         List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
         transmissionOptions.get(automaticOrManual.toLowerCase(Locale.ROOT).contains("au") ? 0 : 1).click();
+    }
+
+
+    public List<String> getTheSelectedTransmission() {
+        List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
+        List<String> transmission = new ArrayList<>();
+        for (WebElement transmissionOption : transmissionOptions) {
+            transmission.add(transmissionOption.getText());
+        }
+        return transmission;
     }
 
     public void setCarCategory(String carCategoryTypes) {
@@ -116,7 +132,7 @@ public class CarConfigs extends BasePage {
     @FindBy(css = "div[class='search-btn-car-rental'] button")
     private WebElement searchButton;
 
-    public void clickOnSearchButton(){
+    public void clickOnSearchButton() {
         searchButton.click();
         BrowserUtils.wait(2);
     }
