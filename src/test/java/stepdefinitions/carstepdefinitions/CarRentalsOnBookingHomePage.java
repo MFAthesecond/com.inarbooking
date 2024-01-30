@@ -48,7 +48,7 @@ public class CarRentalsOnBookingHomePage extends BaseStep {
 
     @Then("Verify That PickUp Location Inar Booking HomePage Is {string}")
     public void verifyThatPickUpLocationInarBookingHomePageIs(String actualLocation) {
-        String expectedPickupLocation = "Heathrow Airport";
+        String expectedPickupLocation = actualLocation;
         actualLocation = PAGES.getCarPages().getCarRentalsHomePage().getThePickUpLocation();
         then(actualLocation).isEqualTo(expectedPickupLocation);
     }

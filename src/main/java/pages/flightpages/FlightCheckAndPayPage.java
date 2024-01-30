@@ -30,9 +30,9 @@ public class FlightCheckAndPayPage extends BasePage {
         BrowserUtils.clickOnElement(backButton);
     }
 
-    public void clickOnCompleteBookingButton() {
-        BrowserUtils.clickOnElement(completeBookingButton.);
-    }
+//    public void clickOnCompleteBookingButton() {
+//        BrowserUtils.clickOnElement(completeBookingButton.);
+//    }
 
     public void fillCardHolderName(String name) {
         cardHolderNameField.sendKeys(name);
