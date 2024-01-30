@@ -34,10 +34,10 @@ Feature: Flight Filtering
     And Select "USA" for from dropdown and select "Canada" for to dropdown
     And Click on search flight button
     And Unselect "Business" and Unselect "Economy" for cabin class
-    And Select "Airline Y" for airlines
-    And Select "1 hours" for duration (hours)
+    And Select "Airline C" for airlines
+    And Select "6 hours" for duration (hours)
     And Click on search button
-    And Click on select ticket button for "<Airline Y - FL248669>"
+    And Click on select ticket button for "<Airline C - FL287790>"
 #    Then Verify that the user on flight fare page
 
 

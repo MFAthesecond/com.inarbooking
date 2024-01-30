@@ -100,7 +100,8 @@ public class FlightHomePage extends BasePage {
     }
 
     public void clickOnPassengersOptionsItem() {
-        searchFlightsBarInputFields.get(3).click();
+        BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(3));
+//        searchFlightsBarInputFields.get(3).click();
 
     }
 
@@ -149,7 +150,7 @@ public class FlightHomePage extends BasePage {
     }
 
     public void clickOnPrevButton() {
-        prevButton.click();
+        BrowserUtils.clickOnElement(prevButton);
     }
 
     public void clickOnNextButton() {
