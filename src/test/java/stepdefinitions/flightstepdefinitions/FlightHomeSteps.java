@@ -93,10 +93,19 @@ public class FlightHomeSteps extends BaseStep {
     @And("Click on search flight button")
     public void clickOnSearchFlightButton() {
         PAGES.getFlightPages().getFlightHomePage().clickOnSearchFlightButton();
+        BrowserUtils.wait(2);
     }
     @Then("Validate the user is on flight selection page")
     public void validate_the_user_is_on_flight_selection_page() {
         then(DRIVER.getCurrentUrl()).isEqualTo("https://InarAcademy:Fk160621.@test.inar-academy.com/booking/flights");
+    }
+    @And("Select date as {string} and {string}")
+    public void selectDate(String date1, String date2)  {
+        PAGES.getFlightPages().getFlightHomePage().clickOnDatePicker();
+        BrowserUtils.scrollDownWithJavaScript(0 , 400);
+        BrowserUtils.wait(2);
+        PAGES.getFlightPages().getFlightHomePage().selectFirstDate(date1);
+        PAGES.getFlightPages().getFlightHomePage().selectLastDate(date2);
     }
 
 }

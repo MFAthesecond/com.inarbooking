@@ -7,8 +7,15 @@ import org.apache.logging.log4j.Logger;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 
+import java.util.Collections;
+import java.util.List;
+
+import static org.assertj.core.api.BDDAssertions.then;
+
 public class FlightSelectionSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightSelectionSteps.class);
+
+    private List<Double> flightRanking;
     @And("Unselect {string} and Unselect {string} for cabin class")
     public void unselectAndUnselectForCabinClass(String classType1, String classType2) {
         PAGES.getFlightPages().getFlightSelectionPage().selectCabinClassForRoundTrip(classType1);
@@ -40,4 +47,29 @@ public class FlightSelectionSteps extends BaseStep {
         }
     }
 
+    @And("Click on {string} tab")
+    public void clickOnTab(String tabName) {
+        if(tabName.equals("Fastest")){
+            flightRanking = PAGES.getFlightPages().getFlightSelectionPage().getFlightHours();
+        }else {
+            flightRanking = PAGES.getFlightPages().getFlightSelectionPage().getFlightPrices();
+        }
+        PAGES.getFlightPages().getFlightSelectionPage().clickOnTab(tabName);
+    }
+
+    @Then("Verify that the the cheapest flight is the first flight")
+    public void verifyThatTheTheCheapestFlightIsTheFirstFlight() {
+        List<Double> flightPricesAfterCheapest = PAGES.getFlightPages().getFlightSelectionPage().getFlightPrices();
+        Collections.sort(flightRanking);
+        then(flightPricesAfterCheapest).isEqualTo(flightRanking);
+    }
+
+    @Then("Verify that the the fastest flight is the first flight")
+    public void verifyThatTheTheFastestFlightIsTheFirstFlight() {
+        List<Double> flightPricesAfterFastest = PAGES.getFlightPages().getFlightSelectionPage().getFlightHours();
+        System.out.println(flightRanking);
+        Collections.sort(flightRanking);
+        System.out.println(flightRanking);
+        then(flightPricesAfterFastest).isEqualTo(flightRanking);
+    }
 }

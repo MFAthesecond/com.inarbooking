@@ -9,6 +9,7 @@ import utils.BrowserUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightSelectionPage extends BasePage {
 
@@ -54,6 +55,11 @@ public class FlightSelectionPage extends BasePage {
 
     public void clickOnSelectTicket(int flightIndex){
         BrowserUtils.clickOnElement(getItem(flightIndex).findElement(By.cssSelector(".flight-button")));
+    }
+
+    public void clickOnTab(String tabName){
+        WebElement tab = tabList.stream().filter(element -> element.getText().equals(tabName)).findFirst().get();
+        BrowserUtils.clickOnElement(tab);
     }
     public List<String> getItemInformation(int flightIndex){
         List<String> flightInformationList = new ArrayList<>();
@@ -138,6 +144,14 @@ public class FlightSelectionPage extends BasePage {
     public void selectDurationHoursForOneWay(String durationHoursName){
         WebElement durationHours = airlinesListForRoundTripAndDurationListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(durationHoursName)).findFirst().get();
         BrowserUtils.clickOnElement(durationHours.findElement(By.cssSelector("input")));
+    }
+
+    public List<Double> getFlightPrices(){
+        return flightItemsList.stream().flatMap(parent -> parent.findElements(By.cssSelector(".siPrice")).stream()).map(WebElement::getText).map(element -> element.substring(1)).map(Double::parseDouble).collect(Collectors.toList());
+    }
+
+    public List<Double> getFlightHours(){
+        return flightItemsList.stream().flatMap(parent -> parent.findElements(By.cssSelector(".my-2:nth-child(1)")).stream()).map(WebElement::getText).map(element -> element.split(" ")[0]).map(Double::parseDouble).collect(Collectors.toList());
     }
 
 
