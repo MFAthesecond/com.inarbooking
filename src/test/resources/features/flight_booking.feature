@@ -81,17 +81,24 @@ Feature: Flight Filtering
     And Click on select return ticket button for #1 flight
     Then Verify that the user on flight fare page
 
-  Scenario: Validate that the dropdowns , checkboxes and radio buttons functionality for round trip
+  Scenario Outline: Validate that the dropdowns , checkboxes and radio buttons functionality for round trip
 
     When Click on the Flight Tab
-    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Select "<Origin>" for from dropdown and select "<Destination>" for to dropdown
     And Click on search flight button
-    And Select "Italy" from origin drop down
-    And Select "Germany" from destination drop down
-    And Select #5 for Adult dropdown
-    And Select #7 for Children dropdown
-    And Unselect "Business" and Unselect "First Class" for cabin class
-    And Select "Airline Z" for airlines
-    And Select "6 hours" for duration (hours)
-    Then Verify that all selected items as requested
+    And Select "<OriginSelection>" from origin drop down
+    And Select "<DestinationSelection>" from destination drop down
+    And Select "<AdultNum>" for Adult dropdown
+    And Select "<ChildNum>" for Children dropdown
+    And Unselect "<CabinClass1>" and Unselect "<CabinClass2>" for cabin class
+    And Select "<Airline>" for airlines
+    And Select "<Duration>" for duration (hours)
+    Then Verify that "<OriginSelection>" for origin, "<DestinationSelection>" for destination "<AdultNum>" for adult "<ChildNum>" for children dropdown is selected
+    And Verify that "<CabinClass1>" and "<CabinClass2>" unselected for for cabin class, "<Airline>" selected for airlines , "<Duration>" selected for duration
+    Examples:
+      | Origin | Destination | OriginSelection | DestinationSelection | AdultNum | ChildNum | CabinClass1 | CabinClass2 | Airline   | Duration |
+      | USA    | Canada      | United Kingdom  | Germany              | 5        | 7        | Business    | Economy     | Airline Z | 6 hours  |
+      | France | Italy       | China           | Brazil               | 3        | 4        | First Class | Business    | Airline A | 14 hours |
+      | Japan  | Spain       | India           | Australia            | 10       | 9        | Economy     | First Class | Airline C | 24 hours |
+
 
