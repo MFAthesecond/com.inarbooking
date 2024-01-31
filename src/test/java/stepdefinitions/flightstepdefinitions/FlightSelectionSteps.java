@@ -2,6 +2,7 @@ package stepdefinitions.flightstepdefinitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import stepdefinitions.BaseStep;
@@ -70,4 +71,5 @@ public class FlightSelectionSteps extends BaseStep {
         Collections.sort(flightRanking);
         then(flightPricesAfterFastest).isEqualTo(flightRanking);
     }
+
 }

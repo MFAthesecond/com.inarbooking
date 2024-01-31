@@ -131,6 +131,9 @@ public class BrowserUtils {
         Actions actions = new Actions(DriverManager.getDriver());
         actions.moveToElement(element).click().perform();
     }
-
+    public static void executeJavaScript(String script, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript(script, element);
+    }
 
 }
