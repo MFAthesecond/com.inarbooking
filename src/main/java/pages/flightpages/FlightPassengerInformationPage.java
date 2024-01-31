@@ -61,12 +61,13 @@ public class FlightPassengerInformationPage extends BasePage {
 
     public void fillTravelerCard(int index, String firstName, String lastName, String gender, String year, String month, String day) {
         WebElement travelerCard = travelerCards.get(index);
+        List<WebElement>dateOfBirth=travelerCard.findElements(By.cssSelector("div[style='width: 32%;'] select"));
         WebElement firstNameInput = travelerCard.findElement(By.xpath(".//input[@placeholder='First Name']"));
         WebElement lastNameInput = travelerCard.findElement(By.xpath(".//input[@placeholder='Surname']"));
         WebElement genderSelect = travelerCard.findElement(By.xpath(".//select[@class='form-select fs-4 p-3 border-danger']"));
-        WebElement yearDropDown = travelerCard.findElement(By.xpath("(//select[@class='form-select fs-4 p-3'])[4]"));
-        WebElement monthDropDown = travelerCard.findElement(By.xpath("(//select[@class='form-select fs-4 p-3'])[5]"));
-        WebElement dayDropDown = travelerCard.findElement(By.xpath("(//select[@class='form-select fs-4 p-3'])[6]"));
+        WebElement yearDropDown = dateOfBirth.get(0);
+        WebElement monthDropDown = dateOfBirth.get(1);
+        WebElement dayDropDown =dateOfBirth.get(2);
 
         firstNameInput.sendKeys(firstName);
         lastNameInput.sendKeys(lastName);
