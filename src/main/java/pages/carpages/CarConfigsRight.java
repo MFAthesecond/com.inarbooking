@@ -1,7 +1,11 @@
 package pages.carpages;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
+import utils.DriverManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +35,7 @@ public class CarConfigsRight extends BasePage {
         }
     }
 
-    public List<Integer> pricesOfCarsInPage() {
+    public List<Integer> getThePricesOfCarsInPage() {
         List<Integer> priceOfCars = new ArrayList<>();
         for (WebElement element : carsAppeared) {
             priceOfCars.add(Integer.parseInt(element.getText().substring(1, element.getText().indexOf("."))));
@@ -40,10 +44,13 @@ public class CarConfigsRight extends BasePage {
     }
 
     public void sortByPriceLowest() {
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), sortByButtons.get(0));
+
         sortByButtons.get(0).click();
     }
 
     public void sortPriceHighest() {
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), sortByButtons.get(1));
         sortByButtons.get(1).click();
     }
 
@@ -97,6 +104,7 @@ public class CarConfigsRight extends BasePage {
 
     public void clickOnViewDealElement(String numberOfElement) {
         if (getTheNumberOfCarsInPage() != 0) {
+            BrowserUtils.scrollToElement(DriverManager.getDriver(), viewDealClickableElement.get(Integer.parseInt(numberOfElement)));
             viewDealClickableElement.get(Integer.parseInt(numberOfElement)).click();
         }
     }

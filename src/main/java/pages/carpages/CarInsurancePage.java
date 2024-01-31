@@ -17,11 +17,24 @@ public class CarInsurancePage extends BasePage {
     @FindBy(css = ".mt-5 .btn.btn-blue")
     private List<WebElement> goToBookElement;
 
+    @FindBy(css = ".carDate-area .fw-bold")
+    private List<WebElement> pickAndDropAddressAtTopOfInsurancePage;
+
 
     public void clickOnGoToBookElement() {
         BrowserUtils.scrollToElement(DriverManager.getDriver(), goToBookElement.get(1));
         goToBookElement.get(1).click();
     }
+    public String getPickupAddressAtTheTopOfInsurancePageFullAddressWithCountry() {
+        return pickAndDropAddressAtTopOfInsurancePage.get(0).getText();
+    }
+    public String getDropOffAddressAtTheTopOfInsurancePageFullAddressWithCountry() {
+        return pickAndDropAddressAtTopOfInsurancePage.get(1).getText();
+    }
+
+//    public String getThePickUpDateAndHour(){
+//
+//    }
 
 
 }
