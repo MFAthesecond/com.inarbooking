@@ -41,7 +41,8 @@ public class FlightFareSteps extends BaseStep {
 
     @Then("Verify that the {string} is selected for departure fare type and {string} is selected for return fare type")
     public void verifyThatTheIsSelectedForDepartureFareTypeAndIsSelectedForReturnFareType(String departureFareType, String returnFareType) {
-        then(PAGES.getFlightPages().getFlightFarePage().isFareTypeSelected("departure" , departureFareType)).isTrue();
-        then(PAGES.getFlightPages().getFlightFarePage().isFareTypeSelected("return" , returnFareType)).isTrue();
+        then(PAGES.getFlightPages().getFlightFarePage().isFareTypeSelected("departure", departureFareType)).isTrue();
+        then(PAGES.getFlightPages().getFlightFarePage().isFareTypeSelected("return", returnFareType)).isTrue();
     }
+
 }

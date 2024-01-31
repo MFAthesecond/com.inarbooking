@@ -15,7 +15,6 @@ import java.util.Set;
 public class BrowserUtils {
 
 
-
     /**
      * Captures a screenshot of the current browser window and saves it with a unique name.
      *
@@ -128,11 +127,16 @@ public class BrowserUtils {
         js.executeScript("window.scrollBy(" + x + "," + y + ");");
         wait(2);
     }
-    public static void clickOnElement(WebElement element){
+
+    public static void clickOnElement(WebElement element) {
         Actions actions = new Actions(DriverManager.getDriver());
         actions.moveToElement(element).click().perform();
     }
 
+    public static void executeJavaScript(String script, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
+        js.executeScript(script, element);
+    }
     public static void scrollToElement(WebDriver driver, WebElement element) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);

@@ -1,8 +1,14 @@
 package pages.carpages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chromium.ChromiumDriver;
+import org.openqa.selenium.devtools.v120.dom.DOM;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
+import utils.DriverManager;
 
 import java.util.List;
 
@@ -21,6 +27,7 @@ public class CarRentalsHomePage extends BasePage {
     private List<WebElement> pickHourAndDropHour;
     @FindBy(css = ".form-select")
     private List<WebElement> pickHourAndDropHourSelection;
+
 
 
     public void clickOnCarRentalsElementsInHomePage() {
@@ -46,8 +53,13 @@ public class CarRentalsHomePage extends BasePage {
         }
     }
 
+
+
     public void setThePickUpDate() {
         pickAndDropDates.get(0).click();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverManager.getDriver();
+        javascriptExecutor.executeScript("document.querySelector('."+"headerDateInput"+"').value='"+"2027-03-05"+"'");
+        BrowserUtils.wait(3);
     }
 
     public void setTheDropOffDate() {
