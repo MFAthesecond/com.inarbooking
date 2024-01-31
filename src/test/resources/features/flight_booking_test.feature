@@ -31,7 +31,7 @@ Scenario: Validate that passenger flight information
   Then Verify that the "Invalid email address" message is not displayed
   And Verify that the "Invalid phone number" message is not displayed
 
-  Scenario: Validate that flight fare calculation
+  Scenario: Validate that passenger flight information
 
     When Click on the Flight Tab
     And Click on round trip checkbox
@@ -46,4 +46,18 @@ Scenario: Validate that passenger flight information
     And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
     And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1905" as the year, "4" as the month, "3" as the day for the #2 passenger
     And Fill in "John" as the name, "Eris" as the surname, "Male" as the gender, "2005" as the year, "2" as the month, "6" as the day for the #3 passenger
-    And Verify that the "Please select a gender." message is not displayed
+    Then Verify that the "Please select a gender." message is not displayed
+
+
+
+  Scenario: Validate that flight fare calculation
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "Business" for flight class
+    And Select "USA" for from dropdown and select "Japan" for to dropdown
+    And Select "2" adults and "2" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    And Click on select who's flying button

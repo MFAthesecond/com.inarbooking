@@ -72,4 +72,46 @@ public class FlightSelectionSteps extends BaseStep {
         then(flightPricesAfterFastest).isEqualTo(flightRanking);
     }
 
+    @And("Click on select return ticket button for #{int} flight")
+    public void clickOnSelectReturnTicketButtonForFlight(int flightIndex) {
+        PAGES.getFlightPages().getFlightSelectionPage().clickOnSelectTicket(flightIndex);
+    }
+
+    @And("Select {string} from origin drop down")
+    public void selectFromOriginDropDown(String originName) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromOriginDropDown(originName);
+    }
+
+    @And("Select {string} from destination drop down")
+    public void selectFromDestinationDropDown(String destinationName) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromDestinationDropDown(destinationName);
+    }
+
+    @And("Select {string} for Adult dropdown")
+    public void selectForAdultDropdown(String adultNum) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromAdultDropDownForRoundTrip(Integer.parseInt(adultNum));
+    }
+
+    @And("Select {string} for Children dropdown")
+    public void selectForChildrenDropdown(String childNum) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromChildDropDownForRoundTrip(Integer.parseInt(childNum));
+        BrowserUtils.wait(3);
+    }
+
+    @Then("Verify that {string} for origin, {string} for destination {string} for adult {string} for children dropdown is selected")
+    public void verifyThatForOriginForDestinationForAdultForChildrenDropdown(String originName, String destinationName, String adultNum, String childrenNum) {
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected(originName , "Origin")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected(destinationName , "Destination")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected(adultNum , "AdultForRoundTrip")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected(childrenNum , "ChildrenForRoundTrip")).isTrue();
+    }
+
+    @And("Verify that {string} and {string} unselected for for cabin class, {string} selected for airlines , {string} selected for duration")
+    public void verifyThatAndUnselectedForForCabinClassSelectedForAirlinesSelectedForDuration(String cabinClassName1, String cabinClassName2, String airlineName, String duration) {
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList(cabinClassName1 , "CabinClassForRoundTrip")).isFalse();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList(cabinClassName2 , "CabinClassForRoundTrip")).isFalse();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList(airlineName , "AirlinesForRoundTrip")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList(duration , "DurationForRoundTrip")).isTrue();
+    }
+
 }

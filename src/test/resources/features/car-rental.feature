@@ -29,30 +29,38 @@ Feature: Car Rental page verification
 
   Scenario: Tests Car Rentals Page For Some Configurations
     When click On Search Button On The Inar Booking HomePage
-
-#    When Select The Drivers Age as '35'
-#    Then Verify That Driver Aged Button Clicked 'true'
-#
-#    When Set the Pickup Location On Configpage as 'Heathrow Airport'
-#
-#    When Select The Price Range from '20' to '350'
-#    And Select 'Automatic Transmission' '' 'Heated Seats' ''Car Specs
-#    And Select Transmission as 'Automatic'
-#    When Select From Car Category The 'small'
-
-
-
+    When Select The Drivers Age as '35'
+    Then Verify That Driver Aged Button Clicked 'true'
+    When Set the Pickup Location On Configpage as 'Grand Bazaar'
+    When Select The Price Range from '20' to '350'
+    And Select 'Automatic Transmission' '' 'Heated Seats' ''Car Specs
+    And Select Transmission as 'Automatic'
+    When Select From Car Category The 'Large'
+    When Select From Car Category The 'Suv'
+    When Select From Car Category The 'Minivan'
+    When Click on search button In Car Rental Config Page
     When Sort The Cars By Lowest Price
     Then Verify That Cars Sorted By Lowest Price
-
     When Sort The Cars By Highest Price
     Then Verify That Cars Sorted By Highest Price
-
-#    Then Verify That Car Category is Formed By '<small><suv>'
-#    Then Verify That Cars Are Only From 'Heathrow Airport'
-#
-#    Then Verify That All Prices Are Within '350'
+    Then Verify That Cars Are Only From 'Grand Bazaar'
+    Then Verify That All Prices Are Within '350'
     Then Verify That Transmission Is 'Automatic'
+
+
+  Scenario: Test Cases for Check-out Process
+    When click On Search Button On The Inar Booking HomePage
+    When Set the Pickup Location On Configpage as 'Grand Bazaar'
+    When Select From Car Category The 'Large'
+    When Select From Car Category The 'Suv'
+    When Select From Car Category The 'Minivan'
+    When Select From Car Category The 'Small'
+    When Select From Car Category The 'Medium'
+    When Click on search button In Car Rental Config Page
+    When Sort The Cars By Lowest Price
+    And Click on '0' Car's View Deal Element
+    When Click On Go To Book Element From Car Insurance Page
+
 
 
 

@@ -3,15 +3,16 @@ package utils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class BrowserUtils {
-
 
 
     /**
@@ -127,13 +128,20 @@ public class BrowserUtils {
         wait(2);
     }
 
-    public static void clickOnElement(WebElement element){
+    public static void clickOnElement(WebElement element) {
         Actions actions = new Actions(DriverManager.getDriver());
         actions.moveToElement(element).click().perform();
     }
+
     public static void executeJavaScript(String script, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript(script, element);
+    }
+    public static void scrollToElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+        BrowserUtils.wait(2);
+
     }
 
 }

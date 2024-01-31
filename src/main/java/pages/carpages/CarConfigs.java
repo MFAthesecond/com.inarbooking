@@ -1,10 +1,12 @@
 package pages.carpages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import utils.BrowserUtils;
+import utils.DriverManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +17,22 @@ import java.util.Random;
 public class CarConfigs extends BasePage {
     @FindBy(css = ".listSearch-car-rental > div")
     private WebElement carRentalConfigurations;
+    @FindBy(css = "div[class='search-btn-car-rental'] button")
+    private WebElement searchButton;
+    @FindBy(css = ".form-select > option")
+    private List<WebElement> driverAgesOptions;
+    @FindBy(css = ".w-auto.h-auto")
+    WebElement isDriverAgedBetween30And65CheckBoxElement;
+    @FindBy(css = ".lsOptions ")
+    private List<WebElement> getTheOptionsInConfigurationPage;
+    @FindBy(css = ".form-control")
+    private List<WebElement> pickAndDropDateAndPickLocation;
 
     //
     public void setTheDriverAge(String driverAge) {
         carRentalConfigurations.findElement(By.cssSelector(" .form-select")).sendKeys(driverAge);
     }
 
-    @FindBy(css = ".form-select > option")
-    private List<WebElement> driverAgesOptions;
 
     public void setCarRentalsDriverAgeByDropBox(String driversAge) {
         carRentalConfigurations.findElement(By.cssSelector(" .form-select")).click();
@@ -32,8 +42,6 @@ public class CarConfigs extends BasePage {
 
     }
 
-    @FindBy(css = ".w-auto.h-auto")
-    WebElement isDriverAgedBetween30And65CheckBoxElement;
 
     public void clickOnDriverAgedBetween30And65() {
         isDriverAgedBetween30And65CheckBoxElement.click();
@@ -45,20 +53,19 @@ public class CarConfigs extends BasePage {
 
     //bunları bulamadım
     public void setThePickUpDateInConfigurationPage() {
-        // takvime ulaşamıyorum
+        //pickAndDropDateAndPickLocation.get(0).
     }
 
     public void setTheDropOffDateInConfigurationPage() {
-        // takvime ulaşamıyorum
+        // pickAndDropDateAndPickLocation.get(1)
     }
 
     public void setThePickUpLocationInConfigurationPage(String setThePickUpLocationInConfigurationPage) {
-        carRentalConfigurations.sendKeys(setThePickUpLocationInConfigurationPage);
+        pickAndDropDateAndPickLocation.get(2).sendKeys(setThePickUpLocationInConfigurationPage);
     }
 
     //4 options
-    @FindBy(css = ".lsOptions ")
-    private List<WebElement> getTheOptionsInConfigurationPage;
+
 
     public void setThePriceRange(String minPrice, String maxPrice) {
         List<WebElement> priceOptions = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxInput"));
@@ -106,7 +113,6 @@ public class CarConfigs extends BasePage {
         transmissionOptions.get(automaticOrManual.toLowerCase(Locale.ROOT).contains("au") ? 0 : 1).click();
     }
 
-
     public List<String> getTheSelectedTransmission() {
         List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
         List<String> transmission = new ArrayList<>();
@@ -119,6 +125,7 @@ public class CarConfigs extends BasePage {
     public void setCarCategory(String carCategoryTypes) {
         String carCategoryTypesSmall = carCategoryTypes.toLowerCase(Locale.ROOT);
         List<WebElement> carCategoryOptions = getTheOptionsInConfigurationPage.get(3).findElements(By.cssSelector(".lsCheckboxInput"));
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), carCategoryOptions.get(0));
         switch (carCategoryTypesSmall) {
             case "small" -> carCategoryOptions.get(0).click();
             case "medium" -> carCategoryOptions.get(1).click();
@@ -128,9 +135,6 @@ public class CarConfigs extends BasePage {
         }
     }
 
-    //sort bY section
-    @FindBy(css = "div[class='search-btn-car-rental'] button")
-    private WebElement searchButton;
 
     public void clickOnSearchButton() {
         searchButton.click();
