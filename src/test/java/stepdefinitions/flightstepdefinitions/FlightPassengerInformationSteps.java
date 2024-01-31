@@ -56,7 +56,6 @@ public class FlightPassengerInformationSteps extends BaseStep {
     @And("Fill in {string} as the name, {string} as the surname, {string} as the gender, {string} as the year, {string} as the month, {string} as the day for the #{int} passenger")
     public void fillInAsTheNameAsTheSurnameAsTheGenderAsTheYearAsTheMonthAsTheDayForThePassenger(String firstName, String lastName, String gender, String year, String month, String day, int traveler) {
         PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(traveler,firstName,lastName,gender,year,month,day);
-        BrowserUtils.wait(4);
     }
 
     @And("Calculate total price")

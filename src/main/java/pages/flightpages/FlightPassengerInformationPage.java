@@ -139,7 +139,7 @@ public class FlightPassengerInformationPage extends BasePage {
         String taxesAndFees = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(2)  > span:nth-child(1)")).getText();
         String[] dividedTaxesAndFees = taxesAndFees.split("%");
         String percentage = dividedTaxesAndFees[dividedTaxesAndFees.length - 1];
-        return percentage.substring(0, percentage.length() - 1);
+        return percentage.charAt(0) + "";
     }
 
     public String getThirdPartyFeePercentage() {
@@ -149,7 +149,7 @@ public class FlightPassengerInformationPage extends BasePage {
     }
 
     public String getTotalPrice() {
-        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1")).getText().split("\\$");
+        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1:nth-child(2)")).getText().split("\\$");
         return dividedPrice[dividedPrice.length - 1];
     }
 
