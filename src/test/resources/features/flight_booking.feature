@@ -115,4 +115,4 @@ Feature: Flight Filtering
     And Click on "Refundable Main" for return fare type
     Then Verify that the "First Class" is selected for departure fare type and "Refundable Main" is selected for return fare type
     And Click on select who's flying button
-#    Then Verify that the user is on passenger information page
+    Then Verify that the user is on passenger information page

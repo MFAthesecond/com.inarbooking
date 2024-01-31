@@ -9,6 +9,8 @@ import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 import utils.Pages;
 
+import static org.assertj.core.api.BDDAssertions.then;
+
 public class FlightPassengerInformationSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightHomeSteps.class);
     @And("Fill {string} as contact email")
@@ -69,5 +71,10 @@ public class FlightPassengerInformationSteps extends BaseStep {
         String expectedTotalPrice=PAGES.getFlightPages().getFlightPassengerInformationPage().getTotalPrice();
         Assertions.assertThat(actualTotalPriceStr).as("Actual and expected total prices should be equal")
                 .isEqualTo(expectedTotalPrice);
+    }
+
+    @Then("Verify that the user is on passenger information page")
+    public void verifyThatTheUserIsOnPassengerInformationPage() {
+        then(PAGES.getFlightPages().getFlightPassengerInformationPage().getHeaderText()).isEqualTo("Contact Details");
     }
 }

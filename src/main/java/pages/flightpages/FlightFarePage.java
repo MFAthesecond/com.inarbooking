@@ -83,7 +83,7 @@ public class FlightFarePage extends BasePage {
 
     public boolean isFareTypeSelected(String containerName , String fareType){
       WebElement fare = getContainer(containerName).findElements(By.cssSelector(".fare-item-header")).stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(fareType)).findFirst().get();
-      return fare.findElement(By.cssSelector(".icn div")).isSelected();
+      return fare.findElement(By.xpath("./parent::*/parent::*")).getAttribute("class").contains("active-fare");
     }
 
 }
