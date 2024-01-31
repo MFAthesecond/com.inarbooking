@@ -29,7 +29,7 @@ public class FlightCheckAndPayPage extends BasePage {
     public void clickOnBackButton() {
         BrowserUtils.clickOnElement(backButton);
     }
-
+  
     public void clickOnCompleteBookingButton() {
         BrowserUtils.clickOnElement(completeBookingButton);
     }
