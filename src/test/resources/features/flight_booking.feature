@@ -102,3 +102,17 @@ Feature: Flight Filtering
       | Japan  | Spain       | India           | Australia            | 10       | 9        | Economy     | First Class | Airline C | 24 hours |
 
 
+  Scenario: Validate that the fare type selection functionality on fare page
+
+    When Click on the Flight Tab
+    And Select "Germany" for from dropdown and select "France" for to dropdown
+    And Click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select return ticket button for #1 flight
+    Then Verify that the user on flight fare page
+    And Verify that the departure route "Germany to France" and the return route "France to Germany"
+    When Click on "First Class" for departure fare type
+    And Click on "Refundable Main" for return fare type
+    Then Verify that the "First Class" is selected for departure fare type and "Refundable Main" is selected for return fare type
+    And Click on select who's flying button
+#    Then Verify that the user is on passenger information page
