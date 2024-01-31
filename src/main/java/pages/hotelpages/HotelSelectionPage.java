@@ -20,7 +20,7 @@ public class HotelSelectionPage extends BasePage {
     @FindBy(css = ".listSearch-hotels > div:nth-child(3) > span")
     WebElement checkInDate;
 
-    @FindBy(css = ":nth-child(1) > input.lsOptionInput.shadow-md.w-100:nth-child(2)0")
+    @FindBy(css = ":nth-child(1) > input.lsOptionInput.shadow-md.w-100:nth-child(2)")
     WebElement minPriceSlider;
 
     @FindBy(css = ":nth-child(4) > div > div:nth-child(2) > input")
