@@ -67,9 +67,7 @@ public class FlightSelectionSteps extends BaseStep {
     @Then("Verify that the the fastest flight is the first flight")
     public void verifyThatTheTheFastestFlightIsTheFirstFlight() {
         List<Double> flightPricesAfterFastest = PAGES.getFlightPages().getFlightSelectionPage().getFlightHours();
-        System.out.println(flightRanking);
         Collections.sort(flightRanking);
-        System.out.println(flightRanking);
         then(flightPricesAfterFastest).isEqualTo(flightRanking);
     }
 }
