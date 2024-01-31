@@ -8,6 +8,7 @@ import pages.BasePage;
 import utils.BrowserUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlightPassengerInformationPage extends BasePage {
     @FindBy(xpath = "//input[@name='contactEmail']")
@@ -22,7 +23,7 @@ public class FlightPassengerInformationPage extends BasePage {
     @FindBy(xpath = "//input[@name='freeTextMessages']")
     private WebElement freeTextMessageField;
 
-    @FindBy(xpath = "(//div)[46]")
+    @FindBy(className = "flight-reserve-card")
     private List<WebElement> travelerCards;
 
     @FindBy(xpath = ".//input[@placeholder='First Name']")
@@ -50,6 +51,8 @@ public class FlightPassengerInformationPage extends BasePage {
     private WebElement selectExtrasButton;
     @FindBy(css = ".col-5 .flight-reserve-card")
     private WebElement priceCalculationContainer;
+    @FindBy(className = "text-danger")
+    private List<WebElement> errorMessage;
 
 
     public void clickOnFreeTextMessageField() {
@@ -61,9 +64,9 @@ public class FlightPassengerInformationPage extends BasePage {
         WebElement firstNameInput = travelerCard.findElement(By.xpath(".//input[@placeholder='First Name']"));
         WebElement lastNameInput = travelerCard.findElement(By.xpath(".//input[@placeholder='Surname']"));
         WebElement genderSelect = travelerCard.findElement(By.xpath(".//select[@class='form-select fs-4 p-3 border-danger']"));
-        WebElement yearDropDown = travelerCard.findElement(By.xpath(".//select[contains(@class, 'form-select')]"));
-        WebElement monthDropDown = travelerCard.findElement(By.xpath(".//select[contains(@class, 'form-select')]"));
-        WebElement dayDropDown = travelerCard.findElement(By.xpath(".//select[contains(@class, 'form-select')]"));
+        WebElement yearDropDown = travelerCard.findElement(By.xpath("(//select[@class='form-select fs-4 p-3'])[4]"));
+        WebElement monthDropDown = travelerCard.findElement(By.xpath("(//select[@class='form-select fs-4 p-3'])[5]"));
+        WebElement dayDropDown = travelerCard.findElement(By.xpath("(//select[@class='form-select fs-4 p-3'])[6]"));
 
         firstNameInput.sendKeys(firstName);
         lastNameInput.sendKeys(lastName);
@@ -71,6 +74,9 @@ public class FlightPassengerInformationPage extends BasePage {
         new Select(yearDropDown).selectByVisibleText(year);
         new Select(monthDropDown).selectByVisibleText(month);
         new Select(dayDropDown).selectByVisibleText(day);
+    }
+    public void travelerCards(int index){
+        WebElement travelerCard = travelerCards.get(index);
     }
 
     public void fillContactEmail(String email) {
@@ -155,4 +161,15 @@ public class FlightPassengerInformationPage extends BasePage {
         return totalPrice;
     }
 
+    public String findErrorMessage(String targetErrorMessage) {
+        List<WebElement> matchingElements = errorMessage.stream()
+                .filter(element -> element.getText().equals(targetErrorMessage))
+                .toList();
+
+        if (!matchingElements.isEmpty()) {
+            return matchingElements.get(0).getText();
+        } else {
+            return "No matching error message found";
+        }
+    }
 }

@@ -165,13 +165,13 @@ public class FlightHomePage extends BasePage {
 
     public void selectFirstDate(String firstDateStr) {
         BrowserUtils.clickOnElement(firstDate);
-        firstDate.clear();
+        BrowserUtils.executeJavaScript("arguments[0].value = '';", firstDate);
         firstDate.sendKeys(firstDateStr);
     }
 
     public void selectLastDate(String lastDateStr) {
         BrowserUtils.clickOnElement(lastDate);
-        lastDate.clear();
+        BrowserUtils.executeJavaScript("arguments[0].value = '';", lastDate);
         lastDate.sendKeys(lastDateStr);
     }
 
