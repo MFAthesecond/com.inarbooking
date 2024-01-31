@@ -53,6 +53,8 @@ Feature: Flight Filtering
     And Select "6" adults and "3" child and click on search flight button
     Then Validate the user is on flight selection page
 
+#Test Cases for Flight Selection Page
+
   Scenario: Validate that the cheapest functionality on flight selection page
 
     When Click on the Flight Tab
@@ -70,6 +72,33 @@ Feature: Flight Filtering
     Then Verify that the the fastest flight is the first flight
 
 
+  Scenario: Validate that the successful flight selection for Round Trip as Trip Type
 
+    When Click on the Flight Tab
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select return ticket button for #1 flight
+    Then Verify that the user on flight fare page
+
+  Scenario Outline: Validate that the dropdowns , checkboxes and radio buttons functionality for round trip
+
+    When Click on the Flight Tab
+    And Select "<Origin>" for from dropdown and select "<Destination>" for to dropdown
+    And Click on search flight button
+    And Select "<OriginSelection>" from origin drop down
+    And Select "<DestinationSelection>" from destination drop down
+    And Select "<AdultNum>" for Adult dropdown
+    And Select "<ChildNum>" for Children dropdown
+    And Unselect "<CabinClass1>" and Unselect "<CabinClass2>" for cabin class
+    And Select "<Airline>" for airlines
+    And Select "<Duration>" for duration (hours)
+    Then Verify that "<OriginSelection>" for origin, "<DestinationSelection>" for destination "<AdultNum>" for adult "<ChildNum>" for children dropdown is selected
+    And Verify that "<CabinClass1>" and "<CabinClass2>" unselected for for cabin class, "<Airline>" selected for airlines , "<Duration>" selected for duration
+    Examples:
+      | Origin | Destination | OriginSelection | DestinationSelection | AdultNum | ChildNum | CabinClass1 | CabinClass2 | Airline   | Duration |
+      | USA    | Canada      | United Kingdom  | Germany              | 5        | 7        | Business    | Economy     | Airline Z | 6 hours  |
+      | France | Italy       | China           | Brazil               | 3        | 4        | First Class | Business    | Airline A | 14 hours |
+      | Japan  | Spain       | India           | Australia            | 10       | 9        | Economy     | First Class | Airline C | 24 hours |
 
 
