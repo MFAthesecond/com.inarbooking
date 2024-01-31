@@ -21,11 +21,11 @@ public class HotelSelectionPage extends BasePage {
     @FindBy(css = ".listSearch-hotels > div:nth-child(3) > span")
     WebElement checkInAndCheckOutDate;
 
-//    @FindBy(css = ":nth-child(1) > input.lsOptionInput.shadow-md.w-100:nth-child(2)0")
-//    WebElement minPriceSlider;
-//
-//    @FindBy(css = ":nth-child(4) > div > div:nth-child(2) > input")
-//    WebElement maxPriceSlider;
+    @FindBy(css = ":nth-child(1) > input.lsOptionInput.shadow-md.w-100:nth-child(2)0")
+    WebElement minPriceSlider;
+
+    @FindBy(css = ":nth-child(4) > div > div:nth-child(2) > input")
+    WebElement maxPriceSlider;
 
     @FindBy(css = ":nth-child(3) > input.lsOptionInput.shadow-md")
     WebElement adultNumberBox;
@@ -181,28 +181,7 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 
-    List<WebElement> hotelsElementsList = new ArrayList<>();
 
-    public void findHotelElementsPerPage() {
-        for (int i = 0; i < 10; i++) {
-            if (hotelsList.findElement(By.cssSelector("> div.searchItem:nth-child(" + i + ")")).isDisplayed()) {
-                hotelsElementsList.add(hotelsList.findElement(By.cssSelector("> div.searchItem:nth-child(" + i + ")")));
-            }
-        }
-    }
-
-    public void findAllHotelsElement() {
-        int i = 1;
-        while (true) {
-            findHotelElementsPerPage();
-            i++;
-            if (hotelsList.findElement(By.xpath("//button[contains(text(),'" + i + "')]")).isDisplayed()) {
-                hotelsList.findElement(By.xpath("//button[contains(text(),'" + i + "')]")).click();
-            } else {
-                break;
-            }
-        }
-    }
 
 }
 
