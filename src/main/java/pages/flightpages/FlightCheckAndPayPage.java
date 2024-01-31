@@ -31,7 +31,7 @@ public class FlightCheckAndPayPage extends BasePage {
     }
 
     public void clickOnCompleteBookingButton() {
-        BrowserUtils.clickOnElement(completeBookingButton.);
+        BrowserUtils.clickOnElement(completeBookingButton);
     }
 
     public void fillCardHolderName(String name) {
