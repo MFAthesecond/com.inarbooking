@@ -16,7 +16,7 @@ public class HotelConfirmationPage extends BasePage {
     @FindBy(css = ".your-reservation")
     WebElement reservationCard;
 
-    @FindBy(css = "//button[normalize-space()='Close']")
+    @FindBy(xpath = "//button[normalize-space()='Close']")
     WebElement closeButton;
 
     @FindBy(css = ".about-hotel-title > h1")
