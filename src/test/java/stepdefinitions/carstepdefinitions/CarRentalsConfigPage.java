@@ -4,11 +4,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.sl.In;
+import net.bytebuddy.pool.TypePool;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,9 +23,6 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @When("Select The Drivers Age as {string}")
     public void selectTheDriversAgeAs(String driversAge) {
-        BrowserUtils.scrollDownWithJavaScript(0, 400);
-        BrowserUtils.wait(2);
-        System.out.println(PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage());
         PAGES.getCarPages().getCarConfigs().setCarRentalsDriverAgeByDropBox(driversAge);
     }
 
@@ -49,6 +51,7 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @And("Select From Car Category The {string}")
     public void selectFromCarCategoryTheSmall(String carCategoryType) {
+
         PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
     }
 
@@ -65,6 +68,7 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @When("Sort The Cars By Lowest Price")
     public void sort_the_cars_by_lowest_price() {
+        BrowserUtils.scrollDownWithJavaScript(0, -2000);
         PAGES.getCarPages().getCarConfigsRight().sortByPriceLowest();
     }
 
@@ -91,20 +95,29 @@ public class CarRentalsConfigPage extends BaseStep {
         then(getThePricesOfCar).isEqualTo(sortedThePricesOfCar);
     }
 
-    @Then("Verify That There are Small Cars")
-    public void verify_that_there_are_small_cars() {
+    @Then("Verify That There are Small Cars {string}")
+    public void verify_that_there_are_small_cars(String givenCarCatgory) {
+        List<String> carCategory = PAGES.getCarPages().getCarConfigsRight().getTheCarCategory();
+        for (int i = 0; i < carCategory.size(); i++) {
+            then(givenCarCatgory).isEqualTo(carCategory.get(i));
 
+        }
 
     }
 
     @Then("Verify That Cars Are Only From {string}")
-    public void verify_that_cars_are_only_from(String string) {
-
+    public void verify_that_cars_are_only_from(String givenPickupLocation) {
+        List<String> pickUpLocations = PAGES.getCarPages().getCarConfigsRight().getThePickupLocation();
+        for (int i = 0; i < pickUpLocations.size(); i++) {
+            then(givenPickupLocation).isEqualTo(pickUpLocations.get(i));
+        }
     }
 
     @Then("Verify That All Prices Are Within {string}")
-    public void verify_that_all_prices_are_within(String string) {
-
+    public void verify_that_all_prices_are_within(String givenCarPrice) {
+        PAGES.getCarPages().getCarConfigsRight().sortPriceHighest();
+        List<Integer> carPrices = PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage();
+        then(carPrices.get(0)).isLessThanOrEqualTo(Integer.parseInt(givenCarPrice));
     }
 
     @Then("Verify That Transmission Is {string}")
@@ -121,7 +134,22 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @Then("Verify That Car Category is Formed By {string}")
     public void verifyThatCarCategoryIsFormedBy(String arg0, String arg1) {
+        List<String> givenCarCategory = new ArrayList<>(List.of(new String[]{arg0, arg1}));
+        List<String> carCategory = PAGES.getCarPages().getCarConfigsRight().getTheCarCategory();
+        for (String nameOfProduct : carCategory) {
+            then(nameOfProduct).isIn(givenCarCategory);
+        }
 
+    }
 
+    @When("Click on search button In Car Rental Config Page")
+    public void clickOnSearchButtonInCarRentalConfigPage() {
+        PAGES.getCarPages().getCarConfigs().clickOnSearchButton();
+    }
+
+    @And("Click on {string} Car's View Deal Element")
+    public void clickOnCarSViewDealElement(String numberOfCar) {
+        BrowserUtils.scrollDownWithJavaScript(0, 100);
+        PAGES.getCarPages().getCarConfigsRight().clickOnViewDealElement(numberOfCar);
     }
 }

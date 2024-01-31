@@ -14,12 +14,14 @@ public class CarPages {
     private CarRentalsHomePage carRentalsHomePage;
     private CarConfigsRight carConfigsRight;
     private CarRentalCheckOut carRentalCheckOut;
+    private CarInsurancePage carInsurancePage;
 
     public CarPages() {
         carConfigs = new CarConfigs();
         carRentalsHomePage = new CarRentalsHomePage();
         carConfigsRight = new CarConfigsRight();
         carRentalCheckOut = new CarRentalCheckOut();
+        carInsurancePage = new CarInsurancePage();
     }
 
 

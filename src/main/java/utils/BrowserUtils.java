@@ -132,5 +132,11 @@ public class BrowserUtils {
         actions.moveToElement(element).click().perform();
     }
 
+    public static void scrollToElement(WebDriver driver, WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+        BrowserUtils.wait(2);
+
+    }
 
 }
