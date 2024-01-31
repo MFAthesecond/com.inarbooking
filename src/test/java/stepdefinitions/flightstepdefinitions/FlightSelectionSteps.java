@@ -70,4 +70,42 @@ public class FlightSelectionSteps extends BaseStep {
         Collections.sort(flightRanking);
         then(flightPricesAfterFastest).isEqualTo(flightRanking);
     }
+
+    @And("Click on select return ticket button for #{int} flight")
+    public void clickOnSelectReturnTicketButtonForFlight(int flightIndex) {
+        PAGES.getFlightPages().getFlightSelectionPage().clickOnSelectTicket(flightIndex);
+    }
+
+    @And("Select {string} from origin drop down")
+    public void selectFromOriginDropDown(String originName) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromOriginDropDown(originName);
+    }
+
+    @And("Select {string} from destination drop down")
+    public void selectFromDestinationDropDown(String destinationName) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromDestinationDropDown(destinationName);
+    }
+
+    @And("Select #{int} for Adult dropdown")
+    public void selectForAdultDropdown(int adultNum) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromAdultDropDownForRoundTrip(adultNum);
+    }
+
+    @And("Select #{int} for Children dropdown")
+    public void selectForChildrenDropdown(int childNum) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectFromChildDropDownForRoundTrip(childNum);
+        BrowserUtils.wait(3);
+    }
+
+    @Then("Verify that all selected items as requested")
+    public void verifyThatAllSelectedItemsAsRequested() {
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected("Italy" , "Origin")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected("Germany" , "Destination")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected("5" , "AdultForRoundTrip")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementOnDropDownSelected("7" , "ChildrenForRoundTrip")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList("First Class" , "CabinClassForRoundTrip")).isFalse();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList("Business" , "CabinClassForRoundTrip")).isFalse();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList("Airline Z" , "AirlinesForRoundTrip")).isTrue();
+        then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList("6 hours" , "DurationForRoundTrip")).isTrue();
+    }
 }

@@ -53,6 +53,8 @@ Feature: Flight Filtering
     And Select "6" adults and "3" child and click on search flight button
     Then Validate the user is on flight selection page
 
+#Test Cases for Flight Selection Page
+
   Scenario: Validate that the cheapest functionality on flight selection page
 
     When Click on the Flight Tab
@@ -70,6 +72,26 @@ Feature: Flight Filtering
     Then Verify that the the fastest flight is the first flight
 
 
+  Scenario: Validate that the successful flight selection for Round Trip as Trip Type
 
+    When Click on the Flight Tab
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select return ticket button for #1 flight
+    Then Verify that the user on flight fare page
 
+  Scenario: Validate that the dropdowns , checkboxes and radio buttons functionality for round trip
+
+    When Click on the Flight Tab
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Click on search flight button
+    And Select "Italy" from origin drop down
+    And Select "Germany" from destination drop down
+    And Select #5 for Adult dropdown
+    And Select #7 for Children dropdown
+    And Unselect "Business" and Unselect "First Class" for cabin class
+    And Select "Airline Z" for airlines
+    And Select "6 hours" for duration (hours)
+    Then Verify that all selected items as requested
 

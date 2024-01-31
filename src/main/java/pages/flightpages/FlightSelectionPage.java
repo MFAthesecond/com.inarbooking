@@ -96,7 +96,7 @@ public class FlightSelectionPage extends BasePage {
     }
     public void selectFromChildDropDownForRoundTrip(int childNum){
         Select select = new Select(childDropDown);
-        select.selectByIndex(childNum - 1);
+        select.selectByIndex(childNum);
     }
     public void selectTripTypeForRoundTrip(String tripTypeName){
         WebElement tripType = tripTypeListForRoundTripAndCabinClassListForOneWay.stream().filter(element -> element.findElement(By.cssSelector(".ms-2")).getText().equals(tripTypeName)).findFirst().get();
@@ -153,6 +153,43 @@ public class FlightSelectionPage extends BasePage {
     public List<Double> getFlightHours(){
         return flightItemsList.stream().flatMap(parent -> parent.findElements(By.cssSelector(".my-2:nth-child(1)")).stream()).map(WebElement::getText).map(element -> element.split(" ")[0]).map(Double::parseDouble).collect(Collectors.toList());
     }
+    private boolean isElementOnDropDownSelected(String elementName , WebElement dropDown){
+        Select select = new Select(dropDown);
+        return select.getFirstSelectedOption().getText().equals(elementName);
+    }
+    public boolean isElementOnDropDownSelected(String elementName , String dropDownName){
+        switch (dropDownName){
+            case "Origin" : return isElementOnDropDownSelected(elementName , originDropDown);
+            case "Destination" : return isElementOnDropDownSelected(elementName , destinationDropDown);
+            case "AdultForRoundTrip", "ChildrenForOneWay": return isElementOnDropDownSelected(elementName , adultDropDownForRoundTripAndChildDropDownForOneWay);
+            case "ChildrenForRoundTrip" : return isElementOnDropDownSelected(elementName , childDropDown);
+            case "AdultForOneWay" : return isElementOnDropDownSelected(elementName , oneWayAdultDropDown);
+            default: return false;
+        }
+    }
+    private boolean isElementSelectedOnList(String elementName , List<WebElement> listName , String tripTypeName){
+        WebElement webElement;
+        if((listName.equals(tripTypeListForRoundTripAndCabinClassListForOneWay) && tripTypeName.equals("Round Trip")) || listName.equals(tripTypeListForOneWay)){
+            webElement = listName.stream().filter(element -> element.findElement(By.cssSelector("div")).getText().equals(elementName)).findFirst().get();
+        }else{
+            webElement = listName.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(elementName)).findFirst().get();
+        }
+        return webElement.findElement(By.cssSelector("input")).isSelected();
+    }
+    public boolean isElementSelectedOnList(String elementName , String listName){
+        switch (listName){
+            case "TripTypeForRoundTrip" : return isElementSelectedOnList(elementName , tripTypeListForRoundTripAndCabinClassListForOneWay , "Round Trip");
+            case "TripTypeForOneWay" : return isElementSelectedOnList(elementName , tripTypeListForOneWay , " ");
+            case "CabinClassForRoundTrip" , "AirlinesForOneWay": return isElementSelectedOnList(elementName , cabinClassListForRoundTripAndAirlinesListForOneWay , " ");
+            case "CabinClassForOneWay": return isElementSelectedOnList(elementName , tripTypeListForRoundTripAndCabinClassListForOneWay , " ");
+            case "AirlinesForRoundTrip" , "DurationForOneWay" : return isElementSelectedOnList(elementName , airlinesListForRoundTripAndDurationListForOneWay , " ");
+            case "DurationForRoundTrip" : return isElementSelectedOnList(elementName , durationList , " ");
+            default: return false;
+        }
+    }
+
+
+
 
 
 
