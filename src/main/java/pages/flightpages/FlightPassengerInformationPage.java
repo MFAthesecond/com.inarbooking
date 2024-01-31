@@ -54,6 +54,9 @@ public class FlightPassengerInformationPage extends BasePage {
     @FindBy(className = "text-danger")
     private List<WebElement> errorMessage;
 
+    @FindBy(css = ".flight-reserve-card h2")
+    private WebElement contactHeader;
+
 
     public void clickOnFreeTextMessageField() {
         BrowserUtils.clickOnElement(freeTextMessageField);
@@ -159,7 +162,7 @@ public class FlightPassengerInformationPage extends BasePage {
         double taxesAndFeesPercentage = Double.parseDouble(getTaxesAndFeesPercentage());
         double thirdPartyFeePercentage = Double.parseDouble(getThirdPartyFeePercentage());
         double totalPrice = ticketPrice + ((ticketPrice * taxesAndFeesPercentage) / 100) + ((ticketPrice * thirdPartyFeePercentage) / 100);
-        return totalPrice;
+        return Double.parseDouble(String.format("%.2f", totalPrice));
     }
 
     public String findErrorMessage(String targetErrorMessage) {
@@ -172,5 +175,9 @@ public class FlightPassengerInformationPage extends BasePage {
         } else {
             return "No matching error message found";
         }
+    }
+
+    public String getHeaderText(){
+        return contactHeader.getText();
     }
 }
