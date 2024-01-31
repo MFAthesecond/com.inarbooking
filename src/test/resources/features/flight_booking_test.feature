@@ -60,4 +60,5 @@ Scenario: Validate that passenger flight information
     And Click on select ticket button for #1 flight
     And Click on select ticket button for #1 flight
     And Click on select who's flying button
-    And Click on select who's flying button
+    And Calculate total price
+    Then Verify that total flight fare

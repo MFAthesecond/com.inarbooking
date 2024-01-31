@@ -59,4 +59,16 @@ public class FlightPassengerInformationSteps extends BaseStep {
         BrowserUtils.wait(4);
     }
 
+    @And("Calculate total price")
+    public double calculateTotalPrice() {
+        return PAGES.getFlightPages().getFlightPassengerInformationPage().getCalculatedTotalPrice();
+    }
+
+    @Then("Verify that total flight fare")
+    public void verifyThatTotalFlightFare() {
+        String actualTotalPriceStr = String.valueOf(calculateTotalPrice());
+        String expectedTotalPrice=PAGES.getFlightPages().getFlightPassengerInformationPage().getTotalPrice();
+        Assertions.assertThat(actualTotalPriceStr).as("Actual and expected total prices should be equal")
+                .isEqualTo(expectedTotalPrice);
+    }
 }
