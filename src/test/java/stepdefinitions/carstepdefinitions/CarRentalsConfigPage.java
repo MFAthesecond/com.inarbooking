@@ -1,18 +1,13 @@
 package stepdefinitions.carstepdefinitions;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.sl.In;
-import net.bytebuddy.pool.TypePool;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,13 +46,13 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @And("Select From Car Category The {string}")
     public void selectFromCarCategoryTheSmall(String carCategoryType) {
-
-        PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
+        //  PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
     }
 
     @And("Select {string} {string} {string} {string}Car Specs")
     public void selectAutomaticTransmissionCarSpecs(String args1, String arg2, String arg3, String arg4) {
-        PAGES.getCarPages().getCarConfigs().setTheCarSpecs(args1, arg2, arg3, arg4);
+        List<String> specs = new ArrayList<>(List.of(new String[]{args1, arg2, arg3, arg4}));
+        PAGES.getCarPages().getCarConfigs().setTheCarSpecs(specs);
 
     }
 
@@ -74,8 +69,8 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @Then("Verify That Cars Sorted By Lowest Price")
     public void verify_that_cars_sorted_by_lowest_price() {
-        List<Integer> getThePricesOfCar = PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage();
-        List<Integer> sortedList = PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage();
+        List<Integer> getThePricesOfCar = PAGES.getCarPages().getCarConfigsRight().getThePricesOfCarsInPage();
+        List<Integer> sortedList = PAGES.getCarPages().getCarConfigsRight().getThePricesOfCarsInPage();
         Collections.sort(sortedList);
         then(getThePricesOfCar).isEqualTo(sortedList);
     }
@@ -88,9 +83,9 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @Then("Verify That Cars Sorted By Highest Price")
     public void verify_that_cars_sorted_by_highest_price() {
-        List<Integer> getThePricesOfCar = PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage();
+        List<Integer> getThePricesOfCar = PAGES.getCarPages().getCarConfigsRight().getThePricesOfCarsInPage();
         Collections.reverse(getThePricesOfCar);
-        List<Integer> sortedThePricesOfCar = PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage();
+        List<Integer> sortedThePricesOfCar = PAGES.getCarPages().getCarConfigsRight().getThePricesOfCarsInPage();
         Collections.sort(sortedThePricesOfCar);
         then(getThePricesOfCar).isEqualTo(sortedThePricesOfCar);
     }
@@ -113,11 +108,11 @@ public class CarRentalsConfigPage extends BaseStep {
         }
     }
 
-    @Then("Verify That All Prices Are Within {string}")
-    public void verify_that_all_prices_are_within(String givenCarPrice) {
-        PAGES.getCarPages().getCarConfigsRight().sortPriceHighest();
-        List<Integer> carPrices = PAGES.getCarPages().getCarConfigsRight().pricesOfCarsInPage();
-        then(carPrices.get(0)).isLessThanOrEqualTo(Integer.parseInt(givenCarPrice));
+    @Then("Verify That All Prices Are Within Given Range")
+    public void verify_that_all_prices_are_within() {
+        String givenMaxPrice = PAGES.getCarPages().getCarConfigs().getTheSelectedMaxPrice();
+        List<Integer> carPrices = PAGES.getCarPages().getCarConfigsRight().getThePricesOfCarsInPage();
+        then(carPrices.get(0)).isLessThanOrEqualTo(Integer.parseInt(givenMaxPrice));
     }
 
     @Then("Verify That Transmission Is {string}")
@@ -144,12 +139,44 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @When("Click on search button In Car Rental Config Page")
     public void clickOnSearchButtonInCarRentalConfigPage() {
-        PAGES.getCarPages().getCarConfigs().clickOnSearchButton();
+        PAGES.getCarPages().getCarConfigs().clickOnSearchButtonInConfigPage();
     }
 
     @And("Click on {string} Car's View Deal Element")
     public void clickOnCarSViewDealElement(String numberOfCar) {
-        BrowserUtils.scrollDownWithJavaScript(0, 100);
         PAGES.getCarPages().getCarConfigsRight().clickOnViewDealElement(numberOfCar);
+    }
+
+    @When("Select Car Category Via DataTable")
+    public void enterPickupLocations(DataTable carSpec) {
+        List<String> carSpecList = carSpec.asList(String.class);
+        PAGES.getCarPages().getCarConfigs().setCarCategory(carSpecList);
+    }
+
+    @When("Select Car Specs Via DataTable")
+    public void selectCarSpecsViaDataTable(DataTable carSpec) {
+        List<String> carSpecList = carSpec.asList(String.class);
+        PAGES.getCarPages().getCarConfigs().setTheCarSpecs(carSpecList);
+    }
+
+    @When("Select The Price Range Via DataTable")
+    public void selectThePriceRangeViaDataTable(DataTable carSpec) {
+        List<String> carPriceRangeList = carSpec.asList(String.class);
+        PAGES.getCarPages().getCarConfigs().setThePriceRangeViaList(carPriceRangeList);
+    }
+
+    @When("Set The Car's Transmission Via DataTable")
+    public void setTheCarSTransmissionViaDataTable(DataTable carSpec) {
+        List<String> carTransmissionList = carSpec.asList(String.class);
+        PAGES.getCarPages().getCarConfigs().setTheTransmissionViaDataSet(carTransmissionList);
+    }
+
+    @Then("Verify That Car Category is Formed By As Given")
+    public void verifyThatCarCategoryIsFormedByAsGiven() {
+        List<String> selectedCarCategory = PAGES.getCarPages().getCarConfigs().getTheSelectedCarCategory();
+        List<String> categoryOfAppearedCar = PAGES.getCarPages().getCarConfigsRight().getTheCarCategory();
+        for (int i = 0; i < categoryOfAppearedCar.size(); i++) {
+            then(selectedCarCategory).contains(categoryOfAppearedCar.get(i));
+        }
     }
 }

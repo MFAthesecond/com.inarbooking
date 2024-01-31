@@ -1,7 +1,6 @@
 package pages.carpages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
@@ -11,7 +10,6 @@ import utils.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 
 public class CarConfigs extends BasePage {
@@ -80,21 +78,36 @@ public class CarConfigs extends BasePage {
         }
     }
 
-    public String getTheSelectedMaxPrice() {
+    public void setThePriceRangeViaList(List<String> list) {
         List<WebElement> priceOptions = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxInput"));
-        List<WebElement> prices = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxText"));
-
-        for (int i = priceOptions.size() - 1; i >= 0; i--) {
-            if (priceOptions.get(i).isSelected()) {
-                return prices.get(i).getText().substring(prices.get(i).getText().indexOf("-"));
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), priceOptions.get(0));
+        for (String nameOfProduct : list) {
+            for (WebElement carSpecsOption : priceOptions) {
+                if (carSpecsOption.getAttribute("value").equals(nameOfProduct.substring(1))) {
+                    carSpecsOption.click();
+                }
             }
         }
-        return prices.get(prices.size()).getText().substring(prices.get(prices.size()).getText().indexOf("-") + 1);
+
     }
 
-    public void setTheCarSpecs(String args1, String arg2, String arg3, String arg4) {
-        List<String> list = new ArrayList<>(List.of(new String[]{args1, arg2, arg3, arg4}));
+    public String getTheSelectedMaxPrice() {
+        List<WebElement> priceOptions = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxInput"));
+        String maxPrice;
+        for (int i = priceOptions.size() - 1; i >= 0; i--) {
+            if (priceOptions.get(i).isSelected()) {
+                maxPrice = priceOptions.get(i).getAttribute("value");
+                return maxPrice.substring(maxPrice.indexOf('-') + 1);
+            }
+        }
+        maxPrice = priceOptions.get(priceOptions.size()).getAttribute("value");
+        return maxPrice.substring(maxPrice.indexOf('-') + 1);
+
+    }
+
+    public void setTheCarSpecs(List<String> list) {
         List<WebElement> carSpecsOptions = getTheOptionsInConfigurationPage.get(1).findElements(By.cssSelector(".lsCheckboxInput"));
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), carSpecsOptions.get(0));
         for (String nameOfProduct : list) {
             if (nameOfProduct != null) {
                 for (WebElement carSpecsOption : carSpecsOptions) {
@@ -110,7 +123,22 @@ public class CarConfigs extends BasePage {
 
     public void setTheTransmission(String automaticOrManual) {
         List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), transmissionOptions.get(0));
         transmissionOptions.get(automaticOrManual.toLowerCase(Locale.ROOT).contains("au") ? 0 : 1).click();
+    }
+
+    public void setTheTransmissionViaDataSet(List<String> list) {
+        List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), transmissionOptions.get(0));
+        for (String nameOfProduct : list) {
+            if (nameOfProduct != null) {
+                for (WebElement carSpecsOption : transmissionOptions) {
+                    if (carSpecsOption.getAttribute("value").equals(nameOfProduct) && !carSpecsOption.isSelected()) {
+                        carSpecsOption.click();
+                    }
+                }
+            }
+        }
     }
 
     public List<String> getTheSelectedTransmission() {
@@ -122,23 +150,33 @@ public class CarConfigs extends BasePage {
         return transmission;
     }
 
-    public void setCarCategory(String carCategoryTypes) {
-        String carCategoryTypesSmall = carCategoryTypes.toLowerCase(Locale.ROOT);
+    public void setCarCategory(List<String> carCategory) {
         List<WebElement> carCategoryOptions = getTheOptionsInConfigurationPage.get(3).findElements(By.cssSelector(".lsCheckboxInput"));
         BrowserUtils.scrollToElement(DriverManager.getDriver(), carCategoryOptions.get(0));
-        switch (carCategoryTypesSmall) {
-            case "small" -> carCategoryOptions.get(0).click();
-            case "medium" -> carCategoryOptions.get(1).click();
-            case "large" -> carCategoryOptions.get(2).click();
-            case "minivan" -> carCategoryOptions.get(3).click();
-            case "suv" -> carCategoryOptions.get(4).click();
+        for (int i = 0; i < carCategory.size(); i++) {
+            for (int j = 0; j < carCategoryOptions.size(); j++) {
+                if (carCategory.get(i).equals(carCategoryOptions.get(j).getAttribute("value"))) {
+                    carCategoryOptions.get(j).click();
+                }
+            }
+
         }
     }
 
+    public List<String> getTheSelectedCarCategory() {
+        List<WebElement> carCategoryOptions = getTheOptionsInConfigurationPage.get(3).findElements(By.cssSelector(".lsCheckboxInput"));
+        List<String> selectedCarCategory = new ArrayList<>();
+        for (int i = 0; i < carCategoryOptions.size(); i++) {
+            if (carCategoryOptions.get(i).isSelected()) {
+                selectedCarCategory.add(carCategoryOptions.get(i).getAttribute("value"));
+            }
+        }
+        return selectedCarCategory;
+    }
 
-    public void clickOnSearchButton() {
+    public void clickOnSearchButtonInConfigPage() {
+        BrowserUtils.scrollToElement(DriverManager.getDriver(), searchButton);
         searchButton.click();
-        BrowserUtils.wait(2);
     }
 
 
