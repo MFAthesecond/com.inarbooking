@@ -156,7 +156,8 @@ public class HotelSelectionPage extends BasePage {
     public static WebElement hotelFee() {
         return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
-    
+
+
 
 }
 
