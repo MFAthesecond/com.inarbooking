@@ -1,13 +1,8 @@
 package pages.carpages;
-
-import com.fasterxml.jackson.databind.ser.Serializers;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,9 +10,18 @@ public class CarConfigsRight extends BasePage {
 
     @FindBy(css = ".tab-item-car")
     private List<WebElement> carType;
+    @FindBy(css = "div[class='fs-1 fw-bold mb-0']")
+    private List<WebElement> carsAppeared;
+    @FindBy(css = ".lrb-btn")
+    private List<WebElement> sortByButtons;
+    @FindBy(css = ".listResult span.fs-4")
+    private List<WebElement> carSpecsInPage;
+    @FindBy(css = ".mt-2")
+    private List<WebElement> viewDealClickableElement;
+    @FindBy(css = ".pagination-button-booking ")
+    private List<WebElement> pageNumberClickableElement;
 
     public void setCarTypes(String carTypes) {
-
         switch (carTypes) {
             case "small" -> carType.get(0).click();
             case "medium" -> carType.get(1).click();
@@ -27,21 +31,13 @@ public class CarConfigsRight extends BasePage {
         }
     }
 
-    //cars appeared in the page after clicked on search button
-
-    @FindBy(css = "div[class='fs-1 fw-bold mb-0']")
-    private List<WebElement> carsAppeared;
-
     public List<Integer> pricesOfCarsInPage() {
         List<Integer> priceOfCars = new ArrayList<>();
-        for (int i = 0; i < carsAppeared.size(); i++) {
-            priceOfCars.add(Integer.parseInt(carsAppeared.get(i).getText().substring(1, carsAppeared.get(i).getText().indexOf("."))));
+        for (WebElement element : carsAppeared) {
+            priceOfCars.add(Integer.parseInt(element.getText().substring(1, element.getText().indexOf("."))));
         }
         return priceOfCars;
     }
-
-    @FindBy(css = ".lrb-btn")
-    private List<WebElement> sortByButtons;
 
     public void sortByPriceLowest() {
         sortByButtons.get(0).click();
@@ -54,10 +50,6 @@ public class CarConfigsRight extends BasePage {
     public int getTheNumberOfCarsInPage() {
         return carsAppeared.size();
     }
-
-
-    @FindBy(css = ".listResult span.fs-4")
-    private List<WebElement> carSpecsInPage;
 
     public HashMap<Integer, List<String>> getCarSpecsFromShowedCars() {
         HashMap<Integer, List<String>> carSpecs = new HashMap<>();
@@ -85,4 +77,35 @@ public class CarConfigsRight extends BasePage {
     }
 
 
+    public List<String> getTheCarCategory() {
+        HashMap<Integer, List<String>> carSpecs = getCarSpecsFromShowedCars();
+        List<String> carCategory = new ArrayList<>();
+        for (int i = 0; i < carSpecs.size(); i++) {
+            carCategory.add(carSpecs.get(i).get(3));
+        }
+        return carCategory;
+    }
+
+    public List<String> getThePickupLocation() {
+        HashMap<Integer, List<String>> carSpecs = getCarSpecsFromShowedCars();
+        List<String> pickUpLocation = new ArrayList<>();
+        for (int i = 0; i < carSpecs.size(); i++) {
+            pickUpLocation.add(carSpecs.get(i).get(5));
+        }
+        return pickUpLocation;
+    }
+
+    public void clickOnViewDealElement(String numberOfElement) {
+        if (getTheNumberOfCarsInPage() != 0) {
+            viewDealClickableElement.get(Integer.parseInt(numberOfElement)).click();
+        }
+    }
+
+    public int getTheNumberOfPage() {
+        return pageNumberClickableElement.size();
+    }
+
+
 }
+
+
