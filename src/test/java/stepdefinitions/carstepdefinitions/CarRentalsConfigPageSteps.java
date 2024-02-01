@@ -46,7 +46,9 @@ public class CarRentalsConfigPageSteps extends BaseStep {
 
     @And("Select From Car Category The {string}")
     public void selectFromCarCategoryTheSmall(String carCategoryType) {
-        //  PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
+        List<String> carTypeList = new ArrayList<>();
+        carTypeList.add(carCategoryType);
+        PAGES.getCarPages().getCarConfigs().setCarCategory(carTypeList);
     }
 
     @And("Select {string} {string} {string} {string}Car Specs")

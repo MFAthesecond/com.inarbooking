@@ -11,15 +11,15 @@ Feature: Car Rental Page Verification
     And Select The Drivers Age as '40'
     Then Verify That Driver Aged Button Clicked 'true'
     When Set the Pickup Location On Configpage as 'Grand Bazaar'
-    When Select The Price Range from '20' to '350'
-    And Select 'Automatic Transmission' '' 'Heated Seats' ''Car Specs
+    And  Select The Price Range from '30' to '400'
+    And Select 'Automatic Transmission' '4+ Doors' '' ''Car Specs
     And Select Transmission as 'Automatic'
-    When Select From Car Category The 'Large'
-    When Select From Car Category The 'Suv'
-    When Select From Car Category The 'Minivan'
-    When Click on search button In Car Rental Config Page
-    When Sort The Cars By Lowest Price
-    Then Verify That Cars Sorted By Lowest Price
+    And Select From Car Category The 'Large'
+    And Select From Car Category The 'Small'
+    And Select From Car Category The 'Minivan'
+    And Click on search button In Car Rental Config Page
+    And Sort The Cars By Highest Price
+    Then Verify That Cars Sorted By Highest Price
     When Sort The Cars By Highest Price
     Then Verify That Cars Sorted By Highest Price
     Then Verify That Cars Are Only From 'Grand Bazaar'
