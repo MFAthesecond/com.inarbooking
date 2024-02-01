@@ -5,7 +5,7 @@ import io.cucumber.java.en.When;
 import stepdefinitions.BaseStep;
 
 public class FlightCheckAndPaySteps extends BaseStep {
-    @And("Click on go to checkout  button")//bu ifade bir önceki page in test step inde olamalı
+    @And("Click on go to checkout  button")
     public void click_on_go_to_checkout_button() {
         PAGES.getFlightPages().getFlightExtrasPage().clickOnGoToCheckOutButton();
     }
