@@ -29,16 +29,15 @@ Feature: Stay Filtering
       | New York    | 3       | 14      | 5        | 2        | 6       |
       | Paris       | 21      | 28      | 10       | 5        | 12      |
 
-#  Scenario: Validate that the stays selection process
-#
-#    When Choose "Istanbul" where to stay
-#    And Click on search hotels button
-#    And Select "Bicyle Rental" and select "Fitness" for fun things to do
-#    And Select "Free WiFi" for additional features
-#    And Click on search button
-#    And Click on the see availability button for #1 hotel
-#    Then Verify that the user is on the details page
-#
+  Scenario: Validate that the stays selection process
+    Given Navigation to the Hotel Details Page
+    When Choose "Istanbul" where to stay
+    And Select "Bicycle rental" and select "Fitness" for fun things to do
+    And Select "Free WiFi" for additional features
+    And Click on search hotels button
+    And Click on the see availability button for #1 hotel
+    Then Verify that the user is on the details page
+
 #  Scenario:Validate that the successful hotel reservation process 1
 #
 #    When Choose "Istanbul" where to stay
