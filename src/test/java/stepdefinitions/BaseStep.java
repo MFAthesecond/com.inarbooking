@@ -1,9 +1,9 @@
 
 package stepdefinitions;
 
-        import org.openqa.selenium.WebDriver;
-        import utils.DriverManager;
-        import utils.Pages;
+import org.openqa.selenium.WebDriver;
+import utils.DriverManager;
+import utils.Pages;
 
 public class BaseStep {
 

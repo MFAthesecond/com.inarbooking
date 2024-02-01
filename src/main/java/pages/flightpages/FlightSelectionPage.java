@@ -57,10 +57,22 @@ public class FlightSelectionPage extends BasePage {
         BrowserUtils.clickOnElement(getItem(flightIndex).findElement(By.cssSelector(".flight-button")));
     }
     public void selectDepartureDate(String date){
-        BrowserUtils.setElementValueByLocator(".lsItem-flights:nth-child(4) input" , date);
+        departureDatePicker.clear();
+        departureDatePicker.sendKeys(date);
     }
     public void selectReturnDate(String date){
-        BrowserUtils.setElementValueByLocator(".lsItem-flights:nth-child(5) input" , date);
+        returnDatePicker.clear();
+        returnDatePicker.sendKeys(date);
+    }
+    public String getSelectedDepartureDate(){
+        String departureDate = departureDatePicker.getAttribute("value");
+        String[] dividedDate = departureDate.split("-");
+        return dividedDate[1] + "/" + dividedDate[2] + "/" + dividedDate[0];
+    }
+    public String getSelectedReturnDate(){
+        String returnDate = returnDatePicker.getAttribute("value");
+        String[] dividedDate = returnDate.split("-");
+        return dividedDate[1] + "/" + dividedDate[2] + "/" + dividedDate[0];
     }
     public void clickOnTab(String tabName){
         WebElement tab = tabList.stream().filter(element -> element.getText().equals(tabName)).findFirst().get();
@@ -172,19 +184,23 @@ public class FlightSelectionPage extends BasePage {
             default: return false;
         }
     }
-    private boolean isElementSelectedOnList(String elementName , List<WebElement> listName , String tripTypeName){
+    private boolean isElementSelectedOnTripTypeList(String tripTypeName , String elementName){
         WebElement webElement;
-        if((listName.equals(tripTypeListForRoundTripAndCabinClassListForOneWay) && tripTypeName.equals("Round Trip")) || listName.equals(tripTypeListForOneWay)){
-            webElement = listName.stream().filter(element -> element.findElement(By.cssSelector("div")).getText().equals(elementName)).findFirst().get();
-        }else{
-            webElement = listName.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(elementName)).findFirst().get();
+        if(tripTypeName.equals("Round Trip")){
+            webElement = tripTypeListForRoundTripAndCabinClassListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("div")).getText().equals(elementName)).findFirst().get();
+        }else {
+            webElement = tripTypeListForOneWay.stream().filter(element -> element.findElement(By.cssSelector("div")).getText().equals(elementName)).findFirst().get();
         }
+        return webElement.findElement(By.cssSelector("input")).isSelected();
+    }
+    private boolean isElementSelectedOnList(String elementName , List<WebElement> listName , String tripTypeName){
+        WebElement webElement = listName.stream().filter(element -> element.findElement(By.cssSelector("span")).getText().equals(elementName)).findFirst().get();
         return webElement.findElement(By.cssSelector("input")).isSelected();
     }
     public boolean isElementSelectedOnList(String elementName , String listName){
         switch (listName){
-            case "TripTypeForRoundTrip" : return isElementSelectedOnList(elementName , tripTypeListForRoundTripAndCabinClassListForOneWay , "Round Trip");
-            case "TripTypeForOneWay" : return isElementSelectedOnList(elementName , tripTypeListForOneWay , " ");
+            case "TripTypeForRoundTrip" : return isElementSelectedOnTripTypeList("Round Trip" , elementName);
+            case "TripTypeForOneWay" : return isElementSelectedOnTripTypeList(" " , elementName);
             case "CabinClassForRoundTrip" , "AirlinesForOneWay": return isElementSelectedOnList(elementName , cabinClassListForRoundTripAndAirlinesListForOneWay , " ");
             case "CabinClassForOneWay": return isElementSelectedOnList(elementName , tripTypeListForRoundTripAndCabinClassListForOneWay , " ");
             case "AirlinesForRoundTrip" , "DurationForOneWay" : return isElementSelectedOnList(elementName , airlinesListForRoundTripAndDurationListForOneWay , " ");
@@ -192,11 +208,4 @@ public class FlightSelectionPage extends BasePage {
             default: return false;
         }
     }
-
-
-
-
-
-
-
 }
