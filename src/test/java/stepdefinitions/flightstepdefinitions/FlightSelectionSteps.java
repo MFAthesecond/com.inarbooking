@@ -17,6 +17,9 @@ public class FlightSelectionSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightSelectionSteps.class);
 
     private List<Double> flightRanking;
+
+    public static List<String> departureFlightInfo;
+    public static List<String> returnFlightInfo;
     @And("Unselect {string} and Unselect {string} for cabin class")
     public void unselectAndUnselectForCabinClass(String classType1, String classType2) {
         PAGES.getFlightPages().getFlightSelectionPage().selectCabinClassForRoundTrip(classType1);
@@ -127,5 +130,17 @@ public class FlightSelectionSteps extends BaseStep {
     public void verifyThatAndIsSelected(String departureDate, String returnDate) {
         then(PAGES.getFlightPages().getFlightSelectionPage().getSelectedDepartureDate()).isEqualTo(departureDate);
         then(PAGES.getFlightPages().getFlightSelectionPage().getSelectedReturnDate()).isEqualTo(returnDate);
+    }
+
+    @And("Get the #{int} flight information and click on select ticket button")
+    public void getTheFlightInformationAndClickOnSelectTicketButton(int flightIndex) {
+        departureFlightInfo = PAGES.getFlightPages().getFlightSelectionPage().getItemInformation(flightIndex);
+        PAGES.getFlightPages().getFlightSelectionPage().clickOnSelectTicket(flightIndex);
+    }
+
+    @And("Get the #{int} flight information and click on select return ticket button")
+    public void getTheFlightInformationAndClickOnSelectReturnTicketButton(int flightIndex) {
+        returnFlightInfo = PAGES.getFlightPages().getFlightSelectionPage().getItemInformation(flightIndex);
+        PAGES.getFlightPages().getFlightSelectionPage().clickOnSelectTicket(flightIndex);
     }
 }
