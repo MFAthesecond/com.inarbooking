@@ -9,7 +9,7 @@ import java.util.List;
 public class HotelConfirmationPage extends BasePage {
 
     @FindBy(css = ".about-hotel-title")
-    private WebElement hotelTitle;
+    public WebElement hotelTitle;
 
     @FindBy(css = ".text-muted.fs-4")
     private WebElement locationOfHotel;
@@ -35,5 +35,6 @@ public class HotelConfirmationPage extends BasePage {
     public String getLocationOfHotel() {
         return locationOfHotel.getText();
     }
+
 
 }
