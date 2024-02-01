@@ -43,11 +43,15 @@ public class CarRentalsConfigPageSteps extends BaseStep {
         BrowserUtils.scrollDownWithJavaScript(0, 600);
         PAGES.getCarPages().getCarConfigs().setTheTransmission(transmissionType);
     }
-
-    @And("Select From Car Category The {string}")
-    public void selectFromCarCategoryTheSmall(String carCategoryType) {
-        //  PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
-    }
+//
+//    @And("Select From Car Category The {string}")
+//    public void selectFromCarCategoryTheSmall(String carCategoryType) {
+//<<<<<<< HEAD:src/test/java/stepdefinitions/carstepdefinitions/CarRentalsConfigPage.java
+//        //     PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
+//=======
+//        //  PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
+//>>>>>>> main:src/test/java/stepdefinitions/carstepdefinitions/CarRentalsConfigPageSteps.java
+//    }
 
     @And("Select {string} {string} {string} {string}Car Specs")
     public void selectAutomaticTransmissionCarSpecs(String args1, String arg2, String arg3, String arg4) {
@@ -178,5 +182,22 @@ public class CarRentalsConfigPageSteps extends BaseStep {
         for (int i = 0; i < categoryOfAppearedCar.size(); i++) {
             then(selectedCarCategory).contains(categoryOfAppearedCar.get(i));
         }
+    }
+    static int numberOfDayForRental;
+    static String nameOfChosenCar;
+    static int priceOfCar;
+    @When("Get The Price Of #{string} Car's In The Page")
+    public void getThePriceOfCarSInThePage(String numberOfCar) {
+        priceOfCar = PAGES.getCarPages().getCarConfigsRight().getTheSelectedCarPrice(numberOfCar);
+    }
+    @And("Get The Name Of #{string} Car's In Config Page")
+    public void getTheNameOfCarSInConfigPage(String numberOfCar) {
+        nameOfChosenCar = PAGES.getCarPages().getCarConfigsRight().getTheSelectedCarName(numberOfCar);
+
+    }
+
+    @And("Get The Number Of Days For Rental In Config Page")
+    public void getTheNumberOfDaysForRentalInConfigPage() {
+        numberOfDayForRental = PAGES.getCarPages().getCarConfigs().getTheNumberOfDaysInfos();
     }
 }

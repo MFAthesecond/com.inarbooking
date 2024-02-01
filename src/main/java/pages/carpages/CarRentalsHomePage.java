@@ -111,6 +111,8 @@ public class CarRentalsHomePage extends BasePage {
 
     public void setTheLocationHourDateInfos() {
         locationHourDateInfos = new HashMap<>();
+        BrowserUtils.scrollToElement(pickUpLocationElement);
+        System.out.println("4");
         locationHourDateInfos.put("PickupLocation", getThePickUpLocation());
         locationHourDateInfos.put("PickupDate", getThePickupDate());
         locationHourDateInfos.put("PickupHour", getThePickupHour());
@@ -120,6 +122,7 @@ public class CarRentalsHomePage extends BasePage {
 
     public HashMap<String, String> getTheLocationHourDateInfos() {
         setTheLocationHourDateInfos();
+        System.out.println("5");
         return locationHourDateInfos;
     }
 }
