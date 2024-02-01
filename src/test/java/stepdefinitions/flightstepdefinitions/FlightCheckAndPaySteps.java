@@ -3,6 +3,7 @@ package stepdefinitions.flightstepdefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import stepdefinitions.BaseStep;
+import utils.BrowserUtils;
 
 public class FlightCheckAndPaySteps extends BaseStep {
 

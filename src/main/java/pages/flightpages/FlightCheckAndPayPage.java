@@ -21,7 +21,7 @@ public class FlightCheckAndPayPage extends BasePage {
     private WebElement transportDealsConsentCheckbox;
     @FindBy(xpath = "//span[normalize-space()='Back']")
     private WebElement backButton;
-    @FindBy(xpath = "//span[normalize-space()='Complete Booking']")
+    @FindBy(xpath = "//button[@class='btn btn-blue']")
     private WebElement completeBookingButton;
     @FindBy(css = ".col-5 .flight-reserve-card")
     private WebElement priceCalculationContainer;

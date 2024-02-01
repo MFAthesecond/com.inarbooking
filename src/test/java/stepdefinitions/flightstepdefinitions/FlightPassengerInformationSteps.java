@@ -81,4 +81,5 @@ public class FlightPassengerInformationSteps extends BaseStep {
         then(PAGES.getFlightPages().getFlightPassengerInformationPage().getHeaderText()).isEqualTo("Contact Details");
     }
 
+
 }

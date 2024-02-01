@@ -24,6 +24,8 @@ public class FlightConfirmationPage extends BasePage {
     private WebElement reservationCard;
     @FindBy(xpath = "//button[normalize-space()='Close']")
     private WebElement closeButton;
+    @FindBy(xpath = "//div[@class='thanks']//h1[contains(text(),'Thank you for your booking')]")
+    private WebElement confirmationMessage;
 
 
     private WebElement getContainer(String containerName){
@@ -60,5 +62,7 @@ public class FlightConfirmationPage extends BasePage {
     public void clickOnGetPrintVersion(String containerName){
         BrowserUtils.clickOnElement(getContainer(containerName).findElement(By.cssSelector("button")));
     }
-
+public boolean isConfirmationMessageDisplayed(){
+       return confirmationMessage.isDisplayed();
+}
 }
