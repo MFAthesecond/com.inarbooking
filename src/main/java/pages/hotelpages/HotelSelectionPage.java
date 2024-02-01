@@ -151,6 +151,10 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.findElement(By.cssSelector(".siCheckButton"));
     }
 
+    public static void clickSeeAvailabilityButton() {
+        seeAvailabilityButton().click();
+    }
+
     public static WebElement getEvaluationScoreBox() {
         return searchItemBox.findElement(By.cssSelector("button:nth-child(2)"));
     }
@@ -181,7 +185,9 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 
-
+    public void clickOnSeeAvailability() {
+        seeAvailabilityButton().click();
+    }
 
 }
 
