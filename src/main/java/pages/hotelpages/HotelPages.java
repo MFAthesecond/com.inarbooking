@@ -1,11 +1,9 @@
 package pages.hotelpages;
 
 import lombok.Data;
-
+import pages.BasePage;
 @Data
 public class HotelPages {
-
-
     private HotelConfirmationPage hotelConfirmationPage;
     private HotelDetailsPage hotelDetailsPage;
     private HotelPage hotelPage;
