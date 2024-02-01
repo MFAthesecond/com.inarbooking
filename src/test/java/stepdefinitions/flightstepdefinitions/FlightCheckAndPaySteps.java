@@ -31,6 +31,7 @@ public class FlightCheckAndPaySteps extends BaseStep {
     @When("Click on complete booking button")
     public void click_on_complete_booking_button() {
         BrowserUtils.wait(2);
+
         PAGES.getFlightPages().getFlightCheckAndPayPage().clickOnCompleteBookingButton();
     }
 
