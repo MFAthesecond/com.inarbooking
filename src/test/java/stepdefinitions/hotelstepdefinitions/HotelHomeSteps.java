@@ -15,15 +15,7 @@ public class HotelHomeSteps extends BaseStep {
         PAGES.getHomePage().clickBookingLink();
 
     }
-    @When("Select {string} adults and {string} child and \"{int}\"room and click on search flight button")
-    public void select_adults_and_child_and_room_and_click_on_search_flight_button(String string, String string2, Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-    @Then("Validate the user is on hotel selection page")
-    public void validate_the_user_is_on_hotel_selection_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
+
+
 
 }

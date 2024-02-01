@@ -51,7 +51,9 @@ public class HotelSelectionPage extends BasePage {
     private static WebElement searchItemBox;
     @FindBy(css = ".listResult ")
     private static WebElement hotelsList;
-
+public boolean validateNavigationToHotelSelectionPage(){
+    return hotelTabName.isDisplayed();
+}
     public String getCheckInDate() {
         String date = checkInAndCheckOutDate.getText();
         return date.substring(0, date.indexOf("/202"));
@@ -180,7 +182,6 @@ public class HotelSelectionPage extends BasePage {
     public static WebElement getHotelFee() {
         return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
-
 
 
 }
