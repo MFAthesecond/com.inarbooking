@@ -55,8 +55,11 @@ public class HotelSelectionSteps extends BaseStep {
 
     @Then("Verify that the user is on the details page")
     public void verify_that_the_user_is_on_the_details_page() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
+    }
+    @When("Select {string} and {string} for hotels and click on search button")
+    public void select_and_for_hotels_and_click_on_search_button(String string, String string2) {
+        PAGES.getHotelPages().getHotelSelectionPage().
     }
 
 

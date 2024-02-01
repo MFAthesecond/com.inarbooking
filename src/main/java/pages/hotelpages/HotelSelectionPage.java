@@ -129,41 +129,53 @@ public class HotelSelectionPage extends BasePage {
         scrollToElement(searchButton);
         searchButton.click();
     }
-    public  WebElement getEvaluationScoreBox(int index) {
+
+    public WebElement getEvaluationScoreBox(int index) {
         return searchItemBox.get(index).findElement(By.cssSelector("button:nth-child(2)"));
     }
-    public  void clickOnSeeAvailabilityButton(int index) {
-        System.out.println(searchItemBox.size());
-        for (int i = 0; i < searchItemBox.size(); i++) {
-            System.out.println(searchItemBox.get(i).getText());
-        }
 
-        searchItemBox.get(index).findElement(By.cssSelector(".siCheckButton")).click();
+    public void clickOnSeeAvailabilityButton(int index) {
+        scrollToElement(hotelTabName);
+        List<WebElement> list = hotelsList.findElements(By.cssSelector(".searchItem "));
+        list.get(index - 1).findElement(By.cssSelector(".siCheckButton")).click();
+
+//        for (int i = 0; i < searchItemBox.size(); i++) {
+//            System.out.println(searchItemBox.get(i).getText());
+//        }
     }
 
-    public  WebElement getHotelNameBox(int index) {
-        return searchItemBox.get(index).findElement(By.xpath("//h1[contains(text(),'Urban Oasis Resort')]"));
+    public WebElement getHotelNameBox(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector(".siTitle"));
     }
 
-    public  WebElement getLocationInformation(int index) {
+    public WebElement getLocationInformation(int index) {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDistance"));
     }
 
-    public  WebElement getLocation(int index) {
+    public WebElement getLocation(int index) {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDesc > h2.fs-5.m-0"));
     }
 
-    public  WebElement getLocationCountry(int index) {
+    public WebElement getLocationCountry(int index) {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDesc > h2.fs-4.m-0"));
     }
-    // New York, United States of America
+
+    @FindBy(css = ":nth-child(7) > div > div")
+    List<WebElement> listOfHotelTypes;
+
+    public void selectHotelTypes(List<String>stringList) {
+        for (int i = 0; i < ; i++) {
+            
+        }
+        listOfHotelTypes.stream().filter()
+    }
 
     public String getCityName(int index) {
         String cityName = getLocation(index).getText();
         return cityName.substring(0, cityName.lastIndexOf(","));
     }
 
-    public  WebElement getHotelFee(int index) {
+    public WebElement getHotelFee(int index) {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 }
