@@ -5,10 +5,8 @@ import io.cucumber.java.en.When;
 import stepdefinitions.BaseStep;
 
 public class FlightCheckAndPaySteps extends BaseStep {
-    @And("Click on go to checkout  button")
-    public void click_on_go_to_checkout_button() {
-        PAGES.getFlightPages().getFlightExtrasPage().clickOnGoToCheckOutButton();
-    }
+
+
     @When("Fill in {string} as the cardholder's name")
     public void fill_in_as_the_cardholder_s_name(String cardHolderName) {
        PAGES.getFlightPages().getFlightCheckAndPayPage().fillCardHolderName(cardHolderName);
