@@ -1,11 +1,10 @@
 package stepdefinitions.carstepdefinitions;
 
 import io.cucumber.java.en.When;
-import io.cucumber.java.sl.In;
 import org.assertj.core.api.Assertions;
 import stepdefinitions.BaseStep;
 
-public class CarRentalsInsurancePage extends BaseStep {
+public class CarRentalsInsurancePageSteps extends BaseStep {
     @When("Click On Go To Book Element From Car Insurance Page")
     public void clickOnGoToBookElementFromCarInsurancePage() {
         PAGES.getCarPages().getCarInsurancePage().clickOnGoToBookElement();

@@ -4,11 +4,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import stepdefinitions.BaseStep;
-import utils.BrowserUtils;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-public class CarRentalsOnBookingHomePage extends BaseStep {
+public class CarRentalsOnBookingHomePageSteps extends BaseStep {
 
     @And("Navigation to the Car Rentals page")
     public void navigationToTheCarRentalsPage() {
