@@ -163,12 +163,12 @@ public class HotelSelectionPage extends BasePage {
     @FindBy(css = ":nth-child(7) > div > div")
     List<WebElement> listOfHotelTypes;
 
-    public void selectHotelTypes(List<String>stringList) {
-        for (int i = 0; i < ; i++) {
-            
-        }
-        listOfHotelTypes.stream().filter()
-    }
+//    public void selectHotelTypes(List<String>stringList) {
+//        for (int i = 0; i < ; i++) {
+//
+//        }
+//        listOfHotelTypes.stream().filter()
+//    }
 
     public String getCityName(int index) {
         String cityName = getLocation(index).getText();

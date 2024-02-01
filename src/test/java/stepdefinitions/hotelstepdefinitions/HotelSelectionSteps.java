@@ -57,10 +57,10 @@ public class HotelSelectionSteps extends BaseStep {
     public void verify_that_the_user_is_on_the_details_page() {
         PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
     }
-    @When("Select {string} and {string} for hotels and click on search button")
-    public void select_and_for_hotels_and_click_on_search_button(String string, String string2) {
-        PAGES.getHotelPages().getHotelSelectionPage().
-    }
+//    @When("Select {string} and {string} for hotels and click on search button")
+//    public void select_and_for_hotels_and_click_on_search_button(String string, String string2) {
+////        PAGES.getHotelPages().getHotelSelectionPage().
+//    }
 
 
 }
