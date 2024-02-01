@@ -13,7 +13,7 @@ Feature: Flight Filtering
     And Click on the Booking Link
 
 
-Scenario: Validate that passenger flight information
+Scenario: Validate that passenger flight information 1
 
   When Click on the Flight Tab
   And Click on round trip checkbox
@@ -31,7 +31,7 @@ Scenario: Validate that passenger flight information
   Then Verify that the "Invalid email address" message is not displayed
   And Verify that the "Invalid phone number" message is not displayed
 
-  Scenario: Validate that passenger flight information
+  Scenario: Validate that passenger flight information 2
 
     When Click on the Flight Tab
     And Click on round trip checkbox
@@ -44,9 +44,10 @@ Scenario: Validate that passenger flight information
     And Fill "bbbbb@gmail.com" as contact email
     And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
     And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
-    And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1905" as the year, "4" as the month, "3" as the day for the #2 passenger
+    And Fill in "Scarlett" as the name, "John" as the surname, "Female" as the gender, "1992" as the year, "4" as the month, "3" as the day for the #2 passenger
     And Fill in "John" as the name, "Eris" as the surname, "Male" as the gender, "2005" as the year, "2" as the month, "6" as the day for the #3 passenger
     Then Verify that the "Please select a gender." message is not displayed
+
 
 
 
@@ -55,7 +56,7 @@ Scenario: Validate that passenger flight information
     When Click on the Flight Tab
     And Click on round trip checkbox
     And Select "Business" for flight class
-    And Select "USA" for from dropdown and select "Japan" for to dropdown
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
     And Select "2" adults and "2" child and click on search flight button
     And Click on select ticket button for #1 flight
     And Click on select ticket button for #1 flight
@@ -63,4 +64,26 @@ Scenario: Validate that passenger flight information
     And Calculate total price
     Then Verify that total flight fare
 
-  
+
+
+  Scenario: Validate that the successful check and pay
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "Business" for flight class
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Select "1" adults and "0" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    And Fill "bbbbb@gmail.com" as contact email
+    And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
+    And Click on select extras button
+    And Click on go to checkout  button
+    And Fill in "John" as the cardholder's name
+    And Fill in "1234567891234567" as the card number
+    And Fill in "1125" as the expiration date
+    And Fill in "345" as the cvc code
+    And Click on complete booking button
+
