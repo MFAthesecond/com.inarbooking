@@ -123,4 +123,9 @@ public class FlightSelectionSteps extends BaseStep {
     public void selectReturnDateAs(String returnDate) {
         PAGES.getFlightPages().getFlightSelectionPage().selectReturnDate(returnDate);
     }
+    @Then("Verify that {string} and {string} is selected")
+    public void verifyThatAndIsSelected(String departureDate, String returnDate) {
+        then(PAGES.getFlightPages().getFlightSelectionPage().getSelectedDepartureDate()).isEqualTo(departureDate);
+        then(PAGES.getFlightPages().getFlightSelectionPage().getSelectedReturnDate()).isEqualTo(returnDate);
+    }
 }

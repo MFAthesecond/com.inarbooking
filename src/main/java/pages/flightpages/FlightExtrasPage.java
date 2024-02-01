@@ -41,7 +41,7 @@ public class FlightExtrasPage extends BasePage {
 
     public void selectMeal(String meal){
         Select select = new Select(mealDropDown);
-        select.selectByValue(meal);
+        select.selectByVisibleText(meal);
     }
 
     public String getMealPrice(String meal){
@@ -99,5 +99,14 @@ public class FlightExtrasPage extends BasePage {
     }
     public void clickOnGoToCheckOutButton(){
        BrowserUtils.clickOnElement(extrasContainer.findElement(By.cssSelector("button:nth-child(2)")));
+    }
+    public boolean isMealSelected(String mealName){
+        Select select = new Select(mealDropDown);
+        return select.getFirstSelectedOption().getText().equals(mealName);
+    }
+
+    public boolean isExtraSelected(String extraName){
+        WebElement extra = extrasCheckBoxList.stream().filter(element -> element.findElement(By.cssSelector("label")).getText().contains(extraName)).findFirst().get();
+        return extra.findElement(By.cssSelector("input")).isSelected();
     }
 }
