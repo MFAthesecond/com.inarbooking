@@ -82,7 +82,7 @@ Feature: Flight Filtering
     And Click on go to checkout  button
     And Fill in "John" as the cardholder's name
     And Fill in "1234567891234567" as the card number
-    And Fill in "1125" as the expiration date
+    And Fill in "11/25" as the expiration date
     And Fill in "345" as the cvc code
     And Click on complete booking button
     Then Validate the user is on confirmation page

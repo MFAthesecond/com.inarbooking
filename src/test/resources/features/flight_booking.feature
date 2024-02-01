@@ -151,4 +151,24 @@ Feature: Flight Filtering
       | Germany | France      | Main                | Business         | user+#15@gmail.com    | +44 (UK)     | 2345467789   | Sally         | Hawkins          | Female | 2003       | 8           | 17        | Gluten-free Meal - $18 | Extra Comfort Kit  | Travel Insurance  |
       | Japan   | Brazil      | Business            | Refundable Main  | willJames15@gmail.com | +81 (JP)     | 1122233332   | Will          | James            | Other  | 1978       | 12          | 31        | Diabetic Meal - $19    | Travel Insurance   | Extra Comfort Kit |
 
+    Scenario: Validate that the Confirmation Page Information for Round Trip
 
+      When Click on the Flight Tab
+      And Select "USA" for from dropdown and select "Canada" for to dropdown
+      And Click on search flight button
+      And Get the #1 flight information and click on select ticket button
+      And Get the #1 flight information and click on select return ticket button
+      And Get departure route information and Click on "Refundable Main" for departure fare type
+      And Get return route information and Click on "First Class" for return fare type
+      And Click on select who's flying button
+      And Fill "john15@gmail.com" as contact email
+      And Select "+44 (UK)" for country code dropdown and fill "4445756661" as phone number
+      And Fill in "Sally" as the name, "James" as the surname, "Male" as the gender, "2003" as the year, "8" as the month, "17" as the day for the #1 passenger
+      And Click on select extras button
+      And Click on go to checkout  button
+      And Fill in "John" as the cardholder's name
+      And Fill in "1234567891234567" as the card number
+      And Fill in "11/25" as the expiration date
+      And Fill in "345" as the cvc code
+      And Click on complete booking button
+      Then Verify that "john15@gmail.com" , route and ticket information on confirmation page for departure and return
