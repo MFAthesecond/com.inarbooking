@@ -114,4 +114,13 @@ public class FlightSelectionSteps extends BaseStep {
         then(PAGES.getFlightPages().getFlightSelectionPage().isElementSelectedOnList(duration , "DurationForRoundTrip")).isTrue();
     }
 
+    @And("Select departure date as {string}")
+    public void selectDepartureDateAs(String departureDate) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectDepartureDate(departureDate);
+    }
+
+    @And("Select return date as {string}")
+    public void selectReturnDateAs(String returnDate) {
+        PAGES.getFlightPages().getFlightSelectionPage().selectReturnDate(returnDate);
+    }
 }
