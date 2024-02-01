@@ -88,4 +88,5 @@ Scenario: Validate that passenger flight information 1
     And Fill in "1125" as the expiration date
     And Fill in "345" as the cvc code
     And Click on complete booking button
+    Then Validate the user is on confirmation page
 
