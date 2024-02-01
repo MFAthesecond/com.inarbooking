@@ -5,6 +5,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import stepdefinitions.BaseStep;
 
+import java.util.HashMap;
+
 import static org.assertj.core.api.BDDAssertions.then;
 
 public class CarRentalsOnBookingHomePageSteps extends BaseStep {
@@ -21,7 +23,7 @@ public class CarRentalsOnBookingHomePageSteps extends BaseStep {
 
     @And("Click on Pickup Date")
     public void clickOnPickupDate() {
-        String pickUpDate ="2027-03-05";
+        String pickUpDate = "2027-03-05";
         PAGES.getCarPages().getCarRentalsHomePage().setThePickUpDate(pickUpDate);
     }
 
@@ -32,7 +34,7 @@ public class CarRentalsOnBookingHomePageSteps extends BaseStep {
 
     @And("Click On DropOff Date")
     public void clickOnDropOffDate() {
-        String dropOffDate ="2027-05-05";
+        String dropOffDate = "2027-05-05";
         PAGES.getCarPages().getCarRentalsHomePage().setTheDropOffDate(dropOffDate);
     }
 
@@ -65,5 +67,13 @@ public class CarRentalsOnBookingHomePageSteps extends BaseStep {
         String expectedDropOffDate = "2024-02-02";
         actualDropOffDate = PAGES.getCarPages().getCarRentalsHomePage().getTheDropOffDate();
         then(actualDropOffDate).isEqualTo(expectedDropOffDate);
+    }
+
+
+    static String location;
+
+    @When("Get The Order Details As Location Date And Hour")
+    public void getTheOrderDetailsAsLocationDateAndHour() {
+        location = PAGES.getCarPages().getCarRentalsHomePage().getThePickUpLocation();
     }
 }

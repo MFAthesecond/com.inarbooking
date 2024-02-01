@@ -17,8 +17,6 @@ import java.util.Locale;
 
 public class CarConfigs extends BasePage {
     private HashMap<String, String> locationHourDateInfosInCarConfigsPage;
-    private int numberOfDaysForRental;
-
     @FindBy(css = ".listSearch-car-rental > div")
     private WebElement carRentalConfigurations;
     @FindBy(css = "div[class='search-btn-car-rental'] button")
@@ -209,16 +207,13 @@ public class CarConfigs extends BasePage {
         return locationHourDateInfosInCarConfigsPage;
     }
 
-    public void setTheNumberOfDaysForRental() {
+    public int getTheNumberOfDaysInfos() {
         String pickUpDate = getThePickUpDateInConfigurationPage();
         String dropOffDate = getTheDropOffDateInConfigurationPage();
         LocalDate date1 = LocalDate.of(Integer.parseInt(pickUpDate.substring(0, 4)), Integer.parseInt(pickUpDate.substring(5, 7)), Integer.parseInt(pickUpDate.substring(8)));
         LocalDate date2 = LocalDate.of(Integer.parseInt(dropOffDate.substring(0, 4)), Integer.parseInt(dropOffDate.substring(5, 7)), Integer.parseInt(dropOffDate.substring(8)));
-        numberOfDaysForRental = Math.abs((int) (ChronoUnit.DAYS.between(date1, date2)));
+        return  Math.abs((int) (ChronoUnit.DAYS.between(date1, date2)));
     }
 
-    public int getTheNumberOfDays() {
-        return numberOfDaysForRental;
-    }
 
 }

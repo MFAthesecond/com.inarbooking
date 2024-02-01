@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CarInsurancePage extends BasePage {
-    private HashMap<String, String> locationHourDateInfosInCarInsurancePage;
     @FindBy(css = ".mt-5 .btn.btn-blue")
     private List<WebElement> goToBookElement;
     @FindBy(css = ".carDate-area .fw-bold")
@@ -19,10 +18,12 @@ public class CarInsurancePage extends BasePage {
     @FindBy(css = ".fs-4.mb-2")
     private List<WebElement> hoursAndDateOfPickupAndDropOff;
     @FindBy(css = ".pickup-and-drop-off.mb-5 .fw-bold.fs-4")
-    private List<String> locationOfPickupAndDropOff;
+    private List<WebElement> locationOfPickupAndDropOff;
     @FindBy(css = "div[class='mt-5'] span:nth-child(2)")
     private WebElement totalPriceElement;
-//
+    @FindBy(css = ".pickup-and-drop-off.mb-5")
+    private WebElement dateAndHourTable;
+    //
     @FindBy(css = "span.d-inline-block:nth-child(1)")
     private List<WebElement> taxesAndFeesElement;
 
@@ -38,10 +39,12 @@ public class CarInsurancePage extends BasePage {
     }
 
     public String getPickupAddressAtTheTopOfInsurancePageFullAddressWithCountry() {
+        BrowserUtils.scrollDownWithJavaScript(0,-3000);
         return pickAndDropAddressAtTopOfInsurancePage.get(0).getText();
     }
 
     public String getDropOffAddressAtTheTopOfInsurancePageFullAddressWithCountry() {
+        BrowserUtils.scrollDownWithJavaScript(0,-3000);
         return pickAndDropAddressAtTopOfInsurancePage.get(1).getText();
     }
 
@@ -67,12 +70,19 @@ public class CarInsurancePage extends BasePage {
 
     }
 
+
+
     public String getThePickUpLocation() {
-        return locationOfPickupAndDropOff.get(0).substring(locationOfPickupAndDropOff.get(0).indexOf("-") + 1);
+        BrowserUtils.scrollToElement(dateAndHourTable);
+        System.out.println("index of - is "+locationOfPickupAndDropOff.get(0).getText().indexOf("-") + 1);
+        return locationOfPickupAndDropOff.get(0).getText().substring(locationOfPickupAndDropOff.get(0).getText().indexOf("-") + 1);
     }
 
+
     public String getTheDropOffLocation() {
-        return locationOfPickupAndDropOff.get(1).substring(locationOfPickupAndDropOff.get(0).indexOf("-") + 1);
+        BrowserUtils.scrollToElement(dateAndHourTable);
+        System.out.println("index of + >>>"+locationOfPickupAndDropOff.get(1).getText().indexOf("-") + 1);
+        return locationOfPickupAndDropOff.get(1).getText().substring(locationOfPickupAndDropOff.get(1).getText().indexOf("-") + 1);
     }
 
     public String datesOfDopOffAndPickUp(int i) {
@@ -88,28 +98,32 @@ public class CarInsurancePage extends BasePage {
         return pickUpYear + "-" + aySirasi + "-" + newPickUpDay;
     }
 
-    public void setLocationHourDateInfosInCarInsurancePage() {
-        locationHourDateInfosInCarInsurancePage = new HashMap<>();
-        locationHourDateInfosInCarInsurancePage.put("PickupLocation", getThePickUpLocation());
-        locationHourDateInfosInCarInsurancePage.put("PickupDate", getThePickupDate());
-        locationHourDateInfosInCarInsurancePage.put("PickupHour", getThePickUpHour());
-        locationHourDateInfosInCarInsurancePage.put("DropoffDate", getTheDropOffDate());
-        locationHourDateInfosInCarInsurancePage.put("DropoffHour", getTheDropOffHour());
-    }
+//    public HashMap<String, String> getLocationHourDateInfosInCarInsurancePage() {
+//        System.out.println("1");
+//        HashMap<String, String> locationHourDateInfosInCarInsurancePage = new HashMap<>();
+//        BrowserUtils.scrollToElement(dateAndHourTable);
+//        locationHourDateInfosInCarInsurancePage.put("PickupLocation", getThePickUpLocation());
+//        System.out.println(locationHourDateInfosInCarInsurancePage.get("PickupLocation"));
+//        locationHourDateInfosInCarInsurancePage.put("PickupDate", getThePickupDate());
+//        System.out.println(locationHourDateInfosInCarInsurancePage.get("PickupDate"));
+//        locationHourDateInfosInCarInsurancePage.put("PickupHour", getThePickUpHour());
+//        locationHourDateInfosInCarInsurancePage.put("DropoffDate", getTheDropOffDate());
+//        locationHourDateInfosInCarInsurancePage.put("DropoffHour", getTheDropOffHour());
+//
+//        return locationHourDateInfosInCarInsurancePage;
+//    }
 
-    public HashMap<String, String> getLocationHourDateInfosInCarInsurancePage() {
-        setLocationHourDateInfosInCarInsurancePage();
-        return locationHourDateInfosInCarInsurancePage;
-    }
 
     public String getTheTotalPriceElement() {
         BrowserUtils.scrollToElement(totalPriceElement);
-        return totalPriceElement.getText().substring(1,totalPriceElement.getText().indexOf("."));
+        return totalPriceElement.getText().substring(1, totalPriceElement.getText().indexOf("."));
     }
 
     public String getTheFeeAndTaxPercentage() {
+        System.out.println("bialssşlşls");
         BrowserUtils.scrollToElement(taxesAndFeesElement.get(0));
         String xx = taxesAndFeesElement.get(0).getText();
+        System.out.println(xx);
         return xx.substring(xx.indexOf("%") + 1, xx.indexOf(" of total price"));
     }
 
@@ -123,13 +137,13 @@ public class CarInsurancePage extends BasePage {
         insuranceOptions.get(0).click();
     }
 
-    public String getTheTotalCoverPricePercentage(){
+    public String getTheTotalCoverPricePercentage() {
         BrowserUtils.scrollToElement(taxesAndFeesElement.get(1));
-        String xx = taxesAndFeesElement.get(0).getText();
+        String xx = taxesAndFeesElement.get(1).getText();
         return xx.substring(xx.indexOf("%") + 1, xx.indexOf(" of total price"));
     }
 
-    public String getTheCarName(){
+    public String getTheCarName() {
         return carNameElement.getText();
     }
 

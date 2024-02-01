@@ -1,30 +1,52 @@
 package stepdefinitions.carstepdefinitions;
 
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.assertj.core.api.Assertions;
 import stepdefinitions.BaseStep;
 
-public class CarRentalsInsurancePageSteps extends BaseStep {
+
+
+import static org.assertj.core.api.BDDAssertions.then;
+
+public class CarRentalsInsurancePage extends BaseStep {
     @When("Click On Go To Book Element From Car Insurance Page")
     public void clickOnGoToBookElementFromCarInsurancePage() {
         PAGES.getCarPages().getCarInsurancePage().clickOnGoToBookElement();
     }
 
-    @When("Verify That Total Car Price Breakdown Is Accurate In Isurance Page")
-    public void verifyThatTotalCarPriceBreakdownIsAccurateInIsurancePage() {
-      int numberOfDays =  PAGES.getCarPages().getCarConfigs().getTheNumberOfDays();
-      int dailyPriceOfSelectedCar = PAGES.getCarPages().getCarConfigsRight().getTheSelectedCarPrice();
-      int getTheFeePercentage =Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage());
-        System.out.println(numberOfDays);
-        System.out.println(dailyPriceOfSelectedCar);
-        System.out.println(getTheFeePercentage);
+    @Then("Verify That Total Car Price Breakdown Is Accurate In Insurance Page")
+    public void verifyThatTotalCarPriceBreakdownIsAccurateInInsurancePage() {
+        int expectedTotalPriceWithoutTax = CarRentalsConfigPageSteps.numberOfDayForRental * CarRentalsConfigPageSteps.priceOfCar;
+        double totalPriceWithTax = expectedTotalPriceWithoutTax + (double) (expectedTotalPriceWithoutTax * percentageOfTax) / 100;
+        then((int) totalPriceWithTax).isEqualTo(Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheTotalPriceElement()));
 
-      int expectedCarPrice = numberOfDays*dailyPriceOfSelectedCar+(numberOfDays*dailyPriceOfSelectedCar*getTheFeePercentage/100);
-        System.out.println(expectedCarPrice);
+    }
 
-      int actualTotalTotalCarPriceBreakdown = Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheTotalPriceElement());
-        System.out.println(actualTotalTotalCarPriceBreakdown);
-        Assertions.assertThat(expectedCarPrice).isEqualTo(actualTotalTotalCarPriceBreakdown);
+    static int percentageOfTax;
 
+    @When("Get The Percentage Of Tax")
+    public void getThePercentageOfTax() {
+        percentageOfTax = Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage());
+        System.out.println("per =" + percentageOfTax);
+    }
+
+    String locationHere;
+
+    @When("Get The Order Details As Location Date And Hour On Insurance Page")
+    public void getTheOrderDetailsAsLocationDateAndHourOnInsurancePage() {
+        System.out.println(PAGES.getCarPages().getCarInsurancePage().getTheCarName());
+        System.out.println(PAGES.getCarPages().getCarInsurancePage().getTheDropOffDate());
+        System.out.println(PAGES.getCarPages().getCarInsurancePage().getThePickUpLocation());
+        System.out.println(PAGES.getCarPages().getCarInsurancePage().getTheDropOffLocation());
+        locationHere = PAGES.getCarPages().getCarInsurancePage().getPickupAddressAtTheTopOfInsurancePageFullAddressWithCountry();
+        System.out.println("Loca ="+ locationHere);
+
+    }
+
+
+
+    @Then("Verify That Order Details Date Place Hour As Given")
+    public void verifyThatOrderDetailsDatePlaceHourAsGiven() {
+        then(locationHere).isEqualTo(CarRentalsOnBookingHomePageSteps.location);
     }
 }
