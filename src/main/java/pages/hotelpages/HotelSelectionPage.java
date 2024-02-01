@@ -1,7 +1,6 @@
 package pages.hotelpages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
@@ -130,14 +129,16 @@ public class HotelSelectionPage extends BasePage {
         scrollToElement(searchButton);
         searchButton.click();
     }
-
+    public  WebElement getEvaluationScoreBox(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector("button:nth-child(2)"));
+    }
     public  void clickOnSeeAvailabilityButton(int index) {
         System.out.println(searchItemBox.size());
         for (int i = 0; i < searchItemBox.size(); i++) {
             System.out.println(searchItemBox.get(i).getText());
         }
 
-         searchItemBox.get(index).findElement(By.cssSelector(".siCheckButton")).click();
+        searchItemBox.get(index).findElement(By.cssSelector(".siCheckButton")).click();
     }
 
     public  WebElement getHotelNameBox(int index) {
