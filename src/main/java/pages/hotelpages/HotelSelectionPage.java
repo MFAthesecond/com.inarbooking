@@ -6,17 +6,20 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HotelSelectionPage extends BasePage {
-    JavascriptExecutor js = (JavascriptExecutor) DRIVER;
+import static utils.BrowserUtils.scrollToElement;
 
+public class HotelSelectionPage extends BasePage {
     @FindBy(css = ".listWrapper > h1")
     WebElement hotelTabName;
 
     @FindBy(css = ".listSearch-hotels > div:nth-child(2) > input")
     WebElement destinationInputArea;
+
+    public void selectDestination(String destination) {
+        destinationInputArea.sendKeys(destination);
+    }
 
     @FindBy(css = ".listSearch-hotels > div:nth-child(3) > span")
     WebElement checkInAndCheckOutDate;
@@ -31,11 +34,12 @@ public class HotelSelectionPage extends BasePage {
     WebElement adultNumberBox;
     @FindBy(css = ":nth-child(4) > input.lsOptionInput.shadow-md")
     WebElement childrenNumberBox;
-
-    @FindBy(css = ":nth-child(5) > div.lsOptions.p-0:nth-child(2)")
-    WebElement funThingsToDo;
-    @FindBy(css = ".listSearch-hotels > div:nth-child(6) > div")
-    WebElement additionalFeatures;
+    @FindBy(css = ":nth-child(5) > div.lsOptions.p-0:nth-child(2) > div.lsCheckboxItem > span")
+    List<WebElement> funThingsToDoNameList;
+    @FindBy(css = ":nth-child(5) > div.lsOptions.p-0:nth-child(2) > div.lsCheckboxItem  >input")
+    List<WebElement> funThingsToDoButtonList;
+    @FindBy(css = ".listSearch-hotels > div:nth-child(6) > div > div > span")
+    List<WebElement> additionalFeaturesNameList;
     @FindBy(css = ".listSearch-hotels > div:nth-child(7) > div")
     WebElement hotels;
     @FindBy(css = ":nth-child(8) > div > div > button:nth-child(1)")
@@ -47,13 +51,15 @@ public class HotelSelectionPage extends BasePage {
 
     @FindBy(css = ".search-btn-flight > button")
     WebElement searchButton;
-    @FindBy(css = ".searchItem:nth-child(1)")
-    private static WebElement searchItemBox;
+    @FindBy(css = ".searchItem")
+    private static List<WebElement> searchItemBox;
     @FindBy(css = ".listResult ")
     private static WebElement hotelsList;
-public boolean validateNavigationToHotelSelectionPage(){
-    return hotelTabName.isDisplayed();
-}
+
+    public boolean validateNavigationToHotelSelectionPage() {
+        return hotelTabName.isDisplayed();
+    }
+
     public String getCheckInDate() {
         String date = checkInAndCheckOutDate.getText();
         return date.substring(0, date.indexOf("/202"));
@@ -72,57 +78,35 @@ public boolean validateNavigationToHotelSelectionPage(){
         return Integer.parseInt(childrenNumberBox.getAttribute("value"));
     }
 
-    public void selectThingsToDo(List<Integer> selectionThingList) {
-        WebElement funThingsElements;
-        List<WebElement> thingsToDoChecklist = new ArrayList<>();
-        for (int i = 1; i < 6; i++) {
-            funThingsElements = funThingsToDo.findElement(By.cssSelector(":nth-child(5) > div.lsOptions.p-0:nth-child(2) > div:nth-child(" + i + ") > input "));
-            thingsToDoChecklist.add(funThingsElements);
-        }
+    @FindBy(css = ".listSearch-hotels > div:nth-child(6) > div > div > input")
+    List<WebElement> additionalButtonList;
 
-        for (int i = 0; i < selectionThingList.size() - 1; i++) {
-            int index = selectionThingList.get(i);
-            for (int j = 0; j < thingsToDoChecklist.size() - 1; j++) {
-                if (index == j) {
-                    thingsToDoChecklist.get(j).click();
+    public void selectThingsToDo(List<String> selectionThingList) {
+        scrollToElement(maxPriceSlider);
+        List<String> textList = funThingsToDoNameList.stream()
+                .map(WebElement::getText)
+                .toList();
+
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (selectionThingList.get(i).equals(textList.get(j))) {
+                    funThingsToDoButtonList.get(j).click();
                 }
             }
         }
+
     }
 
+    public void selectAdditionalFeatures(List<String> selectionAdditionalList) {
+        scrollToElement(maxPriceSlider);
+        List<String> textList = additionalFeaturesNameList.stream()
+                .map(WebElement::getText)
+                .toList();
 
-    public void selectAdditionalFeatures(List<Integer> selectionAdditionalList) {
-        WebElement additionalFeaturesElements;
-        List<WebElement> featureChecklist = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            additionalFeaturesElements = additionalFeatures.findElement(By.cssSelector(".listSearch-hotels > div:nth-child(6) > div > div:nth-child(" + 1 + " ) > input"));
-            featureChecklist.add(additionalFeaturesElements);
-        }
-
-        for (int i = 0; i < selectionAdditionalList.size() - 1; i++) {
-            int index = selectionAdditionalList.get(i);
-            for (int j = 0; j < featureChecklist.size() - 1; j++) {
-                if (index == j) {
-                    featureChecklist.get(j).click();
-                }
-            }
-        }
-    }
-
-
-    public void selectHotelsTypes(List<Integer> hotelsSelectionList) {
-        WebElement hotelsElements;
-        List<WebElement> hotelsChecklist = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            hotelsElements = additionalFeatures.findElement(By.cssSelector(".listSearch-hotels > div:nth-child(7) > div> div:nth-child(" + 1 + ") > input"));
-            hotelsChecklist.add(hotelsElements);
-        }
-
-        for (int i = 0; i < hotelsSelectionList.size() - 1; i++) {
-            int index = hotelsSelectionList.get(i);
-            for (int j = 0; j < hotelsChecklist.size() - 1; j++) {
-                if (index == j) {
-                    hotelsChecklist.get(j).click();
+        for (int i = 0; i < selectionAdditionalList.size(); i++) {
+            for (int j = 0; j < textList.size(); j++) {
+                if (selectionAdditionalList.get(i).equals(textList.get(j))) {
+                    additionalButtonList.get(j).click();
                 }
             }
         }
@@ -138,56 +122,51 @@ public boolean validateNavigationToHotelSelectionPage(){
         minusBox.click();
     }
 
-
     public void clickOnPlusBox() {
         plusBox.click();
     }
 
-
     public void clickOnSearchButton() {
+        scrollToElement(searchButton);
         searchButton.click();
     }
+    public  WebElement getEvaluationScoreBox(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector("button:nth-child(2)"));
+    }
+    public  void clickOnSeeAvailabilityButton(int index) {
+        System.out.println(searchItemBox.size());
+        for (int i = 0; i < searchItemBox.size(); i++) {
+            System.out.println(searchItemBox.get(i).getText());
+        }
 
-
-    public static WebElement seeAvailabilityButton() {
-        return searchItemBox.findElement(By.cssSelector(".siCheckButton"));
+        searchItemBox.get(index).findElement(By.cssSelector(".siCheckButton")).click();
     }
 
-    public static void clickSeeAvailabilityButton() {
-        seeAvailabilityButton().click();
+    public  WebElement getHotelNameBox(int index) {
+        return searchItemBox.get(index).findElement(By.xpath("//h1[contains(text(),'Urban Oasis Resort')]"));
     }
 
-    public static WebElement getEvaluationScoreBox() {
-        return searchItemBox.findElement(By.cssSelector("button:nth-child(2)"));
+    public  WebElement getLocationInformation(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector(".siDistance"));
     }
 
-    public static WebElement getHotelNameBox() {
-        return searchItemBox.findElement(By.xpath("//h1[contains(text(),'Urban Oasis Resort')]"));
+    public  WebElement getLocation(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector(".siDesc > h2.fs-5.m-0"));
     }
 
-    public static WebElement getLocationInformation() {
-        return searchItemBox.findElement(By.cssSelector(".siDistance"));
-    }
-
-    public static WebElement getLocation() {
-        return searchItemBox.findElement(By.cssSelector(".siDesc > h2.fs-5.m-0"));
-    }
-
-    public static WebElement getLocationCountry() {
-        return searchItemBox.findElement(By.cssSelector(".siDesc > h2.fs-4.m-0"));
+    public  WebElement getLocationCountry(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector(".siDesc > h2.fs-4.m-0"));
     }
     // New York, United States of America
 
-    public String getCityName() {
-        String cityName = getLocation().getText();
+    public String getCityName(int index) {
+        String cityName = getLocation(index).getText();
         return cityName.substring(0, cityName.lastIndexOf(","));
     }
 
-    public static WebElement getHotelFee() {
-        return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
+    public  WebElement getHotelFee(int index) {
+        return searchItemBox.get(index).findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
-
-
 }
 
 
