@@ -1,4 +1,4 @@
-@example
+ @bilal
 Feature: Car Rental page verification
 
   Background:
@@ -107,10 +107,11 @@ Feature: Car Rental page verification
 
 
     Scenario: Test Cases For Insurance Page
+      When Enter Pickup Location As 'Grand Bazaar'
+
+      When Get The Order Details As Location Date And Hour
 
       When click On Search Button On The Inar Booking HomePage
-
-      When Set the Pickup Location On Configpage as 'Grand Bazaar'
 
       When Select Car Category Via DataTable
         | Large   |
@@ -120,11 +121,28 @@ Feature: Car Rental page verification
         | Medium  |
       When Click on search button In Car Rental Config Page
 
-      When Sort The Cars By Lowest Price
+      And Get The Number Of Days For Rental In Config Page
 
-      And Click on '0' Car's View Deal Element
+      When Sort The Cars By Highest Price
 
-      When Verify That Total Car Price Breakdown Is Accurate In Isurance Page
+      When Get The Price Of #'1' Car's In The Page
+
+      And Get The Name Of #'1' Car's In Config Page
+
+     And Click on '1' Car's View Deal Element
+
+      When Get The Percentage Of Tax
+
+      Then Verify That Total Car Price Breakdown Is Accurate In Insurance Page
+
+      When Get The Order Details As Location Date And Hour On Insurance Page
+
+      Then Verify That Order Details Date Place Hour As Given
+
+
+
+
+
 
 
 

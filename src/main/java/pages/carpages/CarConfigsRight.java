@@ -11,12 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CarConfigsRight extends BasePage {
-    public CarConfigsRight(){
-        selectedCarPrice = 0;
-    }
-    private Integer selectedCarPrice;
-    private String selectedCarName;
-    @FindBy(css = ".tab-item-car")
+
+      @FindBy(css = ".tab-item-car")
     private List<WebElement> carType;
     @FindBy(css = "div[class='fs-1 fw-bold mb-0']")
     private List<WebElement> carsAppeared;
@@ -111,8 +107,6 @@ public class CarConfigsRight extends BasePage {
     public void clickOnViewDealElement(String numberOfElement) {
         if (getTheNumberOfCarsInPage() != 0) {
             BrowserUtils.scrollToElement(viewDealClickableElement.get(Integer.parseInt(numberOfElement)));
-            this.selectedCarPrice = getThePricesOfCarsInPage().get(Integer.parseInt(numberOfElement));
-            this.selectedCarName = carNamesAfterClickOnSelectButton.get(Integer.parseInt(numberOfElement)).getText();
             viewDealClickableElement.get(Integer.parseInt(numberOfElement)).click();
         }
     }
@@ -121,12 +115,12 @@ public class CarConfigsRight extends BasePage {
         return pageNumberClickableElement.size();
     }
 
-    public int getTheSelectedCarPrice() {
-        return selectedCarPrice;
+    public int getTheSelectedCarPrice(String numberOfElement) {
+        return getThePricesOfCarsInPage().get(Integer.parseInt(numberOfElement));
     }
 
-    public String getTheSelectedCarName() {
-        return selectedCarName;
+    public String getTheSelectedCarName(String numberOfElement) {
+        return carNamesAfterClickOnSelectButton.get(Integer.parseInt(numberOfElement)).getText();
     }
 
 
