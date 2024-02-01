@@ -24,7 +24,7 @@ public class HotelsFinalStep extends BasePage {
     @FindBy(xpath = "//span[normalize-space()='Complete Booking']")
     private WebElement completeBookingButton;
     @FindBy(xpath = "//select[@name='phoneCountry']")
-    private WebElement countryCodeSelect;
+    public WebElement countryCodeSelect;
     @FindBy(xpath = "//input[@name='phone']")
     private WebElement phoneNumberField;
     @FindBy(xpath = "//select[@name='country']")
