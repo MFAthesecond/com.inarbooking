@@ -29,6 +29,9 @@ public class HotelDetailsPage extends BasePage {
             hotelPropertiesStr.add(aspect.getText());
         }
     }
+    public boolean validateNavigateToDetailsPage(){
+        return reserveOrBookNowButton.isDisplayed();
+    }
 
     public void clickOnReserveButton() {
         reserveOrBookNowButton.click();
