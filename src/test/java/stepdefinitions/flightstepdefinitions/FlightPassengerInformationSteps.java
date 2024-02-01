@@ -1,5 +1,6 @@
 package stepdefinitions.flightstepdefinitions;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,10 @@ import org.assertj.core.api.Assertions;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 import utils.Pages;
+
+import java.util.List;
+
+import static org.assertj.core.api.BDDAssertions.then;
 
 public class FlightPassengerInformationSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightHomeSteps.class);
@@ -41,8 +46,6 @@ public class FlightPassengerInformationSteps extends BaseStep {
     }
 
 
-
-
     @Then("Verify that the {string} message is not displayed")
     public void verifyThatTheMessageIsNotDisplayed(String expectedErrorMessage) {
         String actualErrorMessage = PAGES.getFlightPages().getFlightPassengerInformationPage().findErrorMessage(expectedErrorMessage);
@@ -53,22 +56,30 @@ public class FlightPassengerInformationSteps extends BaseStep {
         }
     }
 
-    @And("Fill in {string} as the name, {string} as the surname, {string} as the gender, {string} as the year, {string} as the month, {string} as the day for the #{int} passenger")
+   @And("Fill in {string} as the name, {string} as the surname, {string} as the gender, {string} as the year, {string} as the month, {string} as the day for the #{int} passenger")
     public void fillInAsTheNameAsTheSurnameAsTheGenderAsTheYearAsTheMonthAsTheDayForThePassenger(String firstName, String lastName, String gender, String year, String month, String day, int traveler) {
         PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(traveler,firstName,lastName,gender,year,month,day);
-        BrowserUtils.wait(4);
     }
 
     @And("Calculate total price")
     public double calculateTotalPrice() {
         return PAGES.getFlightPages().getFlightPassengerInformationPage().getCalculatedTotalPrice();
+
     }
 
     @Then("Verify that total flight fare")
     public void verifyThatTotalFlightFare() {
+        BrowserUtils.wait(4);
         String actualTotalPriceStr = String.valueOf(calculateTotalPrice());
         String expectedTotalPrice=PAGES.getFlightPages().getFlightPassengerInformationPage().getTotalPrice();
         Assertions.assertThat(actualTotalPriceStr).as("Actual and expected total prices should be equal")
                 .isEqualTo(expectedTotalPrice);
     }
+
+    @Then("Verify that the user is on passenger information page")
+    public void verifyThatTheUserIsOnPassengerInformationPage() {
+        then(PAGES.getFlightPages().getFlightPassengerInformationPage().getHeaderText()).isEqualTo("Contact Details");
+    }
+
+
 }

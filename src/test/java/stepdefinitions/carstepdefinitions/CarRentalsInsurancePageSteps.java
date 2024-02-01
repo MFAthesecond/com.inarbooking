@@ -2,13 +2,9 @@ package stepdefinitions.carstepdefinitions;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.sl.In;
-import org.assertj.core.api.Assertions;
-import org.openqa.selenium.devtools.v85.page.Page;
-import pages.carpages.CarConfigsRight;
 import stepdefinitions.BaseStep;
 
-import java.util.HashMap;
+
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -20,8 +16,7 @@ public class CarRentalsInsurancePage extends BaseStep {
 
     @Then("Verify That Total Car Price Breakdown Is Accurate In Insurance Page")
     public void verifyThatTotalCarPriceBreakdownIsAccurateInInsurancePage() {
-        System.out.println("hesap " + CarRentalsConfigPage.numberOfDayForRental * CarRentalsConfigPage.priceOfCar);
-        int expectedTotalPriceWithoutTax = CarRentalsConfigPage.numberOfDayForRental * CarRentalsConfigPage.priceOfCar;
+        int expectedTotalPriceWithoutTax = CarRentalsConfigPageSteps.numberOfDayForRental * CarRentalsConfigPageSteps.priceOfCar;
         double totalPriceWithTax = expectedTotalPriceWithoutTax + (double) (expectedTotalPriceWithoutTax * percentageOfTax) / 100;
         then((int) totalPriceWithTax).isEqualTo(Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheTotalPriceElement()));
 
@@ -52,6 +47,6 @@ public class CarRentalsInsurancePage extends BaseStep {
 
     @Then("Verify That Order Details Date Place Hour As Given")
     public void verifyThatOrderDetailsDatePlaceHourAsGiven() {
-        then(locationHere).isEqualTo(CarRentalsOnBookingHomePage.location);
+        then(locationHere).isEqualTo(CarRentalsOnBookingHomePageSteps.location);
     }
 }

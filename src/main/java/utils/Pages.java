@@ -6,7 +6,7 @@ import pages.carpages.CarPages;
 
 import pages.HomePage;
 import pages.flightpages.FlightPages;
-import pages.hotelpages.HotelPages;
+import pages.hotelpages.*;
 
 @Data
 public class Pages {
@@ -18,12 +18,16 @@ public class Pages {
     private HotelPages hotelPages;
 
 
+
+
+
     public Pages() {
         homePage = new HomePage();
         inarBookingHomePage = new InarBookingHomePage();
         hotelPages = new HotelPages();
         flightPages = new FlightPages();
         carPages = new CarPages();
+
     }
 
 }

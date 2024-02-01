@@ -4,13 +4,14 @@ import lombok.Data;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import pages.BasePage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class HotelPage {
-    @FindBy(css = ".headerSearchInput")
+public class HotelPage extends BasePage {
+    @FindBy(css = "input.headerSearchInput")
     WebElement destinationInput;
 
     public void selectDestination(String destination) {
@@ -30,11 +31,12 @@ public class HotelPage {
     public void selectMonth(int index) {
         datePicker.click();
         Select monthSelector = new Select(monthPicker);
-        monthSelector.deselectByIndex(index - 1);
+        monthSelector.selectByIndex(index - 1);
+        findTheMonthDates();
     }
 
     public void findTheMonthDates() {
-        daysOfTheMonth = allTheDays.stream().filter(button -> button.getAttribute("class").contains("Passive")).toList();
+        daysOfTheMonth = allTheDays.stream().filter(button -> !button.getAttribute("class").contains("Passive")).toList();
     }
 
     public void selectFirstDay(String firstDay) {
@@ -73,8 +75,8 @@ public class HotelPage {
         }
     }
 
-    public void selectRoomNumber(String strRoomNumber) {
-        int adultNumber = Integer.parseInt(strRoomNumber);
+    public void selectRoomNumber(int strRoomNumber) {
+        int adultNumber =strRoomNumber;// Integer.parseInt(strRoomNumber);
         for (int i = 0; i < adultNumber - 1; i++) {
             addRoom();
         }

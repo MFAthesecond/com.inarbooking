@@ -54,6 +54,9 @@ public class FlightPassengerInformationPage extends BasePage {
     @FindBy(className = "text-danger")
     private List<WebElement> errorMessage;
 
+    @FindBy(css = ".flight-reserve-card h2")
+    private WebElement contactHeader;
+
 
     public void clickOnFreeTextMessageField() {
         BrowserUtils.clickOnElement(freeTextMessageField);
@@ -139,7 +142,7 @@ public class FlightPassengerInformationPage extends BasePage {
         String taxesAndFees = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(2)  > span:nth-child(1)")).getText();
         String[] dividedTaxesAndFees = taxesAndFees.split("%");
         String percentage = dividedTaxesAndFees[dividedTaxesAndFees.length - 1];
-        return percentage.substring(0, percentage.length() - 1);
+        return percentage.charAt(0) + "";
     }
 
     public String getThirdPartyFeePercentage() {
@@ -149,7 +152,7 @@ public class FlightPassengerInformationPage extends BasePage {
     }
 
     public String getTotalPrice() {
-        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1")).getText().split("\\$");
+        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1:nth-child(2)")).getText().split("\\$");
         return dividedPrice[dividedPrice.length - 1];
     }
 
@@ -159,7 +162,7 @@ public class FlightPassengerInformationPage extends BasePage {
         double taxesAndFeesPercentage = Double.parseDouble(getTaxesAndFeesPercentage());
         double thirdPartyFeePercentage = Double.parseDouble(getThirdPartyFeePercentage());
         double totalPrice = ticketPrice + ((ticketPrice * taxesAndFeesPercentage) / 100) + ((ticketPrice * thirdPartyFeePercentage) / 100);
-        return totalPrice;
+        return Double.parseDouble(String.format("%.2f", totalPrice));
     }
 
     public String findErrorMessage(String targetErrorMessage) {
@@ -172,5 +175,9 @@ public class FlightPassengerInformationPage extends BasePage {
         } else {
             return "No matching error message found";
         }
+    }
+
+    public String getHeaderText(){
+        return contactHeader.getText();
     }
 }
