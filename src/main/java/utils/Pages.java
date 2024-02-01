@@ -1,6 +1,7 @@
 package utils;
 
 import lombok.Data;
+import lombok.Getter;
 import pages.InarBookingHomePage;
 import pages.carpages.CarPages;
 
@@ -11,12 +12,12 @@ import pages.hotelpages.HotelPages;
 @Data
 public class Pages {
 
+    @Getter
     private HomePage homePage;
     private InarBookingHomePage inarBookingHomePage;
     private FlightPages flightPages;
     private CarPages carPages;
     private HotelPages hotelPages;
-
 
     public Pages() {
         homePage = new HomePage();
