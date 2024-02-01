@@ -48,4 +48,12 @@ public class HotelDetailsPage extends BasePage {
         amount = amount.substring(1, amount.indexOf(" "));
         return Integer.parseInt(amount);
     }
+
+    @FindBy(css = ".fs-4.fw-bold > input.me-3.fs-4")
+    WebElement bookingCheckbox;
+
+    public void clickBookingCheckbox() {
+        bookingCheckbox.click();
     }
+
+}

@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,13 @@ public class HotelSelectionPage extends BasePage {
     private static WebElement searchItemBox;
     @FindBy(css = ".listResult ")
     private static WebElement hotelsList;
+
+    @FindBy(css = ".listResult > div:nth-child(1) > div.siDetails > div.siDetailTexts > button")
+    private static WebElement seeAvailabilityButton1;
+
+    public boolean validateNavigationToHotelSelectionPage() {
+        return hotelTabName.isDisplayed();
+    }
 
     public String getCheckInDate() {
         String date = checkInAndCheckOutDate.getText();
@@ -185,6 +193,9 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 
+    public void clickOnSeeAvailability(int hotelIndex) {
+     seeAvailabilityButton1.click();
+    }
 
 }
 

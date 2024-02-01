@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
 
+import static utils.BrowserUtils.scrollToElement;
+
 public class HotelsYourDetailsPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='firstname']")
@@ -31,7 +33,7 @@ public class HotelsYourDetailsPage extends BasePage {
     @FindBy(css = ".hotel-address")
     WebElement address;
 
-    @FindBy(css = " .pe-3:nth-child(2) label.fs-4.fw-bold > input:nth-child(1)")
+    @FindBy(css = ".pe-3:nth-child(2) label.fs-4.fw-bold > input:nth-child(1)")
     WebElement noCheckbox;
 
     @FindBy(css = ":nth-child(4) > fieldset > div > div:nth-child(1) > label > input")
@@ -40,6 +42,17 @@ public class HotelsYourDetailsPage extends BasePage {
     @FindBy(css = ".col-8 > div:nth-child(3) > textarea")
     WebElement requestsTextarea;
 
+    @FindBy(css = ".form-select.fs-4.me-2")
+    private WebElement countryCodeSelect;
+
+    @FindBy(css = ".mb-4 > div:nth-child(3) > div:nth-child(2) > div > div > div:nth-child(2) > input")
+    WebElement phoneNumber;
+
+    @FindBy(css = ".mb-4 > div:nth-child(3) > div:nth-child(3) > div > input")
+    WebElement freePaperCheckbox;
+
+    @FindBy(css = ".save-your-details.mb-4 > div > div > div > input\n")
+    WebElement detailsCheckbox;
 
     public String getHotelName() {
         return hotelName.getText();
@@ -69,12 +82,13 @@ public class HotelsYourDetailsPage extends BasePage {
     }
 
     public void clickOnNextButton() {
+        scrollToElement(nextButton);
         nextButton.click();
     }
 
     public void setArrivalTime(int index) {
         Select arrivalTime = new Select(arrivalTimeDropdownMenu);
-        arrivalTime.deselectByIndex(index);
+        arrivalTime.selectByIndex(index);
     }
 
     public void clickOnNoCheckbox() {
@@ -90,4 +104,25 @@ public class HotelsYourDetailsPage extends BasePage {
         requestsTextarea.sendKeys(text);
     }
 
+    public void fillInContactEmail(String email) {
+        emailInputArea.sendKeys(email);
+    }
+
+    public void selectCountryCodeDropDown(String countryCodeSelectionText) {
+        Select select = new Select(countryCodeSelect);
+        select.selectByVisibleText(countryCodeSelectionText);
+    }
+
+    public void fillPhoneNumber(String number) {
+        phoneNumber.sendKeys(number);
+    }
+
+    public void clickOnFreePaperCheckbox() {
+       scrollToElement(freePaperCheckbox);
+        freePaperCheckbox.click();
+    }
+
+    public void clickOnDetailsCheckbox() {
+        detailsCheckbox.click();
+    }
 }

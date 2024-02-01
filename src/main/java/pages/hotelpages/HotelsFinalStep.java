@@ -30,6 +30,13 @@ public class HotelsFinalStep extends BasePage {
     @FindBy(xpath = "//select[@name='country']")
     private WebElement countrySelect;
 
+    @FindBy(css = ".my-4.fs-4 > div:nth-child(1) > input")
+    private WebElement yesCheckbox1;
+
+    @FindBy(css = ".my-4.fs-4 > div:nth-child(2) > input")
+    private WebElement yesCheckbox2;
+
+
     public void fillCardHolderName(String name) {
         cardHolderNameField.sendKeys(name);
     }
@@ -70,5 +77,10 @@ public class HotelsFinalStep extends BasePage {
     public void selectCountry(String countryName) {
         Select countriesDropdown = new Select(countrySelect);
         countriesDropdown.selectByVisibleText(countryName);
+    }
+
+    public void clickOpportunityCheckbox() {
+        yesCheckbox1.click();
+        yesCheckbox2.click();
     }
 }
