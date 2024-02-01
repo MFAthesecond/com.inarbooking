@@ -31,12 +31,23 @@ public class HotelsYourDetailsPage extends BasePage {
     @FindBy(css = ".hotel-address")
     WebElement address;
 
-    public String getHotelName(){
+    @FindBy(css = " .pe-3:nth-child(2) label.fs-4.fw-bold > input:nth-child(1)")
+    WebElement noCheckbox;
+
+    @FindBy(css = ":nth-child(4) > fieldset > div > div:nth-child(1) > label > input")
+    WebElement guestCheckbox;
+
+    @FindBy(css = ".col-8 > div:nth-child(3) > textarea")
+    WebElement requestsTextarea;
+
+
+    public String getHotelName() {
         return hotelName.getText();
     }
-    public String getHotelCity(){
-        String hotelCity=address.getText();
-        return hotelCity.substring(0,hotelCity.indexOf(','));
+
+    public String getHotelCity() {
+        String hotelCity = address.getText();
+        return hotelCity.substring(0, hotelCity.indexOf(','));
     }
 
 
@@ -60,9 +71,23 @@ public class HotelsYourDetailsPage extends BasePage {
     public void clickOnNextButton() {
         nextButton.click();
     }
-    public void setArrivalTime(int index){
-        Select arrivalTime =new Select(arrivalTimeDropdownMenu);
+
+    public void setArrivalTime(int index) {
+        Select arrivalTime = new Select(arrivalTimeDropdownMenu);
         arrivalTime.deselectByIndex(index);
+    }
+
+    public void clickOnNoCheckbox() {
+        noCheckbox.click();
+    }
+
+    public void clickOnGuestCheckbox() {
+        guestCheckbox.click();
+    }
+
+    public void setRequestsText(String text) {
+        requestsTextarea.clear();
+        requestsTextarea.sendKeys(text);
     }
 
 }

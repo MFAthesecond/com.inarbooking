@@ -153,6 +153,10 @@ public boolean validateNavigationToHotelSelectionPage(){
         return searchItemBox.findElement(By.cssSelector(".siCheckButton"));
     }
 
+    public static void clickSeeAvailabilityButton() {
+        seeAvailabilityButton().click();
+    }
+
     public static WebElement getEvaluationScoreBox() {
         return searchItemBox.findElement(By.cssSelector("button:nth-child(2)"));
     }
