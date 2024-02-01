@@ -56,7 +56,12 @@ public class FlightSelectionPage extends BasePage {
     public void clickOnSelectTicket(int flightIndex){
         BrowserUtils.clickOnElement(getItem(flightIndex).findElement(By.cssSelector(".flight-button")));
     }
-
+    public void selectDepartureDate(String date){
+        BrowserUtils.setElementValueByLocator(".lsItem-flights:nth-child(4) input" , date);
+    }
+    public void selectReturnDate(String date){
+        BrowserUtils.setElementValueByLocator(".lsItem-flights:nth-child(5) input" , date);
+    }
     public void clickOnTab(String tabName){
         WebElement tab = tabList.stream().filter(element -> element.getText().equals(tabName)).findFirst().get();
         BrowserUtils.clickOnElement(tab);

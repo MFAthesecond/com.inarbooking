@@ -144,4 +144,9 @@ public class BrowserUtils {
 
     }
 
+    public static void setElementValueByLocator(String locator, String value){
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) DriverManager.getDriver();
+        jsExecutor.executeScript("document.querySelector('"+locator+"').value='"+value+"'");
+    }
+
 }
