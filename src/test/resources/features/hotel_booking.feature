@@ -11,11 +11,12 @@ Feature: Stay Filtering
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
+    And Click on the Stays Tab
 
   Scenario Outline: Validate that the successful hotel reservation process
 
-    When Click on the Stays Tab
-    And Type the destination "<destination>" where you will be staying    And Select date as "<daynum1>" and "<daynum2>" days of next month
+
+    When Type the destination "<destination>" where you will be staying    And Select date as "<daynum1>" and "<daynum2>" days of next month
     And Select "<adultnum>" adults and "<childnum>" child and "<roomnum>"room and click on search flight button
     Then Validate the user is on hotel selection page
 
@@ -28,8 +29,7 @@ Feature: Stay Filtering
 
   Scenario: Validate that the stays selection process
 
-    When Click on the Stays Tab
-    And Choose "Istanbul" where to stay
+    When Choose "Istanbul" where to stay
     And Click on search hotels button
     And Select "Bicyle Rental" and select "Fitness" for fun things to do
     And Select "Free WiFi" for additional features
@@ -39,8 +39,7 @@ Feature: Stay Filtering
 
   Scenario:Validate that the successful hotel reservation process 1
 
-    When Click on the Stays Tab
-    And Choose "Istanbul" where to stay
+    When Choose "Istanbul" where to stay
     And Select date as "Feb 12, 2024" and "Feb 16, 2024"
     And Select "6" adults and "3" child and click on search hotels button
     Then Validate the user is on hotels selection page
@@ -49,32 +48,28 @@ Feature: Stay Filtering
     #Test Cases for Hotels Selection Page
 
   Scenario: Verify that fun things are selectable
-    When Click on the Stays Tab
-    And  Click on search hotels button
+    When  Click on search hotels button
     And  Select "Cycling" and "Fitness" for fun things to do and click on search button
     And Click on the see availability button for #1 hotel
     Then verify that the user is on the details page
 
 
   Scenario: Verify that additional features are selectable
-    When Click on the Stays Tab
-    And  Click on search hotels button
+    When  Click on search hotels button
     And  Select "Free Parking" and "Heating" and "Non-smoking rooms" for additional features and click on search button
     And  Click on the see availability button for #1 hotel
     Then verify that the user is on the details page
 
   Scenario: Verify that hotels are selectable
-    When Click on the Stays Tab
-    And  Click on search hotels button
+    When  Click on search hotels button
     And  Select "City Center Suites" and "Grand Plaza Hotel" for hotels and click on search button
     And  Click on the see availability button for #2 hotel
     Then verify that the user is on the details page
 
   Scenario Outline: Validate that the textarea ,slide , checkboxes and radio buttons functionality for round trip #
     #metni düzenle yanlış bu
-    When Click on the Stays Tab
    # And Select date as "<daynum1>" and "<daynum2>" days of next month
-    And Type the destination "<destination>" where you will be staying
+    When Type the destination "<destination>" where you will be staying
    # And Select date as "<daynum1>" and "<daynum2>" days of next month
     And Slide to min price
     And Slide to max price
