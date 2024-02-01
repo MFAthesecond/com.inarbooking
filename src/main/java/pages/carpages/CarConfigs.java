@@ -117,8 +117,6 @@ public class CarConfigs extends BasePage {
                 }
             }
         }
-
-
     }
 
     public void setTheTransmission(String automaticOrManual) {
