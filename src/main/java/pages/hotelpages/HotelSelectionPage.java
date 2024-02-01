@@ -185,9 +185,6 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 
-    public void clickOnSeeAvailability() {
-        seeAvailabilityButton().click();
-    }
 
 }
 
