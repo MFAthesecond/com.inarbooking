@@ -65,6 +65,7 @@ Scenario: Validate that passenger flight information 1
     Then Verify that total flight fare
 
 
+
   Scenario: Validate that the successful check and pay
 
     When Click on the Flight Tab
@@ -85,3 +86,4 @@ Scenario: Validate that passenger flight information 1
     And Fill in "1125" as the expiration date
     And Fill in "345" as the cvc code
     And Click on complete booking button
+

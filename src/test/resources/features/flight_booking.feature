@@ -88,6 +88,8 @@ Feature: Flight Filtering
     And Click on search flight button
     And Select "<OriginSelection>" from origin drop down
     And Select "<DestinationSelection>" from destination drop down
+    And Select departure date as "<2024-03-10>"
+    And Select return date as "<2024-03-15>"
     And Select "<AdultNum>" for Adult dropdown
     And Select "<ChildNum>" for Children dropdown
     And Unselect "<CabinClass1>" and Unselect "<CabinClass2>" for cabin class
@@ -102,17 +104,23 @@ Feature: Flight Filtering
       | Japan  | Spain       | India           | Australia            | 10       | 9        | Economy     | First Class | Airline C | 24 hours |
 
 
-  Scenario: Validate that the fare type selection functionality on fare page
+  Scenario Outline: Validate that the fare type selection functionality on fare page
 
     When Click on the Flight Tab
-    And Select "Germany" for from dropdown and select "France" for to dropdown
+    And Select "<Origin>" for from dropdown and select "<Destination>" for to dropdown
     And Click on search flight button
     And Click on select ticket button for #1 flight
     And Click on select return ticket button for #1 flight
     Then Verify that the user on flight fare page
-    And Verify that the departure route "Germany to France" and the return route "France to Germany"
-    When Click on "First Class" for departure fare type
-    And Click on "Refundable Main" for return fare type
-    Then Verify that the "First Class" is selected for departure fare type and "Refundable Main" is selected for return fare type
+    And Verify that the departure route "<Departure Route>" and the return route "<Return Route>"
+    When Click on "<Departure Fare Type>" for departure fare type
+    And Click on "<Return Fare Type>" for return fare type
+    Then Verify that the "<Departure Fare Type>" is selected for departure fare type and "<Return Fare Type>" is selected for return fare type
     And Click on select who's flying button
-#    Then Verify that the user is on passenger information page
+    Then Verify that the user is on passenger information page
+    Examples:
+      | Origin | Destination | Departure Route   | Return Route      | Departure Fare Type | Return Fare Type |
+      | USA    | Canada      | USA to Canada     | Canada to USA     | Refundable Main     | First Class      |
+      | France | Germany     | France to Germany | Germany to France | First Class         | Business         |
+      | Japan  | Brazil      | Japan to Brazil   | Brazil to Japan   | Main                | Refundable Main  |
+

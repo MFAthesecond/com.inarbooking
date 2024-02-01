@@ -72,7 +72,7 @@ public class FlightExtrasPage extends BasePage {
         String taxesAndFees = priceCalculationContainer.findElement(By.cssSelector(".mb-3:nth-child(2)  > span:nth-child(1)")).getText();
         String[] dividedTaxesAndFees = taxesAndFees.split("%");
         String percentage = dividedTaxesAndFees[dividedTaxesAndFees.length - 1];
-        return percentage.substring(0 , percentage.length() - 1);
+        return percentage.charAt(0) + "";
     }
 
     public String getThirdPartyFeePercentage(){
@@ -82,7 +82,7 @@ public class FlightExtrasPage extends BasePage {
     }
 
     public String getTotalPrice(){
-        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1")).getText().split("\\$");
+        String[] dividedPrice = priceCalculationContainer.findElement(By.cssSelector("h1:nth-child(2)")).getText().split("\\$");
         return dividedPrice[dividedPrice.length - 1];
     }
 
@@ -91,7 +91,7 @@ public class FlightExtrasPage extends BasePage {
         double taxesAndFeesPercentage = Double.parseDouble(getTaxesAndFeesPercentage());
         double thirdPartyFeePercentage = Double.parseDouble(getThirdPartyFeePercentage());
         double totalPrice = ticketPrice + ((ticketPrice * taxesAndFeesPercentage) / 100) + ((ticketPrice * thirdPartyFeePercentage) / 100);
-        return totalPrice;
+        return Double.parseDouble(String.format("%.2f", totalPrice));
     }
 
     public void clickOnBackButton(){
