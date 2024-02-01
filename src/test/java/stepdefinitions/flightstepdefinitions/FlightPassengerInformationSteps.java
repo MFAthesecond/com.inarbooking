@@ -1,5 +1,6 @@
 package stepdefinitions.flightstepdefinitions;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
@@ -8,6 +9,8 @@ import org.assertj.core.api.Assertions;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 import utils.Pages;
+
+import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -53,7 +56,7 @@ public class FlightPassengerInformationSteps extends BaseStep {
         }
     }
 
-    @And("Fill in {string} as the name, {string} as the surname, {string} as the gender, {string} as the year, {string} as the month, {string} as the day for the #{int} passenger")
+   @And("Fill in {string} as the name, {string} as the surname, {string} as the gender, {string} as the year, {string} as the month, {string} as the day for the #{int} passenger")
     public void fillInAsTheNameAsTheSurnameAsTheGenderAsTheYearAsTheMonthAsTheDayForThePassenger(String firstName, String lastName, String gender, String year, String month, String day, int traveler) {
         PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(traveler,firstName,lastName,gender,year,month,day);
     }
@@ -77,4 +80,5 @@ public class FlightPassengerInformationSteps extends BaseStep {
     public void verifyThatTheUserIsOnPassengerInformationPage() {
         then(PAGES.getFlightPages().getFlightPassengerInformationPage().getHeaderText()).isEqualTo("Contact Details");
     }
+
 }

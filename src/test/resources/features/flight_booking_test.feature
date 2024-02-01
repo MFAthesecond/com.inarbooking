@@ -47,6 +47,8 @@ Scenario: Validate that passenger flight information 1
     And Fill in "Scarlett" as the name, "John" as the surname, "Female" as the gender, "1992" as the year, "4" as the month, "3" as the day for the #2 passenger
     And Fill in "John" as the name, "Eris" as the surname, "Male" as the gender, "2005" as the year, "2" as the month, "6" as the day for the #3 passenger
     Then Verify that the "Please select a gender." message is not displayed
+    Then Verify that the "Please enter a name." message is not displayed
+    Then Verify that the "Please enter a surname." message is not displayed
 
 
 

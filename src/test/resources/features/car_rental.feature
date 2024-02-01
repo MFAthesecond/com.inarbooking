@@ -45,7 +45,7 @@ Feature: Car Rental page verification
     Then Verify That Cars Sorted By Highest Price
     Then Verify That Cars Are Only From 'Grand Bazaar'
     Then Verify That All Prices Are Within Given Range
-    Then Verify That Transmission Is 'Automatic'
+    Then Verify That Transmission Is As Given
 
 
   Scenario: Test Cases for Insurance Page
@@ -63,26 +63,26 @@ Feature: Car Rental page verification
 
 
   Scenario: Test Case for Check-out Process
-  #  When Enter Pickup Location As 'Grand Bazaar'
+    When Enter Pickup Location As 'Grand Bazaar'
     And Click On Pickup Hour And Choose '10:30'
     And Click On Drop Hour And Set The Time as '23:00'
     When click On Search Button On The Inar Booking HomePage
     When Select The Drivers Age as '35'
     When Select Car Category Via DataTable
       | Large   |
-#      | SUV     |
-#      | Minivan |
-#      | Small   |
+      | SUV     |
+      | Minivan |
+      | Small   |
       | Medium  |
     When Select Car Specs Via DataTable
       | Air Conditioning       |
       | 4+ Doors               |
       | GPS Navigation         |
       | Bluetooth Connectivity |
-      | Automatic Transmission |
-      | Leather Seats          |
-      | Sunroof                |
-      | Backup Camera          |
+#      | Automatic Transmission |
+#      | Leather Seats          |
+#      | Sunroof                |
+#      | Backup Camera          |
       | Heated Seats           |
       | Keyless Entry          |
     When Select The Price Range Via DataTable
@@ -104,6 +104,33 @@ Feature: Car Rental page verification
     Then Verify That All Prices Are Within Given Range
     Then Verify That Car Category is Formed By As Given
     And Click on '1' Car's View Deal Element
+
+
+    Scenario: Test Cases For Insurance Page
+
+      When click On Search Button On The Inar Booking HomePage
+
+      When Set the Pickup Location On Configpage as 'Grand Bazaar'
+
+      When Select Car Category Via DataTable
+        | Large   |
+        | SUV     |
+        | Minivan |
+        | Small   |
+        | Medium  |
+      When Click on search button In Car Rental Config Page
+
+      When Sort The Cars By Lowest Price
+
+      And Click on '0' Car's View Deal Element
+
+      When Verify That Total Car Price Breakdown Is Accurate In Isurance Page
+
+
+
+
+
+
 
 
 
