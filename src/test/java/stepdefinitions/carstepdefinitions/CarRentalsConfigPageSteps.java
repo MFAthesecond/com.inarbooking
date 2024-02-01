@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-public class CarRentalsConfigPage extends BaseStep {
+public class CarRentalsConfigPageSteps extends BaseStep {
 
     @When("Select The Drivers Age as {string}")
     public void selectTheDriversAgeAs(String driversAge) {
