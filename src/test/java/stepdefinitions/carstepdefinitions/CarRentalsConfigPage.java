@@ -46,7 +46,7 @@ public class CarRentalsConfigPage extends BaseStep {
 
     @And("Select From Car Category The {string}")
     public void selectFromCarCategoryTheSmall(String carCategoryType) {
-        //  PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
+   //     PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
     }
 
     @And("Select {string} {string} {string} {string}Car Specs")
@@ -115,13 +115,12 @@ public class CarRentalsConfigPage extends BaseStep {
         then(carPrices.get(0)).isLessThanOrEqualTo(Integer.parseInt(givenMaxPrice));
     }
 
-    @Then("Verify That Transmission Is {string}")
-    public void verify_that_transmission_ıs(String string) {
+    @Then("Verify That Transmission Is As Given")
+    public void verify_that_transmission_ıs() {
         List<String> transmissionTYpe = PAGES.getCarPages().getCarConfigsRight().getTheTransmission();
-        List<String> transmissions = PAGES.getCarPages().getCarConfigs().getTheSelectedTransmission();
-        transmissions.remove(string);
+        List<String> selectedTransmissions = PAGES.getCarPages().getCarConfigs().getTheSelectedTransmission();
         for (String nameOfProduct : transmissionTYpe) {
-            then(transmissions.contains(nameOfProduct)).isFalse();
+            then(selectedTransmissions.contains(nameOfProduct)).isTrue();
         }
 
     }

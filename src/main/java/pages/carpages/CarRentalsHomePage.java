@@ -10,9 +10,11 @@ import pages.BasePage;
 import utils.BrowserUtils;
 import utils.DriverManager;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class CarRentalsHomePage extends BasePage {
+    private HashMap<String, String> locationHourDateInfos;
     @FindBy(css = ".headerList :nth-child(3)")
     private WebElement carRentalsElement;
     @FindBy(css = ".headerBtn")
@@ -29,14 +31,13 @@ public class CarRentalsHomePage extends BasePage {
     private List<WebElement> pickHourAndDropHourSelection;
 
 
-
     public void clickOnCarRentalsElementsInHomePage() {
         carRentalsElement.click();
     }
 
     public void setPickupLocationByFullAddress(String pickUpLocation) {
         pickUpLocationElement.sendKeys(pickUpLocation);
-        if (locationSuggestion != null) {
+        if (!locationSuggestion.isEmpty()) {
             locationSuggestion.get(0).click();
         }
     }
@@ -54,16 +55,16 @@ public class CarRentalsHomePage extends BasePage {
     }
 
 
-
-    public void setThePickUpDate() {
+    public void setThePickUpDate(String value) {
         pickAndDropDates.get(0).click();
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverManager.getDriver();
-        javascriptExecutor.executeScript("document.querySelector('."+"headerDateInput"+"').value='"+"2027-03-05"+"'");
-        BrowserUtils.wait(3);
+        javascriptExecutor.executeScript("document.querySelector('." + "headerDateInput" + "').value='" + value + "'");
     }
 
-    public void setTheDropOffDate() {
+    public void setTheDropOffDate(String value) {
         pickAndDropDates.get(1).click();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverManager.getDriver();
+        javascriptExecutor.executeScript("document.querySelector('." + "headerDateInput.form-control.fs-5.position-relative" + "').value='" + value + "'");
     }
 
     public void setThePickupHour(String pickUpHour_hh_mm_30min_intervals) {
@@ -106,5 +107,19 @@ public class CarRentalsHomePage extends BasePage {
 
     public String getTheDropOffHour() {
         return pickHourAndDropHourSelection.get(1).getText();
+    }
+
+    public void setTheLocationHourDateInfos() {
+        locationHourDateInfos = new HashMap<>();
+        locationHourDateInfos.put("PickupLocation", getThePickUpLocation());
+        locationHourDateInfos.put("PickupDate", getThePickupDate());
+        locationHourDateInfos.put("PickupHour", getThePickupHour());
+        locationHourDateInfos.put("DropoffDate", getTheDropOffDate());
+        locationHourDateInfos.put("DropoffHour", getTheDropOffHour());
+    }
+
+    public HashMap<String, String> getTheLocationHourDateInfos() {
+        setTheLocationHourDateInfos();
+        return locationHourDateInfos;
     }
 }

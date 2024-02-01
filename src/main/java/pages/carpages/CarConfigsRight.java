@@ -11,7 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CarConfigsRight extends BasePage {
-
+    public CarConfigsRight(){
+        selectedCarPrice = 0;
+    }
+    private Integer selectedCarPrice;
+    private String selectedCarName;
     @FindBy(css = ".tab-item-car")
     private List<WebElement> carType;
     @FindBy(css = "div[class='fs-1 fw-bold mb-0']")
@@ -24,6 +28,8 @@ public class CarConfigsRight extends BasePage {
     private List<WebElement> viewDealClickableElement;
     @FindBy(css = ".pagination-button-booking ")
     private List<WebElement> pageNumberClickableElement;
+    @FindBy(css = "h3")
+    private List<WebElement> carNamesAfterClickOnSelectButton;
 
     public void setCarTypes(String carTypes) {
         switch (carTypes) {
@@ -44,13 +50,13 @@ public class CarConfigsRight extends BasePage {
     }
 
     public void sortByPriceLowest() {
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), sortByButtons.get(0));
+        BrowserUtils.scrollToElement(sortByButtons.get(0));
 
         sortByButtons.get(0).click();
     }
 
     public void sortPriceHighest() {
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), sortByButtons.get(1));
+        BrowserUtils.scrollToElement(sortByButtons.get(1));
         sortByButtons.get(1).click();
     }
 
@@ -104,13 +110,23 @@ public class CarConfigsRight extends BasePage {
 
     public void clickOnViewDealElement(String numberOfElement) {
         if (getTheNumberOfCarsInPage() != 0) {
-            BrowserUtils.scrollToElement(DriverManager.getDriver(), viewDealClickableElement.get(Integer.parseInt(numberOfElement)));
+            BrowserUtils.scrollToElement(viewDealClickableElement.get(Integer.parseInt(numberOfElement)));
+            this.selectedCarPrice = getThePricesOfCarsInPage().get(Integer.parseInt(numberOfElement));
+            this.selectedCarName = carNamesAfterClickOnSelectButton.get(Integer.parseInt(numberOfElement)).getText();
             viewDealClickableElement.get(Integer.parseInt(numberOfElement)).click();
         }
     }
 
     public int getTheNumberOfPage() {
         return pageNumberClickableElement.size();
+    }
+
+    public int getTheSelectedCarPrice() {
+        return selectedCarPrice;
+    }
+
+    public String getTheSelectedCarName() {
+        return selectedCarName;
     }
 
 

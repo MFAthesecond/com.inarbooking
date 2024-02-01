@@ -18,12 +18,12 @@ public class CarRentalsOnBookingHomePage extends BaseStep {
     @When("Enter Pickup Location As {string}")
     public void enterPickupLocationAsAirportAndChooseTheOption(String pickupLocation) {
         PAGES.getCarPages().getCarRentalsHomePage().setPickupLocationByFullAddress(pickupLocation);
-        System.out.println(pickupLocation);
     }
 
     @And("Click on Pickup Date")
     public void clickOnPickupDate() {
-        PAGES.getCarPages().getCarRentalsHomePage().setThePickUpDate();
+        String pickUpDate ="2027-03-05";
+        PAGES.getCarPages().getCarRentalsHomePage().setThePickUpDate(pickUpDate);
     }
 
     @And("Click On Pickup Hour And Choose {string}")
@@ -33,7 +33,8 @@ public class CarRentalsOnBookingHomePage extends BaseStep {
 
     @And("Click On DropOff Date")
     public void clickOnDropOffDate() {
-        PAGES.getCarPages().getCarRentalsHomePage().setTheDropOffDate();
+        String dropOffDate ="2027-05-05";
+        PAGES.getCarPages().getCarRentalsHomePage().setTheDropOffDate(dropOffDate);
     }
 
     @And("Click On Drop Hour And Set The Time as {string}")
