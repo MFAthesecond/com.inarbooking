@@ -140,10 +140,6 @@ public class HotelSelectionPage extends BasePage {
          searchItemBox.get(index).findElement(By.cssSelector(".siCheckButton")).click();
     }
 
-    public  WebElement getEvaluationScoreBox(int index) {
-        return searchItemBox.get(index).findElement(By.cssSelector("button:nth-child(2)"));
-    }
-
     public  WebElement getHotelNameBox(int index) {
         return searchItemBox.get(index).findElement(By.xpath("//h1[contains(text(),'Urban Oasis Resort')]"));
     }
