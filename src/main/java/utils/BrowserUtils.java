@@ -137,11 +137,10 @@ public class BrowserUtils {
         JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript(script, element);
     }
-    public static void scrollToElement(WebDriver driver, WebElement element) {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+    public static void scrollToElement( WebElement element) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) DriverManager.getDriver();
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
         BrowserUtils.wait(2);
-
     }
 
 }

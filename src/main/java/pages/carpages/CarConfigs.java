@@ -7,12 +7,18 @@ import pages.BasePage;
 import utils.BrowserUtils;
 import utils.DriverManager;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 
 public class CarConfigs extends BasePage {
+    private HashMap<String, String> locationHourDateInfosInCarConfigsPage;
+    private int numberOfDaysForRental;
+
     @FindBy(css = ".listSearch-car-rental > div")
     private WebElement carRentalConfigurations;
     @FindBy(css = "div[class='search-btn-car-rental'] button")
@@ -49,7 +55,7 @@ public class CarConfigs extends BasePage {
         return isDriverAgedBetween30And65CheckBoxElement.isSelected();
     }
 
-    //bunları bulamadım
+
     public void setThePickUpDateInConfigurationPage() {
         //pickAndDropDateAndPickLocation.get(0).
     }
@@ -58,11 +64,22 @@ public class CarConfigs extends BasePage {
         // pickAndDropDateAndPickLocation.get(1)
     }
 
+    public String getThePickUpDateInConfigurationPage() {
+        return pickAndDropDateAndPickLocation.get(0).getAttribute("value");
+    }
+
+    public String getTheDropOffDateInConfigurationPage() {
+        return pickAndDropDateAndPickLocation.get(1).getAttribute("value");
+    }
+
+
     public void setThePickUpLocationInConfigurationPage(String setThePickUpLocationInConfigurationPage) {
         pickAndDropDateAndPickLocation.get(2).sendKeys(setThePickUpLocationInConfigurationPage);
     }
 
-    //4 options
+    public String getThePickUpLocationInConfigurationPage() {
+        return pickAndDropDateAndPickLocation.get(2).getAttribute("value");
+    }
 
 
     public void setThePriceRange(String minPrice, String maxPrice) {
@@ -80,7 +97,7 @@ public class CarConfigs extends BasePage {
 
     public void setThePriceRangeViaList(List<String> list) {
         List<WebElement> priceOptions = getTheOptionsInConfigurationPage.get(0).findElements(By.cssSelector(".lsCheckboxInput"));
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), priceOptions.get(0));
+        BrowserUtils.scrollToElement(priceOptions.get(0));
         for (String nameOfProduct : list) {
             for (WebElement carSpecsOption : priceOptions) {
                 if (carSpecsOption.getAttribute("value").equals(nameOfProduct.substring(1))) {
@@ -107,7 +124,7 @@ public class CarConfigs extends BasePage {
 
     public void setTheCarSpecs(List<String> list) {
         List<WebElement> carSpecsOptions = getTheOptionsInConfigurationPage.get(1).findElements(By.cssSelector(".lsCheckboxInput"));
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), carSpecsOptions.get(0));
+        BrowserUtils.scrollToElement(carSpecsOptions.get(0));
         for (String nameOfProduct : list) {
             if (nameOfProduct != null) {
                 for (WebElement carSpecsOption : carSpecsOptions) {
@@ -123,13 +140,13 @@ public class CarConfigs extends BasePage {
 
     public void setTheTransmission(String automaticOrManual) {
         List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), transmissionOptions.get(0));
+        BrowserUtils.scrollToElement(transmissionOptions.get(0));
         transmissionOptions.get(automaticOrManual.toLowerCase(Locale.ROOT).contains("au") ? 0 : 1).click();
     }
 
     public void setTheTransmissionViaDataSet(List<String> list) {
         List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), transmissionOptions.get(0));
+        BrowserUtils.scrollToElement(transmissionOptions.get(0));
         for (String nameOfProduct : list) {
             if (nameOfProduct != null) {
                 for (WebElement carSpecsOption : transmissionOptions) {
@@ -144,15 +161,17 @@ public class CarConfigs extends BasePage {
     public List<String> getTheSelectedTransmission() {
         List<WebElement> transmissionOptions = getTheOptionsInConfigurationPage.get(2).findElements(By.cssSelector(".lsCheckboxInput"));
         List<String> transmission = new ArrayList<>();
-        for (WebElement transmissionOption : transmissionOptions) {
-            transmission.add(transmissionOption.getText());
+        for (int i = 0; i < transmissionOptions.size(); i++) {
+            if (transmissionOptions.get(i).isSelected()) {
+                transmission.add(transmissionOptions.get(i).getAttribute("value"));
+            }
         }
         return transmission;
     }
 
     public void setCarCategory(List<String> carCategory) {
         List<WebElement> carCategoryOptions = getTheOptionsInConfigurationPage.get(3).findElements(By.cssSelector(".lsCheckboxInput"));
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), carCategoryOptions.get(0));
+        BrowserUtils.scrollToElement(carCategoryOptions.get(0));
         for (int i = 0; i < carCategory.size(); i++) {
             for (int j = 0; j < carCategoryOptions.size(); j++) {
                 if (carCategory.get(i).equals(carCategoryOptions.get(j).getAttribute("value"))) {
@@ -175,9 +194,33 @@ public class CarConfigs extends BasePage {
     }
 
     public void clickOnSearchButtonInConfigPage() {
-        BrowserUtils.scrollToElement(DriverManager.getDriver(), searchButton);
+        BrowserUtils.scrollToElement(searchButton);
         searchButton.click();
     }
 
+
+    public void setTheLocationHourDateInfosInCarConfigsPage() {
+        locationHourDateInfosInCarConfigsPage = new HashMap<>();
+        locationHourDateInfosInCarConfigsPage.put("PickupLocation", getThePickUpLocationInConfigurationPage());
+        locationHourDateInfosInCarConfigsPage.put("PickupDate", getThePickUpDateInConfigurationPage());
+        locationHourDateInfosInCarConfigsPage.put("DropoffDate", getTheDropOffDateInConfigurationPage());
+    }
+
+    public HashMap<String, String> getTheLocationHourDateInfosInCarConfigsPage() {
+        setTheLocationHourDateInfosInCarConfigsPage();
+        return locationHourDateInfosInCarConfigsPage;
+    }
+
+    public void setTheNumberOfDaysForRental() {
+        String pickUpDate = getThePickUpDateInConfigurationPage();
+        String dropOffDate = getTheDropOffDateInConfigurationPage();
+        LocalDate date1 = LocalDate.of(Integer.parseInt(pickUpDate.substring(0, 4)), Integer.parseInt(pickUpDate.substring(5, 7)), Integer.parseInt(pickUpDate.substring(8)));
+        LocalDate date2 = LocalDate.of(Integer.parseInt(dropOffDate.substring(0, 4)), Integer.parseInt(dropOffDate.substring(5, 7)), Integer.parseInt(dropOffDate.substring(8)));
+        numberOfDaysForRental = Math.abs((int) (ChronoUnit.DAYS.between(date1, date2)));
+    }
+
+    public int getTheNumberOfDays() {
+        return numberOfDaysForRental;
+    }
 
 }
