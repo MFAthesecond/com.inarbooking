@@ -13,6 +13,10 @@ import static org.assertj.core.api.BDDAssertions.then;
 public class FlightFareSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightFareSteps.class);
 
+    public static String departureRoute;
+    public static String returnRoute;
+
+
     @Then("Verify that the user on flight fare page")
     public void verifyThatTheUserOnFlightFarePage() {
         then(PAGES.getFlightPages().getFlightFarePage().getContainerInstruction("departure")).isEqualTo("Choose your fare");
@@ -45,4 +49,16 @@ public class FlightFareSteps extends BaseStep {
         then(PAGES.getFlightPages().getFlightFarePage().isFareTypeSelected("return", returnFareType)).isTrue();
     }
 
+    @And("Get departure route information and Click on {string} for departure fare type")
+    public void getDepartureRouteInformationAndClickOnForDepartureFareType(String fareType) {
+        departureRoute = PAGES.getFlightPages().getFlightFarePage().getContainerDirection("departure");
+        PAGES.getFlightPages().getFlightFarePage().clickOnFareType("departure" , fareType);
+
+    }
+
+    @And("Get return route information and Click on {string} for return fare type")
+    public void getReturnRouteInformationAndClickOnForReturnFareType(String fareType) {
+        returnRoute = PAGES.getFlightPages().getFlightFarePage().getContainerDirection("return");
+        PAGES.getFlightPages().getFlightFarePage().clickOnFareType("return" , fareType);
+    }
 }
