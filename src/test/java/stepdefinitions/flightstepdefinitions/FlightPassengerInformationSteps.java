@@ -41,8 +41,6 @@ public class FlightPassengerInformationSteps extends BaseStep {
     }
 
 
-
-
     @Then("Verify that the {string} message is not displayed")
     public void verifyThatTheMessageIsNotDisplayed(String expectedErrorMessage) {
         String actualErrorMessage = PAGES.getFlightPages().getFlightPassengerInformationPage().findErrorMessage(expectedErrorMessage);
@@ -61,10 +59,12 @@ public class FlightPassengerInformationSteps extends BaseStep {
     @And("Calculate total price")
     public double calculateTotalPrice() {
         return PAGES.getFlightPages().getFlightPassengerInformationPage().getCalculatedTotalPrice();
+
     }
 
     @Then("Verify that total flight fare")
     public void verifyThatTotalFlightFare() {
+        BrowserUtils.wait(4);
         String actualTotalPriceStr = String.valueOf(calculateTotalPrice());
         String expectedTotalPrice=PAGES.getFlightPages().getFlightPassengerInformationPage().getTotalPrice();
         Assertions.assertThat(actualTotalPriceStr).as("Actual and expected total prices should be equal")
