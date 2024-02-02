@@ -65,5 +65,6 @@ public class FlightCheckAndPaySteps extends BaseStep {
             LOGGER.error("Error occurred while clicking on complete booking button: {}", e.getMessage());
             throw e;
         }
+
     }
 }
