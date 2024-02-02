@@ -23,15 +23,13 @@ public class HotelDetailsPage extends BasePage {
     @FindBy(css = ".fs-5")
     WebElement amountPerNight;
 
-    public boolean validateHotelAspects(List<String> FunThings) {
+    public void getHotelAspectsName() {
         List<String> hotelPropertiesStr = new ArrayList<>();
         for (WebElement aspect : hotelProperties) {
             hotelPropertiesStr.add(aspect.getText());
         }
-        return FunThings.stream().allMatch(funThing -> hotelPropertiesStr.stream().anyMatch(property -> property.equals(funThing)));
     }
-
-    public boolean validateNavigateToDetailsPage() {
+    public boolean validateNavigateToDetailsPage(){
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -58,4 +56,12 @@ public class HotelDetailsPage extends BasePage {
         amount = amount.substring(1, amount.indexOf(" "));
         return Integer.parseInt(amount);
     }
+
+    @FindBy(css = ".fs-4.fw-bold > input.me-3.fs-4")
+    WebElement bookingCheckbox;
+
+    public void clickBookingCheckbox() {
+        bookingCheckbox.click();
+    }
+
 }
