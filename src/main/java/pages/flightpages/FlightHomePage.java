@@ -179,4 +179,8 @@ public class FlightHomePage extends BasePage {
       return   flightTab.isDisplayed();
     }
 
+    public boolean isDisplayedFlightTab(){
+        return flightTab.isDisplayed();
+    }
+
 }

@@ -1,6 +1,7 @@
 package stepdefinitions.flightstepdefinitions;
 
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.assertj.core.api.Assertions;
@@ -72,5 +73,10 @@ public class FlightConfirmationSteps extends BaseStep {
             LOGGER.error("Error occurred while verifying route and ticket information on confirmation page.", e);
             throw e;
         }
+    }
+
+    @When("Click on close button on confirmation page")
+    public void clickOnCloseButtonOnConfirmationPage() {
+        PAGES.getFlightPages().getFlightConfirmationPage().clickOnCloseButton();
     }
 }

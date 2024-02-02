@@ -13,18 +13,41 @@ import java.util.stream.Collectors;
 
 public class CarRentalCheckOut extends BasePage {
 
-    //fill the blanks
-    //make some confirmations
+    // fill the blanks
+    // make some confirmations
 
     @FindBy(css = ".form-control")
     private List<WebElement> customesInfos;
 
     @FindBy(css = "option")
     private List<WebElement> countryPhoneNumber;
+
     @FindBy(css = "select[name='phoneCountry']")
     private WebElement counrty;
 
+    @FindBy(css = ".text-danger")
+    private List<WebElement> textDangerElements;
+
+    @FindBy(css = ".btn.btn-blue.fs-4.px-5.py-3")
+    private WebElement bookNowElement;
+
+    @FindBy(css = "input[name='consentMarketingEmails']")
+    private WebElement consentMarketingEmailsElement;
+
+    @FindBy(css = ".modal .thanks .fs-3 ")
+    private WebElement nameInMessageAfterOrdering;
+
+    @FindBy(css = ".fs-2 .fw-bold")
+    private WebElement pickupLocationInMessageAfterOrdering;
+
+    @FindBy(css = ".about-hotel .fs-3")
+    private WebElement carTypeInMessageAfterOrdering;
+
+    @FindBy(css = ".w-100 .text-muted")
+    private List<WebElement> datesInMessageAfterOrdering;
+
     public void setFirstName(String firstName) {
+        BrowserUtils.scrollToElement(customesInfos.get(0));
         customesInfos.get(0).sendKeys(firstName);
     }
 
@@ -72,16 +95,36 @@ public class CarRentalCheckOut extends BasePage {
         counrty.click();
         BrowserUtils.wait(1);
         for (int i = 0; i < 7; i++) {
-            if (countryName.contains(countryPhoneNumber.get(i).getAttribute("value").toLowerCase(Locale.ROOT))) {
-                BrowserUtils.wait(0.50);
+            if (countryName.contains(countryPhoneNumber.get(i).getAttribute("value"))) {
                 countryPhoneNumber.get(i).click();
                 break;
             }
         }
     }
 
+    public int getTheNumberOfTextDangerElement() {
+        return textDangerElements.size();
+    }
 
+    public void clickOnBookNowElement() {
+        BrowserUtils.scrollToElement(bookNowElement);
+        bookNowElement.click();
+    }
 
+    public void clickOnConsentMarketingEmails() {
+        BrowserUtils.scrollToElement(consentMarketingEmailsElement);
+        consentMarketingEmailsElement.click();
+    }
 
+    public String getTheNameInConfirmationMessage() {
+        return nameInMessageAfterOrdering.getText();
+    }
 
+    public String carTypeInConfirmationMessage() {
+        return carTypeInMessageAfterOrdering.getText();
+    }
+
+    public String getThePickUpDateInAppearedMessage() {
+        return datesInMessageAfterOrdering.get(0).getText();
+    }
 }

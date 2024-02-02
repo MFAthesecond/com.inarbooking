@@ -1,11 +1,15 @@
 package stepdefinitions.flightstepdefinitions;
 
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pages.flightpages.FlightExtrasPage;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
+
+import static org.assertj.core.api.BDDAssertions.then;
 
 public class FlightCheckAndPaySteps extends BaseStep {
 
@@ -66,5 +70,15 @@ public class FlightCheckAndPaySteps extends BaseStep {
             throw e;
         }
 
+    }
+
+    @Then("Verify that total price on check and pay page")
+    public void verifyThatTotalPriceOnCheckAndPayPage() {
+        then(PAGES.getFlightPages().getFlightCheckAndPayPage().getTotalPrice()).isEqualTo(FlightExtrasSteps.totalPriceOnExtrasPage);
+    }
+
+    @Then("Verify that the user is on Flight Check And Pay Page")
+    public void verifyThatTheUserIsOnFlightCheckAndPayPage() {
+        then(PAGES.getFlightPages().getFlightCheckAndPayPage().validateCheckAndPay()).isEqualTo("Cardholder's Name");
     }
 }
