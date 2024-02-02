@@ -56,7 +56,7 @@ public class FlightPassengerInformationPage extends BasePage {
 
     @FindBy(css = ".flight-reserve-card h2")
     private WebElement contactHeader;
-    @FindBy(xpath = "//div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/h3[1]")
+    @FindBy(css = "div[class='col-12 fw-bold display-6  text-dark mb-4']")
     private WebElement validatePassengerInformationPage;
 
 
