@@ -56,6 +56,8 @@ public class FlightPassengerInformationPage extends BasePage {
 
     @FindBy(css = ".flight-reserve-card h2")
     private WebElement contactHeader;
+    @FindBy(xpath = "//div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/h3[1]")
+    private WebElement validatePassengerInformationPage;
 
 
     public void clickOnFreeTextMessageField() {
@@ -179,5 +181,9 @@ public class FlightPassengerInformationPage extends BasePage {
 
     public String getHeaderText(){
         return contactHeader.getText();
+    }
+
+    public boolean validatePassengerInformationPage(){
+      return   validatePassengerInformationPage.isDisplayed();
     }
 }
