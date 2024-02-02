@@ -6,13 +6,12 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import pages.BasePage;
 import stepdefinitions.BaseStep;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import org.assertj.core.api.WithAssertions;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HotelSelectionSteps extends BaseStep {
@@ -69,8 +68,8 @@ public class HotelSelectionSteps extends BaseStep {
 
     @And("Select {string} select {string} for additional features")
     public void selectSelectForAdditionalFeatures(String arg0, String arg1) {
-        PAGES.getHotelPages().getHotelSelectionPage().selectAdditionalFeatures(Arrays.asList(arg0,arg1));
-        LOGGER.debug("Click on {} and {} button", arg0,arg1);
+        PAGES.getHotelPages().getHotelSelectionPage().selectAdditionalFeatures(Arrays.asList(arg0, arg1));
+        LOGGER.debug("Click on {} and {} button", arg0, arg1);
     }
 
     @And("Select {string} for hotels")
@@ -89,12 +88,12 @@ public class HotelSelectionSteps extends BaseStep {
     }
 
     @Then("Verify that {string} and {string} for fun things to do are selected")
-    public void verifyThatAndForFunThingsToDoAreSelected(String arg0, String arg1, String arg2, String arg3) {
-        PAGES.getHotelPages().getHotelDetailsPage().
+    public void verifyThatAndForFunThingsToDoAreSelected(String arg0, String arg1) {
+        assertThat(PAGES.getHotelPages().getHotelDetailsPage().validateHotelAspects(Arrays.asList(arg0, arg1))).isTrue();
     }
 
     @And("Verify that {string} selected")
     public void verifyThatSelected(String arg0) {
-        assertThat(arg0.toString()).isEqualTo( PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
+        assertThat(arg0.toString()).isEqualTo(PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
     }
 }
