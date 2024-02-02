@@ -76,4 +76,27 @@ public class HotelYoursDetailsSteps extends BaseStep {
     }
 
 
+    @When("Choose your arrival time between 10 and 11")
+    public void select_arrival_time_between_pm_and_pm() {
+        PAGES.getHotelPages().getHotelsYourDetailsPage().setArrivalTime(2);
+
+    }
+
+    @Then("Click on the close button")
+    public void click_on_the_close_button() {
+        PAGES.getHotelPages().getHotelConfirmationPage().clickOnTheCloseButton();
+
+    }
+
+    @Then("You will confirm that you have successfully navigated to the confirmation page")
+    public void you_will_confirm_that_you_have_successfully_navigated_to_the_confirmation_page() {
+        String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
+        String expectedTitle = "Coastal Breeze Inn";
+        assertThat(actualTitle)
+                .as("Verify that the confirmation page title is correct")
+                .isEqualTo(expectedTitle);
+    }
 }
+
+
+

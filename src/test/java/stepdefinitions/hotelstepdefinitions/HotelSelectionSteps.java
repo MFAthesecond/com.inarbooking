@@ -1,5 +1,6 @@
 package stepdefinitions.hotelstepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,6 +12,8 @@ import stepdefinitions.BaseStep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HotelSelectionSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(HotelSelectionSteps.class);
@@ -64,4 +67,34 @@ public class HotelSelectionSteps extends BaseStep {
         PAGES.getHotelPages().getHotelSelectionPage().selectHotelTypes(Arrays.asList(selection1, selection2));
     }
 
+    @And("Select {string} select {string} for additional features")
+    public void selectSelectForAdditionalFeatures(String arg0, String arg1) {
+        PAGES.getHotelPages().getHotelSelectionPage().selectAdditionalFeatures(Arrays.asList(arg0,arg1));
+        LOGGER.debug("Click on {} and {} button", arg0,arg1);
+    }
+
+    @And("Select {string} for hotels")
+    public void selectForHotels(String selection1) {
+        PAGES.getHotelPages().getHotelSelectionPage().selectHotelTypes(Arrays.asList(selection1));
+    }
+
+    @And("Select {string} for number of bedrooms spinner overflow")
+    public void selectForNumberOfBedroomsSpinnerOverflow(String rooms) {
+        PAGES.getHotelPages().getHotelSelectionPage().setRoomNumber(Integer.parseInt(rooms));
+    }
+
+    @Then("Verify that destination is written as {string}, {string} for adult {string} for child")
+    public void verifyThatDestinationIsWrittenAsForAdultForChild(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5) {
+
+    }
+
+    @Then("Verify that {string} and {string} for fun things to do are selected")
+    public void verifyThatAndForFunThingsToDoAreSelected(String arg0, String arg1, String arg2, String arg3) {
+     //   PAGES.getHotelPages().getHotelDetailsPage().
+    }
+
+    @And("Verify that {string} selected")
+    public void verifyThatSelected(String arg0) {
+        assertThat(arg0.toString()).isEqualTo( PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
+    }
 }

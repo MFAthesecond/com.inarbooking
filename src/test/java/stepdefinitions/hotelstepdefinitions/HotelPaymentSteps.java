@@ -70,13 +70,12 @@ public class HotelPaymentSteps extends BaseStep {
         PAGES.getHotelPages().getHotelsFinalStep().clickOnCompleteBookingButton();
     }
 
-    @Then("Confirm that you have successfully navigated to the confirmation page")
-    public void confirm_that_you_have_successfully_navigated_to_the_confirmation_page() {
+    @Then("Confirm that you have successfully navigated to the {string} confirmation page")
+    public void confirmThatYouHaveSuccessfullyNavigatedToTheConfirmationPage(String expectedTitle) {
         String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
-        String expectedTitle = "About Urban Oasis Resort";
+        LOGGER.debug(expectedTitle + " and ----------------------------- " + actualTitle);
         assertThat(actualTitle)
                 .as("Verify that the confirmation page title is correct")
                 .isEqualTo(expectedTitle);
     }
-
 }
