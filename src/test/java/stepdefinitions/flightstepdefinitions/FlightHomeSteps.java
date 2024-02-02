@@ -177,6 +177,14 @@ public class FlightHomeSteps extends BaseStep {
 
     @And("Verify that the user is Flight Home Page")
     public void verifyThatTheUserIsFlightHomePage() {
-     then(PAGES.getFlightPages().getFlightHomePage().isDisplayedFlightTab());
+        try {
+            boolean isFlightTabDisplayed = PAGES.getFlightPages().getFlightHomePage().isDisplayedFlightTab();
+            LOGGER.debug("Verifying that the user is on the Flight Home Page...");
+            then(isFlightTabDisplayed).isTrue();
+            LOGGER.debug("User is on Flight Home Page.");
+        } catch (Exception e) {
+            LOGGER.error("Error while verifying that the user is on Flight Home Page: {}", e.getMessage());
+            throw e;
+        }
     }
 }

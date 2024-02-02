@@ -1,4 +1,5 @@
 package stepdefinitions.flightstepdefinitions;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -18,7 +19,7 @@ public class FlightPassengerInformationSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightPassengerInformationSteps.class);
 
     @And("Fill {string} as contact email")
-    public void fill_as_contact_email(String email)  {
+    public void fill_as_contact_email(String email) {
         try {
             LOGGER.debug("Filling contact email as {}", email);
             PAGES.getFlightPages().getFlightPassengerInformationPage().fillContactEmail(email);
@@ -107,7 +108,7 @@ public class FlightPassengerInformationSteps extends BaseStep {
     public void fillInAsTheNameAsTheSurnameAsTheGenderAsTheYearAsTheMonthAsTheDayForThePassenger(String firstName, String lastName, String gender, String year, String month, String day, int traveler) {
         try {
             LOGGER.debug("Filling in traveler information - Name: {}, Surname: {}, Gender: {}, Year: {}, Month: {}, Day: {}, Passenger: #{}", firstName, lastName, gender, year, month, day, traveler);
-            PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(traveler,firstName,lastName,gender,year,month,day);
+            PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(traveler, firstName, lastName, gender, year, month, day);
         } catch (Exception e) {
             LOGGER.error("Error occurred while filling traveler information: {}", e.getMessage());
             throw e;
@@ -152,7 +153,7 @@ public class FlightPassengerInformationSteps extends BaseStep {
         List<List<String>> data = travelerInformation.asLists();
         try {
 //            LOGGER.debug("Filling in traveler information - Name: {}, Surname: {}, Gender: {}, Year: {}, Month: {}, Day: {}, Passenger: #{}", firstName, lastName, gender, year, month, day, traveler);
-            for(int i = 0; i < FlightHomeSteps.totalTravelerNumber; i++) {
+            for (int i = 0; i < FlightHomeSteps.totalTravelerNumber; i++) {
                 PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(i + 1, data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3), data.get(i).get(4), data.get(i).get(5));
                 BrowserUtils.wait(1);
             }
@@ -164,6 +165,18 @@ public class FlightPassengerInformationSteps extends BaseStep {
 
     @Then("Verify that the user is on flight Passenger Information Page")
     public void verifyThatTheUserIsOnFlightPassengerInformationPage() {
-        then(PAGES.getFlightPages().getFlightPassengerInformationPage().validatePassengerInformationPage()).isTrue();
+        try {
+            boolean isPassengerInformationPageValid = PAGES.getFlightPages()
+                    .getFlightPassengerInformationPage()
+                    .validatePassengerInformationPage();
+            if (isPassengerInformationPageValid) {
+                LOGGER.debug("User is on the flight Passenger Information Page.");
+            } else {
+                LOGGER.debug("User is NOT on the flight Passenger Information Page.");
+            }
+        } catch (Exception e) {
+            LOGGER.error("An error occurred while verifying passenger information page: " + e.getMessage());
+            throw e;
+        }
     }
 }

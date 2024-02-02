@@ -28,6 +28,10 @@ public class FlightCheckAndPayPage extends BasePage {
     private WebElement priceCalculationContainer;
     @FindBy(xpath = "//label[contains(text(),\"Cardholder's Name\")]")
     private WebElement validateCheckAndPay;
+    @FindBy(css = ".text-danger.fs-5.mt-2")
+    private WebElement expirationOfDateInvalidMessage;
+
+
 
 
     public void clickOnBackButton() {
@@ -92,6 +96,10 @@ public class FlightCheckAndPayPage extends BasePage {
     }
     public String validateCheckAndPay(){
        return validateCheckAndPay.getText();
+    }
+
+    public String expirationOfDateInvalidMessage(){
+        return expirationOfDateInvalidMessage.getText();
     }
 
 

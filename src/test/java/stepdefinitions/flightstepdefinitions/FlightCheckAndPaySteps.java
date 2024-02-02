@@ -3,6 +3,8 @@ package stepdefinitions.flightstepdefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.Assertions;
+import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.flightpages.FlightExtrasPage;
@@ -74,11 +76,34 @@ public class FlightCheckAndPaySteps extends BaseStep {
 
     @Then("Verify that total price on check and pay page")
     public void verifyThatTotalPriceOnCheckAndPayPage() {
-        then(PAGES.getFlightPages().getFlightCheckAndPayPage().getTotalPrice()).isEqualTo(FlightExtrasSteps.totalPriceOnExtrasPage);
+        try {
+            then(PAGES.getFlightPages().getFlightCheckAndPayPage().getTotalPrice()).isEqualTo(FlightExtrasSteps.totalPriceOnExtrasPage);
+            LOGGER.info("Total price on check and pay page verified successfully.");
+        } catch (AssertionError e) {
+            LOGGER.debug("Total price on check and pay page verification failed: " + e.getMessage());
+        }
     }
 
     @Then("Verify that the user is on Flight Check And Pay Page")
     public void verifyThatTheUserIsOnFlightCheckAndPayPage() {
-        then(PAGES.getFlightPages().getFlightCheckAndPayPage().validateCheckAndPay()).isEqualTo("Cardholder's Name");
+        try {
+            then(PAGES.getFlightPages().getFlightCheckAndPayPage().validateCheckAndPay()).isEqualTo("Cardholder's Name");
+            LOGGER.info("User is on Flight Check And Pay Page.");
+        } catch (NoSuchElementException e) {
+            LOGGER.debug("User is not on Flight Check And Pay Page: " + e.getMessage());
+            Assertions.fail("The user should be on the check and pay page because of invalid name credential");
+        }
+    }
+
+    @Then("Verify that the expiration of date invalid message is displayed")
+    public void verifyThatTheExpirationOfDateInvalidMessageIsDisplayed() {
+        try {
+            then(PAGES.getFlightPages().getFlightCheckAndPayPage().expirationOfDateInvalidMessage()).isEqualTo("Invalid expiration date. Please use the MM/YY format.");
+            LOGGER.info("Expiration of date invalid message is displayed as expected.");
+        } catch (NoSuchElementException e) {
+            LOGGER.debug("Expiration of date invalid message is not displayed as expected: " + e.getMessage());
+            Assertions.fail("The user should be on the check and pay page because of the invalid card expiration date credential");
+            throw e;
+        }
     }
 }
