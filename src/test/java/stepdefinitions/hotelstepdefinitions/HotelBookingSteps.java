@@ -44,5 +44,6 @@ public class HotelBookingSteps extends BaseStep {
     @Then("Validate the user is on hotel selection page")
     public void validate_the_user_is_on_hotel_selection_page() {
         PAGES.getHotelPages().getHotelSelectionPage().validateNavigationToHotelSelectionPage();
+        LOGGER.debug("Validated that the user is on the hotel selection page");
     }
 }

@@ -11,7 +11,6 @@ Feature: Hotel Filtering
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
-    And Click on the Stays Tab
 
   Scenario: Hotel Reservation with Visitor Details and Finalization
 

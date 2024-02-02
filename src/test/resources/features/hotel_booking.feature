@@ -11,7 +11,6 @@ Feature: Stay Filtering
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
-    And Click on the Stays Tab
 
   Scenario Outline: Validate that the successful hotel reservation process
 
@@ -28,6 +27,7 @@ Feature: Stay Filtering
       | New York    | 3       | 14      | 5        | 2        | 6       |
       | Paris       | 21      | 28      | 10       | 5        | 12      |
 
+  @validate
   Scenario: Validate that the stays selection process
     Given Navigation to the Hotel Details Page
     When Choose "Istanbul" where to stay
