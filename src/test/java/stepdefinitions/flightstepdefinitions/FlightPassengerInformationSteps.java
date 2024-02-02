@@ -161,4 +161,9 @@ public class FlightPassengerInformationSteps extends BaseStep {
             throw e;
         }
     }
+
+    @Then("Verify that the user is on flight Passenger Information Page")
+    public void verifyThatTheUserIsOnFlightPassengerInformationPage() {
+        then(PAGES.getFlightPages().getFlightPassengerInformationPage().validatePassengerInformationPage()).isTrue();
+    }
 }

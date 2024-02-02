@@ -3,6 +3,7 @@ package pages.carpages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.devtools.v120.dom.DOM;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import utils.BrowserUtils;

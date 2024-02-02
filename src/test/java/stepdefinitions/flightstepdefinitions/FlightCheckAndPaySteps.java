@@ -76,4 +76,9 @@ public class FlightCheckAndPaySteps extends BaseStep {
     public void verifyThatTotalPriceOnCheckAndPayPage() {
         then(PAGES.getFlightPages().getFlightCheckAndPayPage().getTotalPrice()).isEqualTo(FlightExtrasSteps.totalPriceOnExtrasPage);
     }
+
+    @Then("Verify that the user is on Flight Check And Pay Page")
+    public void verifyThatTheUserIsOnFlightCheckAndPayPage() {
+        then(PAGES.getFlightPages().getFlightCheckAndPayPage().validateCheckAndPay()).isEqualTo("Cardholder's Name");
+    }
 }
