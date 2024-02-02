@@ -5,13 +5,13 @@
 #Test Case: BK_FL_001
 #Test Title: Validate the successful flight reservation process
 
-@flight
+@Flight
 Feature: Flight Pages Test Scenarios
 
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
-  @functional
+  @Regression
   Scenario Outline: Validate that the successful flight reservation process
 
     When Click on the Flight Tab
@@ -28,7 +28,7 @@ Feature: Flight Pages Test Scenarios
       | Economy      | USA            | China    | 20      | 25      | 3        | 7        |
       | First Class  | United Kingdom | Spain    | 8       | 11      | 15       | 7        |
 
-  @smoke
+  @Smoke
   Scenario: Validate that the flight selection process
 
     When Click on the Flight Tab
@@ -42,7 +42,7 @@ Feature: Flight Pages Test Scenarios
     And Click on select ticket button for #1 flight
     Then Verify that the user on flight fare page
 
-  @smoke
+  @Smoke
   Scenario: Validate that the successful flight reservation process 1
 
     When Click on the Flight Tab
@@ -54,7 +54,7 @@ Feature: Flight Pages Test Scenarios
     Then Validate the user is on flight selection page
 
 #Tests for Flight Selection Page
-  @smoke
+  @Smoke
   Scenario: Validate that the cheapest functionality on flight selection page
 
     When Click on the Flight Tab
@@ -62,7 +62,7 @@ Feature: Flight Pages Test Scenarios
     And Click on search flight button
     And Click on "Cheapest" tab
     Then Verify that the the cheapest flight is the first flight
-  @smoke
+  @Smoke
   Scenario: Validate that the fastest functionality on flight selection page
 
     When Click on the Flight Tab
@@ -71,7 +71,7 @@ Feature: Flight Pages Test Scenarios
     And Click on "Fastest" tab
     Then Verify that the the fastest flight is the first flight
 
-  @smoke
+  @Smoke
   Scenario: Validate that the successful flight selection for Round Trip as Trip Type
 
     When Click on the Flight Tab
@@ -80,7 +80,7 @@ Feature: Flight Pages Test Scenarios
     And Click on select ticket button for #1 flight
     And Click on select return ticket button for #1 flight
     Then Verify that the user on flight fare page
-  @functional
+  @Regression
   Scenario Outline: Validate that the dropdowns , checkboxes and radio buttons functionality for round trip
 
     When Click on the Flight Tab
@@ -102,10 +102,21 @@ Feature: Flight Pages Test Scenarios
       | Origin | Destination | OriginSelection | DestinationSelection | Departure Date | Return Date | AdultNum | ChildNum | CabinClass1 | CabinClass2 | Airline   | Duration |
       | USA    | Canada      | United Kingdom  | Germany              | 03/03/2024     | 10/03/2024  | 5        | 7        | Business    | Economy     | Airline Z | 6 hours  |
       | France | Italy       | China           | Brazil               | 06/15/2025     | 06/20/2025  | 3        | 4        | First Class | Business    | Airline A | 14 hours |
-      | Japan  | Spain       | India           | Australia            | 12/05/2025     | 12/05/2024  | 10       | 9        | Economy     | First Class | Airline C | 24 hours |
+      | Japan  | Spain       | India           | Australia            | 12/05/2025     | 12/05/2026  | 10       | 9        | Economy     | First Class | Airline C | 24 hours |
+
+#    Test for invalid date acceptance on flight selection page
+  @Smoke
+  Scenario: Validate that invalid date selection process on flight selection page for round trip
+
+    When Click on the Flight Tab
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Click on search flight button
+    And Select departure date as "12/05/2025"
+    And Select return date as "12/05/2024"
+    Then Verify that "12/05/2025" as departure date and "12/05/2024" as return date are not accepted on date picker
 
   #Tests for Flight Fare Page
-  @functional
+  @Regression
   Scenario Outline: Validate that the fare type selection functionality on fare page
 
     When Click on the Flight Tab
@@ -127,7 +138,7 @@ Feature: Flight Pages Test Scenarios
       | Japan  | Brazil      | Japan to Brazil   | Brazil to Japan   | Main                | Refundable Main  |
 
 #Tests For Flight Passenger Information Page
-  @functional
+  @Regression
   Scenario: Validate that passenger flight information 1
 
     When Click on the Flight Tab
@@ -146,7 +157,7 @@ Feature: Flight Pages Test Scenarios
     Then Verify that the "Invalid email address" message is not displayed
     And Verify that the "Invalid phone number" message is not displayed
 
-  @functional
+  @Regression
   Scenario: Validate that passenger flight information 2
 
     When Click on the Flight Tab
@@ -166,7 +177,7 @@ Feature: Flight Pages Test Scenarios
     Then Verify that the "Please enter a name." message is not displayed
     Then Verify that the "Please enter a surname." message is not displayed
 
-  @smoke
+  @Smoke
   Scenario: Validate that flight fare calculation
 
     When Click on the Flight Tab
@@ -180,7 +191,7 @@ Feature: Flight Pages Test Scenarios
     Then Verify that total flight fare
 
 #Tests for Flight Extras Page
-  @functional
+  @Regression
   Scenario Outline: Validate that the extras selection functionality on extras page
 
     When Click on the Flight Tab
@@ -207,7 +218,7 @@ Feature: Flight Pages Test Scenarios
       | Japan   | Brazil      | Business            | Refundable Main  | willJames15@gmail.com | +81 (JP)     | 1122233332   | Will          | James            | Other  | 1978       | 12          | 31        | Diabetic Meal - $19    | Travel Insurance   | Extra Comfort Kit |
 
 #  Tests For Flight Check And Pay Page
-  @functional
+  @Regression
   Scenario: Validate that the successful check and pay
 
     When Click on the Flight Tab
@@ -230,6 +241,8 @@ Feature: Flight Pages Test Scenarios
     And Click on complete booking button
     Then Validate the user is on confirmation page
 
+#    Tests with invalid credentials on the check and pay page
+  @Regression
   Scenario: Validate That CardHolder's Name Information During The Check And Pay Process
 
     When Click on the Flight Tab
@@ -251,7 +264,7 @@ Feature: Flight Pages Test Scenarios
     And Fill in "345" as the cvc code
     And Click on complete booking button
     Then Verify that the user is on Flight Check And Pay Page
-
+  @Regression
   Scenario: Validate That Expiration Date Of Card During The Check And Pay Process
 
     When Click on the Flight Tab
@@ -274,7 +287,7 @@ Feature: Flight Pages Test Scenarios
     Then Verify that the expiration of date invalid message is displayed
 
 #    Tests For Flight Confirmation Page
-  @functional
+  @Regression
   Scenario: Validate that the Confirmation Page Information for Round Trip
 
     When Click on the Flight Tab
@@ -297,7 +310,7 @@ Feature: Flight Pages Test Scenarios
     And Click on complete booking button
     Then Verify that "john15@gmail.com" , route and ticket information on confirmation page for departure and return
 
-  @EndToEnd
+  @Daily @End2End
   Scenario Outline: Verify the functionality of the flight booking tab with end-to-end testing
     When Click on the Flight Tab
     And Click on round trip checkbox

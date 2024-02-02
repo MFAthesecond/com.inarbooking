@@ -8,67 +8,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HotelDetailsPage extends BasePage {
-    @FindBy(css = "button.bookNow")
-    WebElement reserveOrBookNowButton;
 
-    @FindBy(css = ".align-items-center > h1")
-    WebElement hotelName;
+	@FindBy(css = "button.bookNow")
+	WebElement reserveOrBookNowButton;
 
-    @FindBy(css = ".bhp-item.p-3.d-flex.flex-row")
-    List<WebElement> hotelProperties;
+	@FindBy(css = ".align-items-center > h1")
+	WebElement hotelName;
 
-    @FindBy(css = "b")
-    WebElement totalAmount;
+	@FindBy(css = ".bhp-item.p-3.d-flex.flex-row")
+	List<WebElement> hotelProperties;
 
-    @FindBy(css = ".fs-5")
-    WebElement amountPerNight;
+	@FindBy(css = "b")
+	WebElement totalAmount;
 
-    public void getHotelAspectsName() {
-        List<String> hotelPropertiesStr = new ArrayList<>();
-        for (WebElement aspect : hotelProperties) {
-            hotelPropertiesStr.add(aspect.getText());
-        }
-    }
-    public boolean validateHotelAspects(List<String> FunThings) {
-        List<String> hotelPropertiesStr = new ArrayList<>();
-        for (WebElement aspect : hotelProperties) {
-            hotelPropertiesStr.add(aspect.getText());
-        }
-        return FunThings.stream().allMatch(funThing -> hotelPropertiesStr.stream().anyMatch(property -> property.equals(funThing)));
-    }
-    public boolean validateNavigateToDetailsPage(){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        return reserveOrBookNowButton.isDisplayed();
-    }
+	@FindBy(css = ".fs-5")
+	WebElement amountPerNight;
 
-    public void clickOnReserveButton() {
-        reserveOrBookNowButton.click();
-    }
+	public void getHotelAspectsName() {
+		List<String> hotelPropertiesStr = new ArrayList<>();
+		for (WebElement aspect : hotelProperties) {
+			hotelPropertiesStr.add(aspect.getText());
+		}
+	}
 
-    public String getHotelName() {
-        return hotelName.getText();
-    }
+	public boolean validateHotelAspects(List<String> FunThings) {
+		List<String> hotelPropertiesStr = new ArrayList<>();
+		for (WebElement aspect : hotelProperties) {
+			hotelPropertiesStr.add(aspect.getText());
+		}
+		return FunThings.stream()
+			.allMatch(funThing -> hotelPropertiesStr.stream().anyMatch(property -> property.equals(funThing)));
+	}
 
-    public int getTotalAmount() {
-        String amount = totalAmount.getText().substring(1);
-        return Integer.parseInt(amount);
-    }
+	public boolean validateNavigateToDetailsPage() {
+		try {
+			Thread.sleep(5000);
+		}
+		catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+		return reserveOrBookNowButton.isDisplayed();
+	}
 
-    public int getAmountPerNight() {
-        String amount = amountPerNight.getText();
-        amount = amount.substring(1, amount.indexOf(" "));
-        return Integer.parseInt(amount);
-    }
+	public void clickOnReserveButton() {
+		reserveOrBookNowButton.click();
+	}
 
-    @FindBy(css = ".fs-4.fw-bold > input.me-3.fs-4")
-    WebElement bookingCheckbox;
+	public String getHotelName() {
+		return hotelName.getText();
+	}
 
-    public void clickBookingCheckbox() {
-        bookingCheckbox.click();
-    }
+	public int getTotalAmount() {
+		String amount = totalAmount.getText().substring(1);
+		return Integer.parseInt(amount);
+	}
+
+	public int getAmountPerNight() {
+		String amount = amountPerNight.getText();
+		amount = amount.substring(1, amount.indexOf(" "));
+		return Integer.parseInt(amount);
+	}
+
+	@FindBy(css = ".fs-4.fw-bold > input.me-3.fs-4")
+	WebElement bookingCheckbox;
+
+	public void clickBookingCheckbox() {
+		bookingCheckbox.click();
+	}
 
 }

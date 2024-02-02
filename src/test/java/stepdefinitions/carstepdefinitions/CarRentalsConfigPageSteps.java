@@ -229,8 +229,9 @@ public class CarRentalsConfigPageSteps extends BaseStep {
 	public void verifyThatTransmissionIsAsGiven() {
 		List<String> selectedCarTransmission = PAGES.getCarPages().getCarConfigs().getTheSelectedTransmission();
 		List<String> categoryOfAppearedCar = PAGES.getCarPages().getCarConfigsRight().getTheTransmission();
-        for (String nameOfProduct : categoryOfAppearedCar) {
-            then(selectedCarTransmission).contains(nameOfProduct);
-        }
+		for (String nameOfProduct : categoryOfAppearedCar) {
+			then(selectedCarTransmission).contains(nameOfProduct);
+		}
 	}
+
 }
