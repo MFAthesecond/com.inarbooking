@@ -25,15 +25,15 @@ public class HotelBookingSteps extends BaseStep {
         PAGES.getHotelPages().getHotelPage().selectLastDay(lastDate);
         LOGGER.debug("Select last day");
     }
-    @When("Select {string} adults and {string} child and \"{int}\"room")
-    public void select_adults_and_child_and_room(String adults, String children, Integer rooms) {
+    @When("Select {string} adults and {string} child and {string}room")
+    public void select_adults_and_child_and_room(String adults, String children, String rooms) {
         PAGES.getHotelPages().getHotelPage().clickOnVisitors();
         PAGES.getHotelPages().getHotelPage().selectAdultNumber(adults);
         LOGGER.debug("Set adults number:{} ",Integer.parseInt(adults));
         PAGES.getHotelPages().getHotelPage().selectChildrenNumber(children);
         LOGGER.debug("Set children number:{} ",Integer.parseInt(children));
-        PAGES.getHotelPages().getHotelPage().selectRoomNumber(rooms);
-        LOGGER.debug("Set rooms number:{} ",rooms);
+        PAGES.getHotelPages().getHotelPage().selectRoomNumber(Integer.parseInt(rooms));
+        LOGGER.debug("Set rooms number:{} ",Integer.parseInt(rooms));
 
     }
     @When("click on search flight button")
@@ -45,4 +45,6 @@ public class HotelBookingSteps extends BaseStep {
     public void validate_the_user_is_on_hotel_selection_page() {
         PAGES.getHotelPages().getHotelSelectionPage().validateNavigationToHotelSelectionPage();
     }
+
+
 }
