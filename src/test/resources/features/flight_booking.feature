@@ -12,7 +12,7 @@ Feature: Flight Pages Test Scenarios
     Given Navigation to the baseURL
     And Click on the Booking Link
   @Regression
-  Scenario Outline: Validate that the successful flight reservation process
+  Scenario Outline: Validate that the successful flight search process
 
     When Click on the Flight Tab
     And Click on round trip checkbox
