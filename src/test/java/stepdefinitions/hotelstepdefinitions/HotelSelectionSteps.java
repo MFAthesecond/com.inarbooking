@@ -69,8 +69,8 @@ public class HotelSelectionSteps extends BaseStep {
 
     @And("Select {string} select {string} for additional features")
     public void selectSelectForAdditionalFeatures(String arg0, String arg1) {
-        PAGES.getHotelPages().getHotelSelectionPage().selectAdditionalFeatures(Arrays.asList(arg0,arg1));
-        LOGGER.debug("Click on {} and {} button", arg0,arg1);
+        PAGES.getHotelPages().getHotelSelectionPage().selectAdditionalFeatures(Arrays.asList(arg0, arg1));
+        LOGGER.debug("Click on {} and {} button", arg0, arg1);
     }
 
     @And("Select {string} for hotels")
@@ -95,6 +95,6 @@ public class HotelSelectionSteps extends BaseStep {
 
     @And("Verify that {string} selected")
     public void verifyThatSelected(String arg0) {
-        assertThat(arg0.toString()).isEqualTo( PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
+        assertThat(arg0.toString()).isEqualTo(PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
     }
 }
