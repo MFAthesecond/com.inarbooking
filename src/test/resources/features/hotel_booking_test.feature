@@ -46,24 +46,28 @@ Feature: Hotel Filtering
     And Enter cvv as "777"
     And Select both checkboxes to receive notification emails
     And Click on the complete booking button
-    Then Confirm that you have successfully navigated to the confirmation page
+    Then Confirm that you have successfully navigated to the "Urban Oasis Resort" confirmation page
 
-  Scenario:
-    When Type the destination "Istanbul" where you will be staying
-    And Select "2" adults and "2" child and "2"room
+  Scenario:Verify the functionality of the hotel booking tab with end-to-end testing
+
+    When Type the destination "Amsterdam" where you will be staying
+    And Select "3" adults and "4" child and "2"room
     When Click on the search hotels button
-    And Select "Fitness" and select for fun things to do
-    And Select "Free WiFi" for additional features
-    And  Select "City Center Suites" and "Grand Plaza Hotel" for hotels
+    And Select "Bicycle rental" and select "Fitness" for fun things to do
+    And Select "Free WiFi" select "Elevator" for additional features
+    And Select "Coastal Breeze Inn" for hotels
     And Select "2" for number of bedrooms spinner overflow
+    And Click on search hotels button
     And Click on the see availability button for #1 hotel
+    And Verify that "Coastal Breeze Inn" selected
     And Click on the reserve or book now button
     And Click on the no checkbox for are you traveling for business
     And Fill in first name "Furkan" last name "Altun" for visitor
     And Fill in "frknmail@gmail.com" as contact email
     And Click on the I'm the main guest for checkbox
     And Write that you have no "I don't have any requests" requests
-    And Select arrival time between 10:00 PM and 11:00 PM
+    And Choose your arrival time between 10 and 11
+    And Click on the next, final details button
     And Select "+1 (US)" for country code dropdown and fill in "7772228882" as phone number
     And Click yes checkbox for free paper approval
     And Click the yes checkbox to save the details
@@ -73,14 +77,5 @@ Feature: Hotel Filtering
     And Enter cvv as "777"
     And Select both checkboxes to receive notification emails
     And Click on the complete booking button
-    Then Confirm that you have successfully navigated to the confirmation page
+    Then Confirm that you have successfully navigated to the "Coastal Breeze Inn" confirmation page
     And Click on the close button
-
-
-#    And Click on the see availability button for #1 hotel
-#    And Click on the reserve or book now button
-#    And Click on the yes checkbox for are you traveling for business
-#    And Fill in first name "Furkan" last name "Altun" for visitor
-#    And Fill "frknmail@gmail.com" as contact email
-#    And Click on the booking for someone else for checkcbox
-#    And Click on the next, final details button

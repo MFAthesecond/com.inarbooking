@@ -20,6 +20,9 @@ public class HotelConfirmationPage extends BasePage {
     @FindBy(xpath = "//div[@class='text-muted']")
     private List<WebElement> reservationInfos;
 
+    @FindBy(css = ".modal-footer > button")
+    WebElement closeButton;
+
     public String checkReservationInfo(int i) {
         return reservationInfos.get(i).getText();
     }
@@ -29,12 +32,15 @@ public class HotelConfirmationPage extends BasePage {
     }
 
     public String getHotelTitle() {
-        return hotelTitle.getText();
+        return hotelTitle.getText().substring(6);
     }
 
     public String getLocationOfHotel() {
         return locationOfHotel.getText();
     }
 
+    public void clickOnTheCloseButton() {
+        closeButton.click();
+    }
 
 }
