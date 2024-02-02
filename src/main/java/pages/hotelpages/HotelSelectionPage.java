@@ -140,9 +140,9 @@ public class HotelSelectionPage extends BasePage {
         List<WebElement> list = hotelsList.findElements(By.cssSelector(".searchItem "));
         list.get(index - 1).findElement(By.cssSelector(".siCheckButton")).click();
 
-//        for (int i = 0; i < searchItemBox.size(); i++) {
-//            System.out.println(searchItemBox.get(i).getText());
-//        }
+        for (int i = 0; i < searchItemBox.size(); i++) {
+            System.out.println(searchItemBox.get(i).getText());
+        }
     }
 
     public WebElement getHotelNameBox(int index) {
