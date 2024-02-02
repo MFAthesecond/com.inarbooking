@@ -125,6 +125,56 @@ Feature: Flight Filtering
       | France | Germany     | France to Germany | Germany to France | First Class         | Business         |
       | Japan  | Brazil      | Japan to Brazil   | Brazil to Japan   | Main                | Refundable Main  |
 
+#Tests For Flight Passenger Information Page
+  Scenario: Validate that passenger flight information 1
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "First Class" for flight class
+    And Select "Spain" for from dropdown and select "Italy" for to dropdown
+    And Click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    And Fill "bburak@gmail.com" as contact email
+    And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in first name "Brown" last name "Dan" for passenger
+    And Select in the Gender as "Male" from the gender dropdown for the 1st passenger
+    And Select the year "1990", month "1", day "15" as the date of birth
+    Then Verify that the "Invalid email address" message is not displayed
+    And Verify that the "Invalid phone number" message is not displayed
+
+  Scenario: Validate that passenger flight information 2
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "First Class" for flight class
+    And Select "USA" for from dropdown and select "Japan" for to dropdown
+    And Select "2" adults and "1" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select return ticket button for #1 flight
+    And Click on select who's flying button
+    And Fill "bbbbb@gmail.com" as contact email
+    And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
+    And Fill in "Scarlett" as the name, "John" as the surname, "Female" as the gender, "1992" as the year, "4" as the month, "3" as the day for the #2 passenger
+    And Fill in "John" as the name, "Eris" as the surname, "Male" as the gender, "2005" as the year, "2" as the month, "6" as the day for the #3 passenger
+    Then Verify that the "Please select a gender." message is not displayed
+    Then Verify that the "Please enter a name." message is not displayed
+    Then Verify that the "Please enter a surname." message is not displayed
+
+  Scenario: Validate that flight fare calculation
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "Business" for flight class
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Select "2" adults and "2" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    Then Verify that total flight fare
+
 #Tests for Flight Extras Page
   Scenario Outline: Validate that the extras selection functionality on extras page
 
@@ -151,24 +201,49 @@ Feature: Flight Filtering
       | Germany | France      | Main                | Business         | user+#15@gmail.com    | +44 (UK)     | 2345467789   | Sally         | Hawkins          | Female | 2003       | 8           | 17        | Gluten-free Meal - $18 | Extra Comfort Kit  | Travel Insurance  |
       | Japan   | Brazil      | Business            | Refundable Main  | willJames15@gmail.com | +81 (JP)     | 1122233332   | Will          | James            | Other  | 1978       | 12          | 31        | Diabetic Meal - $19    | Travel Insurance   | Extra Comfort Kit |
 
-    Scenario: Validate that the Confirmation Page Information for Round Trip
+#  Tests For Flight Check And Pay Page
+  Scenario: Validate that the successful check and pay
 
-      When Click on the Flight Tab
-      And Select "USA" for from dropdown and select "Canada" for to dropdown
-      And Click on search flight button
-      And Get the #1 flight information and click on select ticket button
-      And Get the #1 flight information and click on select return ticket button
-      And Get departure route information and Click on "Refundable Main" for departure fare type
-      And Get return route information and Click on "First Class" for return fare type
-      And Click on select who's flying button
-      And Fill "john15@gmail.com" as contact email
-      And Select "+44 (UK)" for country code dropdown and fill "4445756661" as phone number
-      And Fill in "Sally" as the name, "James" as the surname, "Male" as the gender, "2003" as the year, "8" as the month, "17" as the day for the #1 passenger
-      And Click on select extras button
-      And Click on go to checkout  button
-      And Fill in "John" as the cardholder's name
-      And Fill in "1234567891234567" as the card number
-      And Fill in "11/25" as the expiration date
-      And Fill in "345" as the cvc code
-      And Click on complete booking button
-      Then Verify that "john15@gmail.com" , route and ticket information on confirmation page for departure and return
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "Economy" for flight class
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Select "1" adults and "0" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    And Fill "bbbbb@gmail.com" as contact email
+    And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
+    And Click on select extras button
+    And Click on go to checkout  button
+    And Fill in "John" as the cardholder's name
+    And Fill in "1234567891234567" as the card number
+    And Fill in "11/25" as the expiration date
+    And Fill in "345" as the cvc code
+    And Click on complete booking button
+    Then Validate the user is on confirmation page
+
+#    Tests For Flight Confirmation Page
+  Scenario: Validate that the Confirmation Page Information for Round Trip
+
+    When Click on the Flight Tab
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Click on search flight button
+    And Get the #1 flight information and click on select ticket button
+    And Get the #1 flight information and click on select return ticket button
+    And Get departure route information and Click on "Refundable Main" for departure fare type
+    And Get return route information and Click on "First Class" for return fare type
+    And Click on select who's flying button
+    And Fill "john15@gmail.com" as contact email
+    And Select "+44 (UK)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in "Sally" as the name, "James" as the surname, "Male" as the gender, "2003" as the year, "8" as the month, "17" as the day for the #1 passenger
+    And Click on select extras button
+    And Click on go to checkout  button
+    And Fill in "John" as the cardholder's name
+    And Fill in "1234567891234567" as the card number
+    And Fill in "11/25" as the expiration date
+    And Fill in "345" as the cvc code
+    And Click on complete booking button
+    Then Verify that "john15@gmail.com" , route and ticket information on confirmation page for departure and return
+

@@ -26,6 +26,9 @@ public class FlightExtrasPage extends BasePage {
     @FindBy(css = ".col-5 .flight-reserve-card")
     private WebElement priceCalculationContainer;
 
+    @FindBy(css = ".flight-reserve-card .col-12")
+    private WebElement instructionText;
+
     public List<String> getReservationSteps(){
         return reservationSteps.stream().map(WebElement::getText).toList();
     }
@@ -108,5 +111,9 @@ public class FlightExtrasPage extends BasePage {
     public boolean isExtraSelected(String extraName){
         WebElement extra = extrasCheckBoxList.stream().filter(element -> element.findElement(By.cssSelector("label")).getText().contains(extraName)).findFirst().get();
         return extra.findElement(By.cssSelector("input")).isSelected();
+    }
+
+    public boolean isInstructionDisplayed(){
+        return instructionText.isDisplayed();
     }
 }
