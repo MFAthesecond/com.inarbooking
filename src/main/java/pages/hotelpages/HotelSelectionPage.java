@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static utils.BrowserUtils.scrollToElement;
@@ -160,15 +161,20 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDesc > h2.fs-4.m-0"));
     }
 
-    @FindBy(css = ":nth-child(7) > div > div")
-    List<WebElement> listOfHotelTypes;
+    @FindBy(css = "div:nth-child(7) > div > div  > span")
+    List<WebElement> listOfHotelTypesStrings;
 
-//    public void selectHotelTypes(List<String>stringList) {
-//        for (int i = 0; i < ; i++) {
-//
-//        }
-//        listOfHotelTypes.stream().filter()
-//    }
+    public void selectHotelTypes(List<String> stringList) {
+        scrollToElement(listOfHotelTypesStrings.get(0));
+        List<WebElement> selectedTypesList = new ArrayList<>();
+        for (int i = 0; i < stringList.size(); i++) {
+            final int a = i;
+            selectedTypesList = listOfHotelTypesStrings.stream().filter(e -> e.getText().contains(stringList.get(a))).toList();
+        }
+        for (int i = 0; i < stringList.size(); i++) {
+            selectedTypesList.get(i).findElement(By.xpath("../input")).click();
+        }
+    }
 
     public String getCityName(int index) {
         String cityName = getLocation(index).getText();
