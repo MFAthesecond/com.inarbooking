@@ -1,4 +1,5 @@
 package stepdefinitions.flightstepdefinitions;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
@@ -7,6 +8,8 @@ import org.assertj.core.api.Assertions;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
 
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
@@ -111,13 +114,14 @@ public class FlightPassengerInformationSteps extends BaseStep {
         }
     }
 
-    @And("Calculate total price")
-    public double calculateTotalPrice() {
+
+    @Then("Verify that the user is on passenger information page")
+    public void verifyThatTheUserIsOnPassengerInformationPage() {
         try {
-            LOGGER.debug("Calculating total price");
-            return PAGES.getFlightPages().getFlightPassengerInformationPage().getCalculatedTotalPrice();
+            LOGGER.debug("Verifying user is on passenger information page");
+            then(PAGES.getFlightPages().getFlightPassengerInformationPage().getHeaderText()).isEqualTo("Contact Details");
         } catch (Exception e) {
-            LOGGER.error("Error occurred while calculating total price: {}", e.getMessage());
+            LOGGER.error("Error occurred while verifying user is on passenger information page: {}", e.getMessage());
             throw e;
         }
     }
@@ -127,7 +131,7 @@ public class FlightPassengerInformationSteps extends BaseStep {
         try {
             LOGGER.info("Verifying total flight fare");
             BrowserUtils.wait(2);
-            String actualTotalPriceStr = String.valueOf(calculateTotalPrice());
+            String actualTotalPriceStr = PAGES.getFlightPages().getFlightPassengerInformationPage().getTotalPrice();
             String expectedTotalPrice = PAGES.getFlightPages().getFlightPassengerInformationPage().getTotalPrice();
 
             assertThat(actualTotalPriceStr)
@@ -140,16 +144,26 @@ public class FlightPassengerInformationSteps extends BaseStep {
             LOGGER.error("Error occurred while verifying total flight fare: {}", e.getMessage());
             throw e;
         }
+
     }
 
-    @Then("Verify that the user is on passenger information page")
-    public void verifyThatTheUserIsOnPassengerInformationPage() {
+    @And("Fill the traveler information")
+    public void fillTheTravelerInformation(DataTable travelerInformation) {
+        List<List<String>> data = travelerInformation.asLists();
         try {
-            LOGGER.debug("Verifying user is on passenger information page");
-            then(PAGES.getFlightPages().getFlightPassengerInformationPage().getHeaderText()).isEqualTo("Contact Details");
+//            LOGGER.debug("Filling in traveler information - Name: {}, Surname: {}, Gender: {}, Year: {}, Month: {}, Day: {}, Passenger: #{}", firstName, lastName, gender, year, month, day, traveler);
+            for(int i = 0; i < FlightHomeSteps.totalTravelerNumber; i++) {
+                PAGES.getFlightPages().getFlightPassengerInformationPage().fillTravelerCard(i + 1, data.get(i).get(0), data.get(i).get(1), data.get(i).get(2), data.get(i).get(3), data.get(i).get(4), data.get(i).get(5));
+                BrowserUtils.wait(1);
+            }
         } catch (Exception e) {
-            LOGGER.error("Error occurred while verifying user is on passenger information page: {}", e.getMessage());
+            LOGGER.error("Error occurred while filling traveler information: {}", e.getMessage());
             throw e;
         }
+    }
+
+    @Then("Verify that the user is on flight Passenger Information Page")
+    public void verifyThatTheUserIsOnFlightPassengerInformationPage() {
+        then(PAGES.getFlightPages().getFlightPassengerInformationPage().validatePassengerInformationPage()).isTrue();
     }
 }

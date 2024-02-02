@@ -175,4 +175,8 @@ public class FlightHomePage extends BasePage {
         lastDate.sendKeys(lastDateStr);
     }
 
+    public boolean isDisplayedFlightTab(){
+        return flightTab.isDisplayed();
+    }
+
 }

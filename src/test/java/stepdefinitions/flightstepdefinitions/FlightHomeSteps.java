@@ -13,6 +13,8 @@ import static org.assertj.core.api.BDDAssertions.then;
 public class FlightHomeSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(FlightHomeSteps.class);
 
+    public static Integer totalTravelerNumber;
+
     @When("Click on the Flight Tab")
     public void click_on_the_flight_tab() {
         try {
@@ -116,6 +118,7 @@ public class FlightHomeSteps extends BaseStep {
             PAGES.getFlightPages().getFlightHomePage().clickOnPassengersOptionsItem();
             PAGES.getFlightPages().getFlightHomePage().clickOnAdultCounterNumber(Integer.parseInt(adultNum));
             PAGES.getFlightPages().getFlightHomePage().clickOnChildrenCounterNumber(Integer.parseInt(childNum));
+            totalTravelerNumber = Integer.parseInt(adultNum) + Integer.parseInt(childNum);
             PAGES.getFlightPages().getFlightHomePage().clickOnSearchFlightButton();
         } catch (RuntimeException ex) {
             LOGGER.error("Error occurred while selecting passengers and clicking search flight button: {}", ex.getMessage());
@@ -170,5 +173,10 @@ public class FlightHomeSteps extends BaseStep {
             LOGGER.error("Error occurred while selecting date: {}", ex.getMessage());
             throw ex;
         }
+    }
+
+    @And("Verify that the user is Flight Home Page")
+    public void verifyThatTheUserIsFlightHomePage() {
+     then(PAGES.getFlightPages().getFlightHomePage().isDisplayedFlightTab());
     }
 }
