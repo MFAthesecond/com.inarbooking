@@ -36,6 +36,9 @@ public class HotelsFinalStep extends BasePage {
     @FindBy(css = ".my-4.fs-4 > div:nth-child(2) > input")
     private WebElement yesCheckbox2;
 
+    @FindBy(css = ".enter-your-info.mb-4 > h2")
+    WebElement infoTitle;
+
 
     public void fillCardHolderName(String name) {
         cardHolderNameField.sendKeys(name);
@@ -82,5 +85,10 @@ public class HotelsFinalStep extends BasePage {
     public void clickOpportunityCheckbox() {
         yesCheckbox1.click();
         yesCheckbox2.click();
+    }
+
+    public boolean validateInfoTitle() {
+        return infoTitle.isDisplayed();
+
     }
 }
