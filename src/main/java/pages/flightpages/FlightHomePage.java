@@ -60,6 +60,7 @@ public class FlightHomePage extends BasePage {
     @FindBy(className = "optionDoneButton")
     private WebElement doneButton;
 
+
     public void clickOnFlightTab() {
         BrowserUtils.clickOnElement(flightTab);
     }
@@ -173,6 +174,9 @@ public class FlightHomePage extends BasePage {
         BrowserUtils.clickOnElement(lastDate);
         BrowserUtils.executeJavaScript("arguments[0].value = '';", lastDate);
         lastDate.sendKeys(lastDateStr);
+    }
+    public boolean isDisplayedFlightTab(){
+      return   flightTab.isDisplayed();
     }
 
 }
