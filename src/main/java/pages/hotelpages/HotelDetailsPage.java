@@ -29,7 +29,19 @@ public class HotelDetailsPage extends BasePage {
             hotelPropertiesStr.add(aspect.getText());
         }
     }
+    public boolean validateHotelAspects(List<String> FunThings) {
+        List<String> hotelPropertiesStr = new ArrayList<>();
+        for (WebElement aspect : hotelProperties) {
+            hotelPropertiesStr.add(aspect.getText());
+        }
+        return FunThings.stream().allMatch(funThing -> hotelPropertiesStr.stream().anyMatch(property -> property.equals(funThing)));
+    }
     public boolean validateNavigateToDetailsPage(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return reserveOrBookNowButton.isDisplayed();
     }
 
