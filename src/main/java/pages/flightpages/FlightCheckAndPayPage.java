@@ -23,8 +23,12 @@ public class FlightCheckAndPayPage extends BasePage {
     private WebElement backButton;
     @FindBy(css = "button[class='btn btn-blue']")
     private WebElement completeBookingButton;
+
     @FindBy(css = ".col-5 .flight-reserve-card")
     private WebElement priceCalculationContainer;
+    @FindBy(xpath = "//label[contains(text(),\"Cardholder's Name\")]")
+    private WebElement validateCheckAndPay;
+
 
     public void clickOnBackButton() {
         BrowserUtils.clickOnElement(backButton);
@@ -85,6 +89,9 @@ public class FlightCheckAndPayPage extends BasePage {
         double thirdPartyFeePercentage = Double.parseDouble(getThirdPartyFeePercentage());
         double totalPrice = ticketPrice + ((ticketPrice * taxesAndFeesPercentage) / 100) + ((ticketPrice * thirdPartyFeePercentage) / 100);
         return Double.parseDouble(String.format("%.2f", totalPrice));
+    }
+    public String validateCheckAndPay(){
+       return validateCheckAndPay.getText();
     }
 
 
