@@ -11,9 +11,7 @@ import stepdefinitions.BaseStep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.assertj.core.api.WithAssertions;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HotelSelectionSteps extends BaseStep {
