@@ -18,18 +18,18 @@ public class CarRentalsInsurancePage extends BaseStep {
 		int expectedTotalPriceWithoutTax = CarRentalsConfigPageSteps.numberOfDayForRental
 				* CarRentalsConfigPageSteps.priceOfCar;
 		double totalPriceWithTax = expectedTotalPriceWithoutTax
-				+ (double) (expectedTotalPriceWithoutTax * percentageOfTax) / 100;
+				+ (double) (expectedTotalPriceWithoutTax * percentageOfTaxAsVariable) / 100;
 		then((int) totalPriceWithTax)
 			.isEqualTo(Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheTotalPriceElement()));
 
 	}
 
-	static int percentageOfTax;
+	static int percentageOfTaxAsVariable;
 
 	@When("Get The Percentage Of Tax")
 	public void getThePercentageOfTax() {
-		percentageOfTax = Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage());
-		System.out.println("per =" + percentageOfTax);
+		percentageOfTaxAsVariable = Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage());
+		System.out.println("per =" + percentageOfTaxAsVariable);
 	}
 
 	String locationHere;

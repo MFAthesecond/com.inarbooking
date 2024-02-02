@@ -9,11 +9,13 @@ import pages.BasePage;
 import utils.BrowserUtils;
 import utils.DriverManager;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class CarRentalsHomePage extends BasePage {
+	Actions actions = new Actions(DriverManager.getDriver());
 
 	private HashMap<String, String> locationHourDateInfos;
 
