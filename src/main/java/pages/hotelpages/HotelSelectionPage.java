@@ -185,5 +185,3 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 }
-
-
