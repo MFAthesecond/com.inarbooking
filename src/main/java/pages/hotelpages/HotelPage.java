@@ -28,6 +28,9 @@ public class HotelPage extends BasePage {
     List<WebElement> allTheDays;
     List<WebElement> daysOfTheMonth = new ArrayList<>();
 
+    @FindBy ( css = ".display-2.text-left.w-100")
+    WebElement hotelsField;
+
     public void selectMonth(int index) {
         datePicker.click();
         Select monthSelector = new Select(monthPicker);
