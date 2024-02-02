@@ -92,6 +92,14 @@ public class FlightExtrasSteps extends BaseStep {
 
     @Then("Verify that the user is on Flight Extras Page")
     public void verifyThatTheUserIsOnFlightExtrasPage() {
-        then(PAGES.getFlightPages().getFlightExtrasPage().isInstructionDisplayed()).isTrue();
+        try {
+            boolean isInstructionDisplayed = PAGES.getFlightPages().getFlightExtrasPage().isInstructionDisplayed();
+            LOGGER.debug("Verifying that the user is on Flight Extras Page...");
+            then(isInstructionDisplayed).isTrue();
+            LOGGER.debug("User is on Flight Extras Page.");
+        } catch (Exception e) {
+            LOGGER.error("Error while verifying that the user is on Flight Extras Page: {}", e.getMessage());
+            throw e;
+        }
     }
 }

@@ -77,6 +77,13 @@ public class FlightConfirmationSteps extends BaseStep {
 
     @When("Click on close button on confirmation page")
     public void clickOnCloseButtonOnConfirmationPage() {
-        PAGES.getFlightPages().getFlightConfirmationPage().clickOnCloseButton();
+        try {
+            PAGES.getFlightPages().getFlightConfirmationPage().clickOnCloseButton();
+            LOGGER.info("Clicked on the close button on the confirmation page.");
+        } catch (Exception e) {
+            LOGGER.error("Error while clicking on the close button: " + e.getMessage());
+            throw e;
+
+        }
     }
 }

@@ -230,6 +230,49 @@ Feature: Flight Pages Test Scenarios
     And Click on complete booking button
     Then Validate the user is on confirmation page
 
+  Scenario: Validate That CardHolder's Name Information During The Check And Pay Process
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "Economy" for flight class
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Select "1" adults and "0" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    And Fill "ashta@gmail.com" as contact email
+    And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
+    And Click on select extras button
+    And Click on go to checkout  button
+    And Fill in "23425" as the cardholder's name
+    And Fill in "1234567891234567" as the card number
+    And Fill in "11/25" as the expiration date
+    And Fill in "345" as the cvc code
+    And Click on complete booking button
+    Then Verify that the user is on Flight Check And Pay Page
+
+  Scenario: Validate That Expiration Date Of Card During The Check And Pay Process
+
+    When Click on the Flight Tab
+    And Click on round trip checkbox
+    And Select "Economy" for flight class
+    And Select "USA" for from dropdown and select "Canada" for to dropdown
+    And Select "1" adults and "0" child and click on search flight button
+    And Click on select ticket button for #1 flight
+    And Click on select ticket button for #1 flight
+    And Click on select who's flying button
+    And Fill "ashta@gmail.com" as contact email
+    And Select "+33 (FR)" for country code dropdown and fill "4445756661" as phone number
+    And Fill in "Ali" as the name, "Veli" as the surname, "Female" as the gender, "1995" as the year, "4" as the month, "3" as the day for the #1 passenger
+    And Click on select extras button
+    And Click on go to checkout  button
+    And Fill in "23425" as the cardholder's name
+    And Fill in "1234567891234567" as the card number
+    And Fill in "11/11" as the expiration date
+    And Fill in "345" as the cvc code
+    Then Verify that the expiration of date invalid message is displayed
+
 #    Tests For Flight Confirmation Page
   @functional
   Scenario: Validate that the Confirmation Page Information for Round Trip
@@ -310,3 +353,4 @@ Feature: Flight Pages Test Scenarios
       | Business     | USA    | Canada      | Feb 14, 2024 | Feb 27, 2024 | 1            | 0            | Refundable Main     | Business         | bbb@gmail.com    | +44 (UK)     | 4444444444   | Kosher Meal - $20 | Extra Comfort Kit  | Extra Legroom Seat | Ben    | 4569875412365897 | 0424            | 325      |
       | First Class  | Spain  | Italy       | Mar 5, 2024  | Mar 30, 2024 | 2            | 1            | Main                | First Class      | Gmail@gmail.com  | +61 (AU)     | 2546987452   | Halal Meal - $16  | Travel Insurance   | Extra Legroom Seat | Furkan | 3658974521236589 | 1126            | 254      |
       | Economy      | China  | Germany     | May 1, 2024  | May 31, 2024 | 2            | 0            | First Class         | Refundable Main  | berkan@gmail.com | +81 (JP)     | 9875641236   | Halal Meal - $16  | Extra Legroom Seat | Travel Insurance   | Nafiz  | 9632587412546987 | 1229            | 985      |
+
