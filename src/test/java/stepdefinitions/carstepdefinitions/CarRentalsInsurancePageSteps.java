@@ -8,7 +8,7 @@ import stepdefinitions.BaseStep;
 
 import static org.assertj.core.api.BDDAssertions.then;
 
-public class CarRentalsInsurancePage extends BaseStep {
+public class CarRentalsInsurancePageSteps extends BaseStep {
     @When("Click On Go To Book Element From Car Insurance Page")
     public void clickOnGoToBookElementFromCarInsurancePage() {
         PAGES.getCarPages().getCarInsurancePage().clickOnGoToBookElement();
