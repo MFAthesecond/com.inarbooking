@@ -171,7 +171,7 @@ public class HotelSelectionPage extends BasePage {
             final int a = i;
             selectedTypesList = listOfHotelTypesStrings.stream().filter(e -> e.getText().contains(stringList.get(a))).toList();
         }
-        for (int i = 0; i < stringList.size(); i++) {
+        for (int i = 0; i < selectedTypesList.size(); i++) {
             selectedTypesList.get(i).findElement(By.xpath("../input")).click();
         }
     }
@@ -185,5 +185,3 @@ public class HotelSelectionPage extends BasePage {
         return searchItemBox.get(index).findElement(By.cssSelector(".siDetailTexts > span.siPrice"));
     }
 }
-
-
