@@ -8,6 +8,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import stepdefinitions.BaseStep;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class HotelPaymentSteps extends BaseStep {
     private static final Logger LOGGER = LogManager.getLogger(HotelPaymentSteps.class);
 
@@ -70,8 +72,11 @@ public class HotelPaymentSteps extends BaseStep {
 
     @Then("Confirm that you have successfully navigated to the confirmation page")
     public void confirm_that_you_have_successfully_navigated_to_the_confirmation_page() {
-        PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
+        String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
+        String expectedTitle = "About Urban Oasis Resort\n";
+        assertThat(actualTitle)
+                .as("Verify that the confirmation page title is correct")
+                .isEqualTo(expectedTitle);
     }
-
 
 }
