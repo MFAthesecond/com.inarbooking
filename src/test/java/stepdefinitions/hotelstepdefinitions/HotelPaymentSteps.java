@@ -73,7 +73,7 @@ public class HotelPaymentSteps extends BaseStep {
     @Then("Confirm that you have successfully navigated to the confirmation page")
     public void confirm_that_you_have_successfully_navigated_to_the_confirmation_page() {
         String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
-        String expectedTitle = "About Urban Oasis Resort\n";
+        String expectedTitle = "About Urban Oasis Resort";
         assertThat(actualTitle)
                 .as("Verify that the confirmation page title is correct")
                 .isEqualTo(expectedTitle);

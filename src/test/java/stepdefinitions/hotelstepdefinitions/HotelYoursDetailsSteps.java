@@ -20,11 +20,6 @@ public class HotelYoursDetailsSteps extends BaseStep {
         LOGGER.debug("Click on search button");
     }
 
-    @And("Click on the see availability button for #{int} hotel")
-    public void click_on_the_see_availability_button_for_hotel(Integer hotelIndex) {
-        PAGES.getHotelPages().getHotelSelectionPage().clickOnSeeAvailabilityButton(hotelIndex);
-        LOGGER.debug("Click on see availability button for hotel #" + hotelIndex);
-    }
 
     @And("Click on the reserve or book now button")
     public void click_on_the_reserve_or_book_now_button() {
