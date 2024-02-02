@@ -6,14 +6,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import pages.BasePage;
 import stepdefinitions.BaseStep;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.assertj.core.api.WithAssertions;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HotelSelectionSteps extends BaseStep {
