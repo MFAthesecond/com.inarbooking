@@ -194,7 +194,7 @@ Feature: Car Rental page verification
       | 1       |      | Derenoğlu | +1          | 9632587412  |         | MCDaldre    | Chicago | 122563     | Han Derenoğlu  | 2587413697896541 | 10/32          | 450 | 2                            |
 
 
-  Scenario: Test Cases About Message After Completation Of Order
+  Scenario: Test Cases About Given Message After Completation Of Order And Validations Of CustomerInformation And Demands
     When Get The Pickup Date In Car Rental Home Page
     When click On Search Button On The Inar Booking HomePage
     And Click on '0' Car's View Deal Element
@@ -219,7 +219,7 @@ Feature: Car Rental page verification
     Given Verify That Pick Up Date Matches With Car Rentals Home Page Given Pickup Date
 
 
-  Scenario:   Test Cases For Inappropriate Date Inputs
+  Scenario:   Test Cases Firstly Inappropriate Then Appropriate Date Inputs
     When Set The Pick Up Date As '03/15/2024' In Car Rental Home Page
     And Set The Drop Off Date As '03/15/2023' In Car Rental Home Page
     When click On Search Button On The Inar Booking HomePage
