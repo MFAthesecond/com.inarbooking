@@ -8,55 +8,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HotelDetailsPage extends BasePage {
-    @FindBy(css = "button.bookNow")
-    WebElement reserveOrBookNowButton;
 
-    @FindBy(css = ".align-items-center > h1")
-    WebElement hotelName;
+	@FindBy(css = "button.bookNow")
+	WebElement reserveOrBookNowButton;
 
-    @FindBy(css = ".bhp-item.p-3.d-flex.flex-row")
-    List<WebElement> hotelProperties;
+	@FindBy(css = ".align-items-center > h1")
+	WebElement hotelName;
 
-    @FindBy(css = "b")
-    WebElement totalAmount;
+	@FindBy(css = ".bhp-item.p-3.d-flex.flex-row")
+	List<WebElement> hotelProperties;
 
-    @FindBy(css = ".fs-5")
-    WebElement amountPerNight;
+	@FindBy(css = "b")
+	WebElement totalAmount;
 
-    public void getHotelAspectsName() {
-        List<String> hotelPropertiesStr = new ArrayList<>();
-        for (WebElement aspect : hotelProperties) {
-            hotelPropertiesStr.add(aspect.getText());
-        }
-    }
-    public boolean validateNavigateToDetailsPage(){
-        return reserveOrBookNowButton.isDisplayed();
-    }
+	@FindBy(css = ".fs-5")
+	WebElement amountPerNight;
 
-    public void clickOnReserveButton() {
-        reserveOrBookNowButton.click();
-    }
+	public void getHotelAspectsName() {
+		List<String> hotelPropertiesStr = new ArrayList<>();
+		for (WebElement aspect : hotelProperties) {
+			hotelPropertiesStr.add(aspect.getText());
+		}
+	}
 
-    public String getHotelName() {
-        return hotelName.getText();
-    }
+	public boolean validateNavigateToDetailsPage() {
+		return reserveOrBookNowButton.isDisplayed();
+	}
 
-    public int getTotalAmount() {
-        String amount = totalAmount.getText().substring(1);
-        return Integer.parseInt(amount);
-    }
+	public void clickOnReserveButton() {
+		reserveOrBookNowButton.click();
+	}
 
-    public int getAmountPerNight() {
-        String amount = amountPerNight.getText();
-        amount = amount.substring(1, amount.indexOf(" "));
-        return Integer.parseInt(amount);
-    }
+	public String getHotelName() {
+		return hotelName.getText();
+	}
 
-    @FindBy(css = ".fs-4.fw-bold > input.me-3.fs-4")
-    WebElement bookingCheckbox;
+	public int getTotalAmount() {
+		String amount = totalAmount.getText().substring(1);
+		return Integer.parseInt(amount);
+	}
 
-    public void clickBookingCheckbox() {
-        bookingCheckbox.click();
-    }
+	public int getAmountPerNight() {
+		String amount = amountPerNight.getText();
+		amount = amount.substring(1, amount.indexOf(" "));
+		return Integer.parseInt(amount);
+	}
+
+	@FindBy(css = ".fs-4.fw-bold > input.me-3.fs-4")
+	WebElement bookingCheckbox;
+
+	public void clickBookingCheckbox() {
+		bookingCheckbox.click();
+	}
 
 }
