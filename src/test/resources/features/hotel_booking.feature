@@ -109,14 +109,18 @@ Feature: Stay Filtering
     When Type the destination "<destination>" where you will be staying
     And Select "<adultnum>" adults and "<childnum>" child and "<NumberRoom>"room
     And Click on the search hotels button
-    And Select "<FunThingsToDo1>" and select "<FunThingsToDo2>" for fun things to do
+    Then Verify that the user is on the hotel selection page
+
+    When Select "<FunThingsToDo1>" and select "<FunThingsToDo2>" for fun things to do
     And Select "<AdditionalFeatures1>" select "<AdditionalFeatures2>" for additional features
     And Select "<Hotel>" for hotels
     And Select "<NumberRoom>" for number of bedrooms spinner overflow
     And Click on search hotels button
     And Click on the see availability button for #1 hotel
-    And Verify that "<Hotel>" selected
-    And Click on the reserve or book now button
+    Then Verify that the user is on the hotel details page
+
+
+    When Click on the reserve or book now button
     And Click on the no checkbox for are you traveling for business
     And Fill in first name "<firstName>" last name "<lastName>" for visitor
     And Fill in "<contactEmail>" as contact email
@@ -124,7 +128,11 @@ Feature: Stay Filtering
     And Write that you have no "<requests>" requests
     And Choose your arrival time between 10 and 11
     And Click on the next, final details button
-    And Select "<countryCode>" for country code dropdown and fill in "<phoneNumber>" as phone number
+    Then Verify that the user is on the payment page
+    And Verify that "<Hotel>" is selected
+
+
+    When Select "<countryCode>" for country code dropdown and fill in "<phoneNumber>" as phone number
     And Click yes checkbox for free paper approval
     And Click the yes checkbox to save the details
     And Write the Card Holder's Name as "<cardHolderName>"
