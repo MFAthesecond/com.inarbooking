@@ -15,7 +15,6 @@ Feature: Stay Filtering
 
   Scenario Outline: Validate that the successful hotel reservation process
 
-
     When Type the destination "<destination>" where you will be staying
     And Select date as "<daynum1>" and "<daynum2>" days of next
     And Select "<adultnum>" adults and "<childnum>" child and "<roomnum>"room
@@ -38,12 +37,6 @@ Feature: Stay Filtering
     And Click on the see availability button for #1 hotel
     Then Verify that the user is on the details page
 
-
-
-#    Test Cases for Hotels Selection Page
-
-
-
   Scenario: Verify that hotels are selectable
     Given Navigation to the Hotel Details Page
     When  Click on search hotels button
@@ -64,7 +57,6 @@ Feature: Stay Filtering
     And Click on search hotels button
     And Click on the see availability button for #1 hotel
     And Verify that "<Hotel>" selected
-
     Then Verify that "<FunThingsToDo1>" and "<FunThingsToDo2>" for fun things to do are selected
 
     Examples:
