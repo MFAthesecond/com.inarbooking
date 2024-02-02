@@ -30,6 +30,11 @@ public class HotelDetailsPage extends BasePage {
         }
     }
     public boolean validateNavigateToDetailsPage(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return reserveOrBookNowButton.isDisplayed();
     }
 

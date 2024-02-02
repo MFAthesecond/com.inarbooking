@@ -50,31 +50,29 @@ Feature: Stay Filtering
     And  Select "City Center Suites" and "Grand Plaza Hotel" for hotels
     And Click on search hotels button
     And  Click on the see availability button for #2 hotel
-    Then verify that the user is on the details page
+    Then Verify that the user is on the details page
 
-#  Scenario Outline: Validate that the textarea ,slide , checkboxes and radio buttons functionality for round trip #
-#    #metni düzenle yanlış bu
-#   # And Select date as "<daynum1>" and "<daynum2>" days of next month
-#    When Type the destination "<destination>" where you will be staying
-#   # And Select date as "<daynum1>" and "<daynum2>" days of next month
-#    And Slide to min price
-#    And Slide to max price
-#    And Select "<adultnum>" adults and "<childnum>" child
-#    And Select "<FunThingsToDo1>" and select "<FunThingsToDo2>" and "<FunThingsToDo3>" for fun things to do
-#    And Select "AdditionalFeatures1>" and select "AdditionalFeatures2>" for additional features
-#    And Select "<Hotels1>" for hotels
-#    And Select "<NumberRoom>" for number of bedrooms spinner overflow
-#    Then Verify that destination is written as "<destination>", "<adultnum>" for adult "<childnum>" for child
-#    # üste ne yazıca
-#    And Verify that  "<FunThingsToDo1>" and select "<FunThingsToDo2>" and "<FunThingsToDo3>" for fun things to do dropdown is selected
-#    And Verify that "<Hotels1>" for hotels and "<NumberRoom>" for number of bedrooms
-#
-#    Examples:
-#      | destination | adultnum | childnum | FunThingsToDo1 | FunThingsToDo2 | FunThingsToDo3 | AdditionalFeatures1 | AdditionalFeatures2 | Hotels1             | NumberRoom |
-#      | Amsterdam   | 3        | 4        | Bicycle rental | Fitness        | Cycling        | Free WiFi           | Elevator            | Coastal Breeze Inn  | 2          |
-#      | New York    | 3        | 4        | Cycling        | Walking Tours  | Fitness        | Baggage storage     | Daily housekeeping  | City Center Suites  | 10         |
-#      | Sydney      | 10       | 9        | Walking Tours  | Bicycle rental | Skate Parkour  | Private Parking     | Non-smoking rooms   | Vintage Manor Hotel | 5          |
-#
+  Scenario Outline: Validate that the textarea ,slide , checkboxes and radio buttons functionality for round trip
+    #metni düzenle yanlış bu
+    When Type the destination "<destination>" where you will be staying
+    And Select "<adultnum>" adults and "<childnum>" child and "<NumberRoom>"room
+    And click on search flight button
+    And Select "<FunThingsToDo1>" and select "<FunThingsToDo2>" for fun things to do
+    And Select "<AdditionalFeatures1>" select "<AdditionalFeatures2>" for additional features
+    And Select "<Hotel>" for hotels
+    And Select "<NumberRoom>" for number of bedrooms spinner overflow
+    And Click on search hotels button
+    And Click on the see availability button for #1 hotel
+    And Verify that "<Hotel>" selected
+
+    Then Verify that "<FunThingsToDo1>" and "<FunThingsToDo2>" for fun things to do are selected
+
+    Examples:
+      | destination | adultnum | childnum | FunThingsToDo1 | FunThingsToDo2 | AdditionalFeatures1 | AdditionalFeatures2 | Hotel               | NumberRoom |
+      | Amsterdam   | 3        | 4        | Bicycle rental | Fitness        | Free WiFi           | Elevator            | Coastal Breeze Inn  | 2          |
+      | New York    | 3        | 4        | Cycling        | Walking Tours  | Baggage storage     | Daily housekeeping  | Ocean View Resort   | 10         |
+      | Istanbul    | 10       | 9        | Walking Tours  | Skate Parkour  | Private Parking     | Non-smoking rooms   | Vintage Manor Hotel | 5          |
+
 #
 #
 
