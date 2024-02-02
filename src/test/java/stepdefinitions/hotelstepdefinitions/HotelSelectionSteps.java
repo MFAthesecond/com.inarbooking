@@ -9,6 +9,7 @@ import pages.BasePage;
 import stepdefinitions.BaseStep;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HotelSelectionSteps extends BaseStep {
@@ -57,10 +58,10 @@ public class HotelSelectionSteps extends BaseStep {
     public void verify_that_the_user_is_on_the_details_page() {
         PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
     }
-//    @When("Select {string} and {string} for hotels and click on search button")
-//    public void select_and_for_hotels_and_click_on_search_button(String string, String string2) {
-////        PAGES.getHotelPages().getHotelSelectionPage().
-//    }
 
+    @When("Select {string} and {string} for hotels")
+    public void select_and_for_hotels(String selection1, String selection2) {
+        PAGES.getHotelPages().getHotelSelectionPage().selectHotelTypes(Arrays.asList(selection1, selection2));
+    }
 
 }

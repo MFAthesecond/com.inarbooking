@@ -47,7 +47,8 @@ Feature: Stay Filtering
   Scenario: Verify that hotels are selectable
     Given Navigation to the Hotel Details Page
     When  Click on search hotels button
-    And  Select "City Center Suites" and "Grand Plaza Hotel" for hotels and click on search button
+    And  Select "City Center Suites" and "Grand Plaza Hotel" for hotels
+    And Click on search hotels button
     And  Click on the see availability button for #2 hotel
     Then verify that the user is on the details page
 
