@@ -23,6 +23,7 @@ public class FlightCheckAndPayPage extends BasePage {
     private WebElement backButton;
     @FindBy(css = "button[class='btn btn-blue']")
     private WebElement completeBookingButton;
+    
     @FindBy(css = ".col-5 .flight-reserve-card")
     private WebElement priceCalculationContainer;
 
