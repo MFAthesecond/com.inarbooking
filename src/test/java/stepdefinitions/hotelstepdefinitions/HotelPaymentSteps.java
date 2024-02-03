@@ -93,5 +93,45 @@ public class HotelPaymentSteps extends BaseStep {
                 .isEqualTo(expectedTitle);
         LOGGER.debug("Confirmed successful navigation to the confirmation page");
     }
-}
 
+
+    @Then("Verify that the user is on the hotel selection page")
+    public void verify_that_the_user_is_on_the_hotel_selection_page() {
+        assertThat(PAGES.getHotelPages().getHotelSelectionPage().validateNavigationToHotelSelectionPage()).isTrue();
+
+    }
+
+    @Then("Verify that the user is on the hotel details page")
+    public void verify_that_the_user_is_on_the_hotel_details_page() {
+
+    }
+
+    @Then("Verify that the user is on the payment page")
+    public void verify_that_the_user_is_on_the_payment_page() {
+        assertThat(PAGES.getHotelPages().getHotelsPaymentPage().validateInfoTitle()).isTrue();
+        try {
+            LOGGER.info("Verifying that the user is on the payment page...");
+            boolean isInfoTitleDisplayed = PAGES.getHotelPages().getHotelsPaymentPage().validateInfoTitle();
+            assertThat(PAGES.getHotelPages().getHotelsPaymentPage().validateInfoTitle()).isTrue();
+            LOGGER.info("Verification completed successfully.");
+
+        } catch (Exception e) {
+            Logger errorLogger = LogManager.getLogger("errorLogger");
+            errorLogger.error("An error occurred during verification: " + e.getMessage());
+
+            throw e;
+        }
+    }
+
+    @Then("Verify that the hotel name is correct")
+    public void verify_that_the_hotel_name_is_correct() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @And("Verify that {string} is selected")
+    public void verifyThatSelected(String arg0) {
+        assertThat(arg0).isEqualTo(PAGES.getHotelPages().getHotelPage().getHotelName());
+        LOGGER.debug("Verified that {} is selected", arg0);
+    }
+}
