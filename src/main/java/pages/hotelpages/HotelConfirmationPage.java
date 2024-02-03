@@ -3,6 +3,7 @@ package pages.hotelpages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class HotelConfirmationPage extends BasePage {
 	}
 
 	public void clickOnTheCloseButton() {
+		BrowserUtils.scrollToElement(closeButton);
 		closeButton.click();
 	}
 
