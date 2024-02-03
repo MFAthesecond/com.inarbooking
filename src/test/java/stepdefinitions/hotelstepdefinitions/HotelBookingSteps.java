@@ -15,7 +15,7 @@ public class HotelBookingSteps extends BaseStep {
 	@When("Type the destination {string} where you will be staying")
 	public void type_the_destination_where_you_will_be_staying(String destination) {
 		PAGES.getHotelPages().getHotelPage().selectDestination(destination);
-		LOGGER.debug("Select destination");
+		LOGGER.debug("Select destination {} ",destination);
 	}
 
 	@When("Select date as {string} and {string} days of next")
