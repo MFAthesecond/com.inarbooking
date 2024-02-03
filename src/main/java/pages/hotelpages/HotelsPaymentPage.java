@@ -47,6 +47,11 @@ public class HotelsPaymentPage extends BasePage {
 	@FindBy(css = ".enter-your-info.mb-4 > h2")
 	WebElement infoTitle;
 
+	@FindBy(css = ".hotel-title")
+	WebElement hotelName;
+	public String getHotelName(){
+		return hotelName.getText();
+	}
 	public void fillCardHolderName(String name) {
 		cardHolderNameField.sendKeys(name);
 	}
