@@ -6,7 +6,7 @@
 #Test Title: Validate the successful hotel reservation process
 
 @Hotel
-Feature: Stay Filtering
+Feature: Stays Function Tests
 
   Background:
     Given Navigation to the baseURL
@@ -113,7 +113,6 @@ Feature: Stay Filtering
     When Select "<FunThingsToDo1>" and select "<FunThingsToDo2>" for fun things to do
     And Select "<AdditionalFeatures1>" select "<AdditionalFeatures2>" for additional features
     And Select "<Hotel>" for hotels
-    And Select "<NumberRoom>" for number of bedrooms spinner overflow
     And Click on search hotels button
     And Click on the see availability button for #1 hotel
     Then Verify that the user is on the hotel details page
@@ -144,7 +143,7 @@ Feature: Stay Filtering
     And Click on the close button
 
     Examples:
-      | destination | adultnum | childnum | NumberRoom | FunThingsToDo1 | FunThingsToDo2 | AdditionalFeatures1 | AdditionalFeatures2 | Hotel                  | NumberRoom | firstName | lastName | contactEmail            | requests             | countryCode  | phoneNumber | cardHolderName | cardNumber       | expirationDate | cvv |
-      | Amsterdam   | 3        | 4        | 2          | Bicycle rental | Fitness        | Free WiFi           | Elevator            | Coastal Breeze Inn     | 2          | Furkan    | Altun    | frknmail@gmail.com      | cookie               | +1 (US)      | 7772228882  | Furkan Altun   | 7772228887779994 | 1222           | 777 |
-      | Paris       | 2        | 2        | 1          | Walking Tours  | Cycling        | Heating             | Baggage storage     | City Center Suites     | 1          | Emma      | Johnson  | emma.j@example.com      | No special requests  | +33 (France) | 33611223344 | Emma Johnson   | 5555444433331111 | 0523           | 123 |
-      | New York    | 4        | 1        | 3          | Skate Parkour  | Fitness        | 24-hour front desk  | Daily housekeeping  | Mountain Lodge Retreat | 3          | James     | Smith    | james.smith@example.com | Extra pillows please | +1 (US)      | 6465551234  | James Smith    | 4111111111111111 | 0624           | 456 |
+      | destination | adultnum | childnum | NumberRoom | FunThingsToDo1 | FunThingsToDo2 | AdditionalFeatures1 | AdditionalFeatures2 | Hotel              | NumberRoom | firstName | lastName | contactEmail            | requests             | countryCode | phoneNumber | cardHolderName | cardNumber       | expirationDate | cvv |
+      | Amsterdam   | 3        | 4        | 2          | Bicycle rental | Fitness        | Free WiFi           | Elevator            | Coastal Breeze Inn | 2          | Furkan    | Altun    | frknmail@gmail.com      | cookie               | +1 (US)     | 7772228882  | Furkan Altun   | 7772228887779994 | 1222           | 777 |
+      | Paris       | 2        | 2        | 1          | Walking Tours  | Cycling        | Heating             | Baggage storage     | City Center Suites | 1          | Emma      | Johnson  | emma.j@example.com      | No special requests  | +33 (FR)    | 33611223344 | Emma Johnson   | 5555444433331111 | 0523           | 123 |
+      | New York    | 4        | 1        | 3          | Skate Parkour  | Fitness        | 24-hour front desk  | Daily housekeeping  | Grand Plaza Hotel  | 3          | James     | Smith    | james.smith@example.com | Extra pillows please | +1 (US)     | 6465551234  | James Smith    | 4111111111111111 | 0624           | 456 |
