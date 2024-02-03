@@ -9,6 +9,8 @@ import stepdefinitions.BaseStep;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+// Diğer import ifadeleri...
+
 public class HotelYoursDetailsSteps extends BaseStep {
 
 	private static final Logger LOGGER = LogManager.getLogger(HotelYoursDetailsSteps.class);
@@ -68,11 +70,10 @@ public class HotelYoursDetailsSteps extends BaseStep {
 		LOGGER.debug("Clicked on the next, final details button");
 	}
 
-	@Then("Verify that you can pass the final step page")
+	@Then("Verify that the user is on the payment page")
 	public void verify_that_you_can_pass_the_final_step_page() {
-		boolean isCountryCodeSelectDisplayed = PAGES.getHotelPages().getHotelsPaymentPage().countryCodeSelect
-			.isDisplayed();
-		assertThat(isCountryCodeSelectDisplayed).as("Verify that the final step page is passed successfully").isTrue();
+		assertThat(PAGES.getHotelPages().getHotelsPaymentPage().validateInfoTitle())
+				.as("Verify that the final step page is passed successfully").isTrue();
 		LOGGER.info("Final step passed successfully");
 	}
 
@@ -92,8 +93,9 @@ public class HotelYoursDetailsSteps extends BaseStep {
 	public void you_will_confirm_that_you_have_successfully_navigated_to_the_confirmation_page() {
 		String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
 		String expectedTitle = "Coastal Breeze Inn";
-		assertThat(actualTitle).as("Verify that the confirmation page title is correct").isEqualTo(expectedTitle);
+		assertThat(actualTitle)
+				.as("Verify that the confirmation page title is correct")
+				.isEqualTo(expectedTitle);
 		LOGGER.info("Confirmed successful navigation to the confirmation page");
 	}
-
 }

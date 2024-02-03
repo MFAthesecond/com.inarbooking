@@ -25,7 +25,7 @@ Feature: Stay Filtering
     And Write that you have no "<request>" requests
     And Choose unknown from the arrival time options
     And Click on the next, final details button
-    Then Verify that you can pass the final step page
+    Then Verify that the user is on the payment page
 
   @Smoke
   Scenario: Complete Hotel Booking with Visitor and Payment Details
