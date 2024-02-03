@@ -128,7 +128,7 @@ public class CarRentalCheckOut extends BasePage {
 	}
 
 	public String getThePickUpDateInAppearedMessage() {
-		return datesInMessageAfterOrdering.get(0).getText();
+		return dateFormatterForGivenMessage(datesInMessageAfterOrdering.get(0).getText());
 	}
 
       public String getTheDropOffDateInAppearedMessage() {

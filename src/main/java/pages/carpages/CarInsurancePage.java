@@ -25,8 +25,9 @@ public class CarInsurancePage extends BasePage {
     @FindBy(css = ".fs-4.mb-2")
     private List<WebElement> hoursAndDateOfPickupAndDropOff;
 
-    @FindBy(css = ".pickup-and-drop-off.mb-5 .fw-bold.fs-4")
-    private List<WebElement> locationOfPickupAndDropOff;
+    @FindBy(css = "div[class='carDate-area mb-5 d-flex flex-row justify-content-start align-items-center'] div:nth-child(1) " +
+            "div:nth-child(1) span:nth-child(1)")
+    private WebElement locationOfPickupAndDropOff;
 
     @FindBy(css = "div[class='mt-5'] span:nth-child(2)")
     private WebElement totalPriceElement;
@@ -69,17 +70,17 @@ public class CarInsurancePage extends BasePage {
 
 
     public String getThePickUpLocation() {
-        BrowserUtils.scrollToElement(dateAndHourTable);
-        return locationOfPickupAndDropOff.get(0)
-                .getText()
-                .substring(locationOfPickupAndDropOff.get(0).getText().indexOf("-") + 1);
+        BrowserUtils.scrollToElement(locationOfPickupAndDropOff);
+        System.out.println(locationOfPickupAndDropOff.getText()
+                .substring(locationOfPickupAndDropOff.getText().indexOf("-") + 1));
+        return locationOfPickupAndDropOff.getText()
+                .substring(locationOfPickupAndDropOff.getText().indexOf("-") + 1);
     }
 
     public String getTheDropOffLocation() {
         BrowserUtils.scrollToElement(dateAndHourTable);
-        return locationOfPickupAndDropOff.get(1)
-                .getText()
-                .substring(locationOfPickupAndDropOff.get(1).getText().indexOf("-") + 1);
+        return locationOfPickupAndDropOff.getText()
+                .substring(locationOfPickupAndDropOff.getText().indexOf("-") + 1);
     }
 
 

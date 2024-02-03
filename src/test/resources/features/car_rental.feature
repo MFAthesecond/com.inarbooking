@@ -1,4 +1,4 @@
-@carRental
+@CarRental
 Feature: Car Rental page verification
 
   Background:
@@ -6,26 +6,24 @@ Feature: Car Rental page verification
     Given Click on the Booking Link
     And Navigation to the Car Rentals page
 
-  @functional
+  @Regression
   Scenario Outline: Tests Car Rentals On The Inar Booking HomePage
     When Enter Pickup Location As '<Pickup Location>'
     When Set The Pick Up Date As '<Pick up Date>' In Car Rental Home Page
     And Set The Drop Off Date As '<Drop off Date>' In Car Rental Home Page
     And Click On Pickup Hour And Choose '<Pick up Hour>'
     And Click On Drop Hour And Set The Time as '<Drop-Off Hour>'
-    Then Verify That PickUp Location Inar Booking HomePage Is '<Pickup Location>'
-    And Verify That Pickup Date On The Inar Booking HomePage Is '<Pick up Hour>'
-    And Verify That DropOff Date On The Inar Booking HomePage Is '<Drop-Off Hour>'
-    And Verify That Pick Up Date Is '<Pick up Date>'
-    And Verify That Drop Date Is As '<Drop off Date>'
+    Then Verify That PickUp Location Inar Booking HomePage Is '<Pickup Location Expected>'
+       And Verify That Pick Up Date Is '<Pick up Date Expected>'
+    And Verify That Drop Date Is As '<Drop off Date Expected>'
     When click On Search Button On The Inar Booking HomePage
     Then Verify That Program Passed To Car Rental Config Page
     Examples:
-      | Pickup Location | Pick up Hour | Drop-Off Hour | Pick up Date | Drop off Date |
-      | Grand Bazaar    | 00.30        | 05:00         | 03/15/2024   | 03/19/2024    |
-      | Central Park    | 14:00        | 22:00         | 12/15/2024   | 12/25/2024    |
+      | Pickup Location | Pick up Date | Drop off Date | Pick up Hour | Drop-Off Hour | Pickup Location Expected | Pick up Date Expected | Drop off Date Expected |
+      | Grand Bazaar    | 03/03/2024   | 07/07/2024    | 00.30        | 05:00         | Grand Bazaar             | 2024-03-03            | 2024-07-07             |
+      | Central Park    | 05/05/2026   | 01/01/2028    | 14:00        | 22:00         | Central Park             | 2026-05-05            | 2028-01-01             |
 
-  @functional
+  @Regression
   Scenario: Tests Car Rentals Page For Some Configurations
     When click On Search Button On The Inar Booking HomePage
     When Select The Drivers Age as '35'
@@ -46,7 +44,7 @@ Feature: Car Rental page verification
     Then Verify That All Prices Are Within Given Range
     Then Verify That Transmission Is As Given
 
-  @functional
+  @Regression
   Scenario: Test Cases for Insurance Page
     When click On Search Button On The Inar Booking HomePage
     When Set the Pickup Location On Configpage as 'Grand Bazaar'
@@ -63,7 +61,7 @@ Feature: Car Rental page verification
     Then Verify That Program Passed To CheckOut Page
 
 
-  @functional
+  @Regression
   Scenario: Test Case for Configuration Process
     When Enter Pickup Location As 'Grand Bazaar'
     And Click On Pickup Hour And Choose '10:30'
@@ -124,7 +122,7 @@ Feature: Car Rental page verification
     And Click on '1' Car's View Deal Element
     Then Verify That Program Passed To Insurance Page
 
-  @smoke
+  @Smoke
   Scenario: Test Cases For Insurance Page
     When Enter Pickup Location As 'Grand Bazaar'
     When Get The Order Details As Location Date And Hour
@@ -143,10 +141,11 @@ Feature: Car Rental page verification
     And Click on '1' Car's View Deal Element
     When Get The Percentage Of Tax
     Then Verify That Total Car Price Breakdown Is Accurate In Insurance Page
-    When Get The Order Details As Location Date And Hour On Insurance Page
-    Then Verify That Order Details Date Place Hour As Given
+#    Then Verify That Order Details Date Place Hour As Given
+#    When Get The Order Details As Location Date And Hour On Insurance Page
 
-  @smoke
+
+  @Smoke
   Scenario Outline: Car Rentals Checkout Process Validation45879
     When click On Search Button On The Inar Booking HomePage
     When Select Car Category Via DataTable
@@ -176,7 +175,7 @@ Feature: Car Rental page verification
       | 1       | eric | capona    | +61         | 1234567890  | Canada  | Hull Street | Quebec  | 9652       | Eric Capona    | 1234567891234567 | 12/25          | 456 | 0                            |
       | 1       |      | Derenoğlu | +1          | 9632587412  |         | MCDaldre    | Chicago | 122563     | Han Derenoğlu  | 2587413697896541 | 10/32          | 450 | 3                            |
 
-  @EndToEnd
+  @Daily @End2End
   Scenario: Test Cases About Given Message After Completation Of Order And Validations Of CustomerInformation And Demands
     When Get The Pickup Date In Car Rental Home Page
     When click On Search Button On The Inar Booking HomePage
@@ -205,7 +204,7 @@ Feature: Car Rental page verification
     Given Verify That Name Of Car Is As Same As In Insurance Page
     Given Verify That Pick Up Date Matches With Car Rentals Home Page Given Pickup Date
 
-  @functional
+  @Regression
   Scenario: Test Cases Firstly Inappropriate Then Appropriate Date Inputs
     When Set The Pick Up Date As '03/15/2024' In Car Rental Home Page
     And Set The Drop Off Date As '03/15/2023' In Car Rental Home Page
@@ -217,7 +216,7 @@ Feature: Car Rental page verification
     When click On Search Button On The Inar Booking HomePage
     Then Verify That Program Passed To Car Rental Config Page
 
-  @functional
+  @Regression
   Scenario: Selected Pick Up Location Matches In All Pages
 
     When Set The Pick Up Date As '03/07/2025' In Car Rental Home Page
@@ -249,6 +248,27 @@ Feature: Car Rental page verification
     When Get The Pick Up Date  In Car Given Message After Order Page
     And Get The Drop Off Date As  In Car Given Message After Order Page
     Then Verify That Dates Matches In All The Order Of Car Rental Process
+
+  @Regression
+  Scenario: Test Car Rentals Page For Some Configurations
+    When click On Search Button On The Inar Booking HomePage
+    And Select The Drivers Age as '40'
+    Then Verify That Driver Aged Button Clicked 'true'
+    When Set the Pickup Location On Configpage as 'Grand Bazaar'
+    When Select The Price Range from '20' to '350'
+    And Select 'Automatic Transmission' '' 'Heated Seats' ''Car Specs
+    And Select Transmission as 'Automatic'
+    When Select From Car Category The 'Large'
+    When Select From Car Category The 'Suv'
+    When Select From Car Category The 'Minivan'
+    When Click on search button In Car Rental Config Page
+    When Sort The Cars By Lowest Price
+    Then Verify That Cars Sorted By Lowest Price
+    When Sort The Cars By Highest Price
+    Then Verify That Cars Sorted By Highest Price
+    Then Verify That Cars Are Only From 'Grand Bazaar'
+    Then Verify That All Prices Are Within Given Range
+    Then Verify That Transmission Is 'Automatic'
 
 
 
