@@ -61,15 +61,22 @@ public class HotelSelectionSteps extends BaseStep {
         LOGGER.debug("Click on the see availability button for hotel #{}", index);
     }
 
-    @Then("Verify that the user is on the details page")
-    public void verify_that_the_user_is_on_the_details_page() {
-        LOGGER.debug("Verifying that the user is on the details page");
-        boolean isOnDetailsPage = PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
-        LOGGER.debug("Validation result: {}", isOnDetailsPage);
-        assertThat(isOnDetailsPage)
-                .as("Verify that the user is on the details page")
-                .isTrue();
-    }
+	@Then("Verify that the user is on the details page")
+	public void verify_that_the_user_is_on_the_details_page() {
+		LOGGER.debug("Verifying that the user is on the details page");
+
+		try {
+			boolean isOnDetailsPage = PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
+
+			LOGGER.debug("Validation result: {}", isOnDetailsPage);
+			assertThat(isOnDetailsPage)
+					.as("Verify that the user is on the details page")
+					.isTrue();
+		} catch (Exception e) {
+			LOGGER.error("An error occurred while verifying user details page: {}", e.getMessage());
+			throw new AssertionError("Error occurred while verifying user details page.", e);
+		}
+	}
 
     @When("Select {string} and {string} for hotels")
     public void select_and_for_hotels(String selection1, String selection2) {
