@@ -2,7 +2,6 @@ package stepdefinitions;
 
 public class InarBookingHomePageSteps {
 
-//en son düzenlenecek
-
+	// en son düzenlenecek
 
 }

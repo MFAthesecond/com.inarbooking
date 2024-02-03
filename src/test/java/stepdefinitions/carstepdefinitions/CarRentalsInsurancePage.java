@@ -28,7 +28,8 @@ public class CarRentalsInsurancePage extends BaseStep {
 
 	@When("Get The Percentage Of Tax")
 	public void getThePercentageOfTax() {
-		percentageOfTaxAsVariable = Integer.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage());
+		percentageOfTaxAsVariable = Integer
+			.parseInt(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage());
 		System.out.println("per =" + percentageOfTaxAsVariable);
 	}
 
@@ -57,10 +58,9 @@ public class CarRentalsInsurancePage extends BaseStep {
 			.substring(0, PAGES.getCarPages().getCarInsurancePage().getTheCarName().indexOf("or similar") - 2);
 	}
 
-    @Then("Verify That Program Passed To Insurance Page")
-    public void verifyThatProgramPassedToInsurancePage() {
+	@Then("Verify That Program Passed To Insurance Page")
+	public void verifyThatProgramPassedToInsurancePage() {
 		then(PAGES.getCarPages().getCarInsurancePage().getTheFeeAndTaxPercentage()).isNotNull();
-    }
-
+	}
 
 }

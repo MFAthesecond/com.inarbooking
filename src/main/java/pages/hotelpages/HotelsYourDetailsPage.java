@@ -63,7 +63,6 @@ public class HotelsYourDetailsPage extends BasePage {
         return hotelCity.substring(0, hotelCity.indexOf(','));
     }
 
-
     public void enterFirstName(String firstname) {
         firstNameInputArea.sendKeys(firstname);
     }
@@ -118,11 +117,12 @@ public class HotelsYourDetailsPage extends BasePage {
     }
 
     public void clickOnFreePaperCheckbox() {
-       scrollToElement(freePaperCheckbox);
+        scrollToElement(freePaperCheckbox);
         freePaperCheckbox.click();
     }
 
     public void clickOnDetailsCheckbox() {
         detailsCheckbox.click();
     }
+
 }

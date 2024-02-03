@@ -15,168 +15,180 @@ import java.util.List;
 
 public class FlightHomePage extends BasePage {
 
-    @FindBy(className = "headerSearchItem")
-    private List<WebElement> searchFlightsBarInputFields;
-    @FindBy(xpath = "//span[normalize-space()='Flights']")
-    private WebElement flightTab;
+	@FindBy(className = "headerSearchItem")
+	private List<WebElement> searchFlightsBarInputFields;
 
-    @FindBy(css = "div[class=' h-100 d-flex justify-content-start align-items-center'] label")
-    private List<WebElement> roundTripAndOneWayRadioButton;
+	@FindBy(xpath = "//span[normalize-space()='Flights']")
+	private WebElement flightTab;
 
-    @FindBy(xpath = "//select[@class='headerSearchInput w-100 form-select fs-4']")
-    private WebElement flightClassesDropDown;
+	@FindBy(css = "div[class=' h-100 d-flex justify-content-start align-items-center'] label")
+	private List<WebElement> roundTripAndOneWayRadioButton;
 
-    @FindBy(xpath = "//div[@class='headerContainer']//div[1]//select[1]")
-    private WebElement fromDropDown;
+	@FindBy(xpath = "//select[@class='headerSearchInput w-100 form-select fs-4']")
+	private WebElement flightClassesDropDown;
 
-    @FindBy(xpath = "(//select[@class='headerSearchInput w-100'])[2]")
-    private WebElement toDropDown;
+	@FindBy(xpath = "//div[@class='headerContainer']//div[1]//select[1]")
+	private WebElement fromDropDown;
 
-    @FindBy(css = "button[class='rdrNextPrevButton rdrPprevButton']")
-    private WebElement prevButton;
+	@FindBy(xpath = "(//select[@class='headerSearchInput w-100'])[2]")
+	private WebElement toDropDown;
 
-    @FindBy(css = "button[class='rdrNextPrevButton rdrNextButton']")
-    private WebElement nextButton;
+	@FindBy(css = "button[class='rdrNextPrevButton rdrPprevButton']")
+	private WebElement prevButton;
 
-    @FindBy(css = ".rdrMonthPicker")
-    private WebElement monthDropDown;
+	@FindBy(css = "button[class='rdrNextPrevButton rdrNextButton']")
+	private WebElement nextButton;
 
-    @FindBy(css = ".rdrYearPicker")
-    private WebElement yearDropDown;
-    @FindBy(css = "button.rdrDay")
-    private List<WebElement> dayButtons;
-    @FindBy(xpath = "//input[@placeholder='Early']")
-    private WebElement firstDate;
+	@FindBy(css = ".rdrMonthPicker")
+	private WebElement monthDropDown;
 
-    @FindBy(xpath = "//input[@placeholder='Continuous']")
-    private WebElement lastDate;
+	@FindBy(css = ".rdrYearPicker")
+	private WebElement yearDropDown;
 
-    @FindBy(css = ".optionCounterNumber")
-    private List<WebElement> passengerCounterNumber;
+	@FindBy(css = "button.rdrDay")
+	private List<WebElement> dayButtons;
 
-    @FindBy(css = ".optionCounterButton")
-    private List<WebElement> counterButtons;
+	@FindBy(xpath = "//input[@placeholder='Early']")
+	private WebElement firstDate;
 
-    @FindBy(className = "optionDoneButton")
-    private WebElement doneButton;
+	@FindBy(xpath = "//input[@placeholder='Continuous']")
+	private WebElement lastDate;
 
-    public void clickOnFlightTab() {
-        BrowserUtils.clickOnElement(flightTab);
-    }
+	@FindBy(css = ".optionCounterNumber")
+	private List<WebElement> passengerCounterNumber;
 
-    public void selectFlightClassesDropDown(String flightClassesSelectionText) {
-        Select select = new Select(flightClassesDropDown);
-        select.selectByVisibleText(flightClassesSelectionText);
-    }
+	@FindBy(css = ".optionCounterButton")
+	private List<WebElement> counterButtons;
 
-    public void clickOnRoundTripAndOneWayRadioButton(String buttonName) {
-        WebElement element = roundTripAndOneWayRadioButton.stream().filter(webElement -> webElement.findElement(By.cssSelector("span")).getText().equals(buttonName)).findFirst().get();
-        BrowserUtils.clickOnElement(element);
-    }
+	@FindBy(className = "optionDoneButton")
+	private WebElement doneButton;
 
-    public void selectFromDropDown(String fromSelectionText) {
-        Select select = new Select(fromDropDown);
-        select.selectByVisibleText(fromSelectionText);
-    }
+	public void clickOnFlightTab() {
+		BrowserUtils.clickOnElement(flightTab);
+	}
 
-    public void selectToDropDown(String toSelectionText) {
-        Select select = new Select(toDropDown);
-        select.selectByVisibleText(toSelectionText);
-    }
+	public void selectFlightClassesDropDown(String flightClassesSelectionText) {
+		Select select = new Select(flightClassesDropDown);
+		select.selectByVisibleText(flightClassesSelectionText);
+	}
 
-    public void clickOnDatePicker() {
-        BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(2));
-    }
+	public void clickOnRoundTripAndOneWayRadioButton(String buttonName) {
+		WebElement element = roundTripAndOneWayRadioButton.stream()
+			.filter(webElement -> webElement.findElement(By.cssSelector("span")).getText().equals(buttonName))
+			.findFirst()
+			.get();
+		BrowserUtils.clickOnElement(element);
+	}
 
-    public void selectMonthDropDown(String monthSelectionText) {
-        Select select = new Select(monthDropDown);
-        select.selectByVisibleText(monthSelectionText);
-    }
+	public void selectFromDropDown(String fromSelectionText) {
+		Select select = new Select(fromDropDown);
+		select.selectByVisibleText(fromSelectionText);
+	}
 
-    public void selectYearDropDown(String yearSelectionText) {
-        Select select = new Select(yearDropDown);
-        select.selectByVisibleText(yearSelectionText);
-    }
+	public void selectToDropDown(String toSelectionText) {
+		Select select = new Select(toDropDown);
+		select.selectByVisibleText(toSelectionText);
+	}
 
-    public void clickOnDayByIndex(int index) {
-        List<WebElement> filterButton = dayButtons.stream().filter(button -> !button.getAttribute("class").contains("rdrDayPassive") && !button.getAttribute("class").contains("rdrDayDisabled")).toList();
-        BrowserUtils.clickOnElement(filterButton.get(index - 1));
-    }
+	public void clickOnDatePicker() {
+		BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(2));
+	}
 
-    public void clickOnPassengersOptionsItem() {
-        BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(3));
+	public void selectMonthDropDown(String monthSelectionText) {
+		Select select = new Select(monthDropDown);
+		select.selectByVisibleText(monthSelectionText);
+	}
 
-    }
+	public void selectYearDropDown(String yearSelectionText) {
+		Select select = new Select(yearDropDown);
+		select.selectByVisibleText(yearSelectionText);
+	}
 
-    public String getTextOfAdultCounterNumber() {
-        return passengerCounterNumber.get(0).getText();
-    }
+	public void clickOnDayByIndex(int index) {
+		List<WebElement> filterButton = dayButtons.stream()
+			.filter(button -> !button.getAttribute("class").contains("rdrDayPassive")
+					&& !button.getAttribute("class").contains("rdrDayDisabled"))
+			.toList();
+		BrowserUtils.clickOnElement(filterButton.get(index - 1));
+	}
 
-    public String getTextOfChildrenCounterNumber() {
-        return passengerCounterNumber.get(1).getText();
-    }
+	public void clickOnPassengersOptionsItem() {
+		BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(3));
 
-    public void clickOnAdultCounterNumber(int input) {
-        int currentNumber = Integer.parseInt(getTextOfAdultCounterNumber());
+	}
 
-        if (input > currentNumber) {
-            while (currentNumber < input) {
-                BrowserUtils.clickOnElement(counterButtons.get(1));
-                currentNumber++;
-            }
-        } else if (input < currentNumber) {
-            while (currentNumber > input) {
-                BrowserUtils.clickOnElement(counterButtons.get(0));
-                currentNumber--;
-            }
-        }
-    }
+	public String getTextOfAdultCounterNumber() {
+		return passengerCounterNumber.get(0).getText();
+	}
 
-    public void clickOnChildrenCounterNumber(int input) {
-        int currentNumber = Integer.parseInt(getTextOfChildrenCounterNumber());
+	public String getTextOfChildrenCounterNumber() {
+		return passengerCounterNumber.get(1).getText();
+	}
 
-        if (input > currentNumber) {
-            while (currentNumber < input) {
-                BrowserUtils.clickOnElement(counterButtons.get(3));
-                currentNumber++;
-            }
-        } else if (input < currentNumber) {
-            while (currentNumber > input) {
-                BrowserUtils.clickOnElement(counterButtons.get(2));
-                currentNumber--;
-            }
-        }
-    }
+	public void clickOnAdultCounterNumber(int input) {
+		int currentNumber = Integer.parseInt(getTextOfAdultCounterNumber());
 
-    public void clickOnDoneButtonForPassengerField() {
-        BrowserUtils.clickOnElement(doneButton);
-    }
+		if (input > currentNumber) {
+			while (currentNumber < input) {
+				BrowserUtils.clickOnElement(counterButtons.get(1));
+				currentNumber++;
+			}
+		}
+		else if (input < currentNumber) {
+			while (currentNumber > input) {
+				BrowserUtils.clickOnElement(counterButtons.get(0));
+				currentNumber--;
+			}
+		}
+	}
 
-    public void clickOnPrevButton() {
-        BrowserUtils.clickOnElement(prevButton);
-    }
+	public void clickOnChildrenCounterNumber(int input) {
+		int currentNumber = Integer.parseInt(getTextOfChildrenCounterNumber());
 
-    public void clickOnNextButton() {
-        BrowserUtils.clickOnElement(nextButton);
-    }
-    public void clickOnSearchFlightButton() {
-        BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(4));
-    }
+		if (input > currentNumber) {
+			while (currentNumber < input) {
+				BrowserUtils.clickOnElement(counterButtons.get(3));
+				currentNumber++;
+			}
+		}
+		else if (input < currentNumber) {
+			while (currentNumber > input) {
+				BrowserUtils.clickOnElement(counterButtons.get(2));
+				currentNumber--;
+			}
+		}
+	}
 
-    public void selectFirstDate(String firstDateStr) {
-        BrowserUtils.clickOnElement(firstDate);
-        BrowserUtils.executeJavaScript("arguments[0].value = '';", firstDate);
-        firstDate.sendKeys(firstDateStr);
-    }
+	public void clickOnDoneButtonForPassengerField() {
+		BrowserUtils.clickOnElement(doneButton);
+	}
 
-    public void selectLastDate(String lastDateStr) {
-        BrowserUtils.clickOnElement(lastDate);
-        BrowserUtils.executeJavaScript("arguments[0].value = '';", lastDate);
-        lastDate.sendKeys(lastDateStr);
-    }
+	public void clickOnPrevButton() {
+		BrowserUtils.clickOnElement(prevButton);
+	}
 
-    public boolean isDisplayedFlightTab(){
-        return flightTab.isDisplayed();
-    }
+	public void clickOnNextButton() {
+		BrowserUtils.clickOnElement(nextButton);
+	}
+
+	public void clickOnSearchFlightButton() {
+		BrowserUtils.clickOnElement(searchFlightsBarInputFields.get(4));
+	}
+
+	public void selectFirstDate(String firstDateStr) {
+		BrowserUtils.clickOnElement(firstDate);
+		BrowserUtils.executeJavaScript("arguments[0].value = '';", firstDate);
+		firstDate.sendKeys(firstDateStr);
+	}
+
+	public void selectLastDate(String lastDateStr) {
+		BrowserUtils.clickOnElement(lastDate);
+		BrowserUtils.executeJavaScript("arguments[0].value = '';", lastDate);
+		lastDate.sendKeys(lastDateStr);
+	}
+
+	public boolean isDisplayedFlightTab() {
+		return flightTab.isDisplayed();
+	}
 
 }
