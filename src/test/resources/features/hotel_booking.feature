@@ -5,14 +5,14 @@
 #Test Case: BK_HP_001
 #Test Title: Validate the successful hotel reservation process
 
-@hotel
+@Hotel
 Feature: Stay Filtering
 
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
 
-  @functional
+  @Regression
   Scenario: Hotel Reservation with Visitor Details and Finalization
 
     When Click on the search hotels button
@@ -27,7 +27,7 @@ Feature: Stay Filtering
     And Click on the next, final details button
     Then Verify that you can pass the final step page
 
-  @smoke
+  @Smoke
   Scenario: Complete Hotel Booking with Visitor and Payment Details
 
     When Click on the search hotels button
@@ -48,7 +48,7 @@ Feature: Stay Filtering
     And Click on the complete booking button
     Then Confirm that you have successfully navigated to the "Urban Oasis Resort" confirmation page
 
-  @functional
+  @Regression
   Scenario Outline: Validate that the successful hotel reservation process
 
     When Type the destination "<destination>" where you will be staying
@@ -64,7 +64,7 @@ Feature: Stay Filtering
       | New York    | 3       | 14      | 5        | 2        | 6       |
       | Paris       | 21      | 28      | 10       | 5        | 12      |
 
-  @functional
+  @Regression
   Scenario: Validate that the stays selection process
     Given Navigation to the Hotel Details Page
     When Choose "Istanbul" where to stay
@@ -74,7 +74,7 @@ Feature: Stay Filtering
     And Click on the see availability button for #1 hotel
     Then Verify that the user is on the details page
 
-  @functional
+  @Regression
   Scenario: Verify that hotels are selectable
     Given Navigation to the Hotel Details Page
     When  Click on search hotels button
@@ -83,7 +83,7 @@ Feature: Stay Filtering
     And  Click on the see availability button for #2 hotel
     Then Verify that the user is on the details page
 
-  @functional
+  @Regression
   Scenario Outline: Validate that the textarea, slide, checkboxes and radio buttons functionality for round trip
     When Type the destination "<destination>" where you will be staying
     And Select "<adultnum>" adults and "<childnum>" child and "<NumberRoom>"room

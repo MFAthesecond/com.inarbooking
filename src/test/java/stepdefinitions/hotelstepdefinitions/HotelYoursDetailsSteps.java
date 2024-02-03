@@ -70,7 +70,7 @@ public class HotelYoursDetailsSteps extends BaseStep {
 
 	@Then("Verify that you can pass the final step page")
 	public void verify_that_you_can_pass_the_final_step_page() {
-		boolean isCountryCodeSelectDisplayed = PAGES.getHotelPages().getHotelsFinalStep().countryCodeSelect
+		boolean isCountryCodeSelectDisplayed = PAGES.getHotelPages().getHotelsPaymentPage().countryCodeSelect
 			.isDisplayed();
 		assertThat(isCountryCodeSelectDisplayed).as("Verify that the final step page is passed successfully").isTrue();
 		LOGGER.info("Final step passed successfully");
