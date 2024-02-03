@@ -61,8 +61,12 @@ public class HotelSelectionSteps extends BaseStep {
 
 	@Then("Verify that the user is on the details page")
 	public void verify_that_the_user_is_on_the_details_page() {
-		PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
-		LOGGER.debug("Verified that the user is on the details page");
+		LOGGER.debug("Verifying that the user is on the details page");
+		boolean isOnDetailsPage = PAGES.getHotelPages().getHotelDetailsPage().validateNavigateToDetailsPage();
+		LOGGER.debug("Validation result: {}", isOnDetailsPage);
+		assertThat(isOnDetailsPage)
+				.as("Verify that the user is on the details page")
+				.isTrue();
 	}
 
 	@When("Select {string} and {string} for hotels")
