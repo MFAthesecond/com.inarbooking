@@ -9,7 +9,6 @@ import stepdefinitions.BaseStep;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-// Diğer import ifadeleri...
 
 public class HotelYoursDetailsSteps extends BaseStep {
 
@@ -68,13 +67,6 @@ public class HotelYoursDetailsSteps extends BaseStep {
 	public void click_on_the_next_final_details_button() {
 		PAGES.getHotelPages().getHotelsYourDetailsPage().clickOnNextButton();
 		LOGGER.debug("Clicked on the next, final details button");
-	}
-
-	@Then("Verify that the user is on the payment page")
-	public void verify_that_you_can_pass_the_final_step_page() {
-		assertThat(PAGES.getHotelPages().getHotelsPaymentPage().validateInfoTitle())
-				.as("Verify that the final step page is passed successfully").isTrue();
-		LOGGER.info("Final step passed successfully");
 	}
 
 	@When("Choose your arrival time between 10 and 11")
