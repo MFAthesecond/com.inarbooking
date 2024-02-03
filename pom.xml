@@ -125,6 +125,16 @@ cucumber-java -->
                             **/CukesRunner.java
                         </include>
                     </includes>
+                    <!-- Continue running tests even if some of them fail -->
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <!-- Order the tests by method name in alphabetical order -->
+                    <runOrder>alphabetical</runOrder>
+                    <!-- Run each test method in a separate thread -->
+                    <parallel>methods</parallel>
+                    <!-- Use 3 threads for parallel execution -->
+                    <threadCount>3</threadCount>
+                    <!-- Use a fixed number of threads, regardless of CPU cores -->
+                    <perCoreThreadCount>true</perCoreThreadCount>
                 </configuration>
             </plugin>
             <plugin>
