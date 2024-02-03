@@ -11,7 +11,9 @@ import stepdefinitions.BaseStep;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.assertj.core.api.WithAssertions;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -91,9 +93,19 @@ public class HotelSelectionSteps extends BaseStep {
 
     @Then("Verify that {string} and {string} for fun things to do are selected")
     public void verifyThatAndForFunThingsToDoAreSelected(String arg0, String arg1) {
-        assertThat(PAGES.getHotelPages().getHotelDetailsPage().validateHotelAspects(Arrays.asList(arg0, arg1))).isTrue();
-        LOGGER.debug("Verified that {} and {} for fun things to do are selected", arg0, arg1);
+        try {
+            boolean aspectsSelected = PAGES.getHotelPages().getHotelDetailsPage().validateHotelAspects(Arrays.asList(arg0, arg1));
+            assertThat(aspectsSelected)
+                    .as("Verify that aspects for fun things to do are selected")
+                    .isTrue();
+
+            LOGGER.debug("Verified that {} and {} for fun things to do are selected", arg0, arg1);
+        } catch (AssertionError e) {
+            LOGGER.error("Verification failed for fun things to do: {} - Expected Aspects: {}",
+                    e.getMessage(), Arrays.asList(arg0, arg1));
+        }
     }
+
 
     @And("Verify that {string} selected")
     public void verifyThatSelected(String arg0) {

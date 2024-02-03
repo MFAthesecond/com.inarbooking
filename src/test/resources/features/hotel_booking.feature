@@ -5,14 +5,14 @@
 #Test Case: BK_HP_001
 #Test Title: Validate the successful hotel reservation process
 
-@hotel
-Feature: Stay Filtering
+@Hotel
+Feature: Stays Function Testing
 
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
 
-  @functional
+  @Regression
   Scenario: Hotel Reservation with Visitor Details and Finalization
 
     When Click on the search hotels button
@@ -27,7 +27,7 @@ Feature: Stay Filtering
     And Click on the next, final details button
     Then Verify that you can pass the final step page
 
-  @smoke
+  @Smoke
   Scenario: Complete Hotel Booking with Visitor and Payment Details
 
     When Click on the search hotels button
@@ -48,7 +48,7 @@ Feature: Stay Filtering
     And Click on the complete booking button
     Then Confirm that you have successfully navigated to the "Urban Oasis Resort" confirmation page
 
-  @functional
+  @Regression
   Scenario Outline: Validate that the successful hotel reservation process
 
     When Type the destination "<destination>" where you will be staying
@@ -64,7 +64,7 @@ Feature: Stay Filtering
       | New York    | 3       | 14      | 5        | 2        | 6       |
       | Paris       | 21      | 28      | 10       | 5        | 12      |
 
-  @functional
+  @Regression
   Scenario: Validate that the stays selection process
     Given Navigation to the Hotel Details Page
     When Choose "Istanbul" where to stay
@@ -74,7 +74,7 @@ Feature: Stay Filtering
     And Click on the see availability button for #1 hotel
     Then Verify that the user is on the details page
 
-  @functional
+  @Regression
   Scenario: Verify that hotels are selectable
     Given Navigation to the Hotel Details Page
     When  Click on search hotels button
@@ -83,7 +83,7 @@ Feature: Stay Filtering
     And  Click on the see availability button for #2 hotel
     Then Verify that the user is on the details page
 
-  @functional
+  @Regression
   Scenario Outline: Validate that the textarea, slide, checkboxes and radio buttons functionality for round trip
     When Type the destination "<destination>" where you will be staying
     And Select "<adultnum>" adults and "<childnum>" child and "<NumberRoom>"room
@@ -103,7 +103,7 @@ Feature: Stay Filtering
       | New York    | 3        | 4        | Cycling        | Walking Tours  | Baggage storage     | Daily housekeeping  | Ocean View Resort   | 10         |
       | Istanbul    | 10       | 9        | Walking Tours  | Skate Parkour  | Private Parking     | Non-smoking rooms   | Vintage Manor Hotel | 5          |
 
-  @EndToEnd
+  @End2End
   Scenario Outline:Verify the functionality of the hotel booking tab with end-to-end testing
 
     When Type the destination "<destination>" where you will be staying
@@ -145,7 +145,7 @@ Feature: Stay Filtering
     And Click on the close button
 
     Examples:
-      | destination | adultnum | childnum | NumberRoom | FunThingsToDo1 | FunThingsToDo2 | AdditionalFeatures1 | AdditionalFeatures2 | Hotel                  | NumberRoom | firstName | lastName | contactEmail            | requests             | countryCode  | phoneNumber | cardHolderName | cardNumber       | expirationDate | cvv |
-      | Amsterdam   | 3        | 4        | 2          | Bicycle rental | Fitness        | Free WiFi           | Elevator            | Coastal Breeze Inn     | 2          | Furkan    | Altun    | frknmail@gmail.com      | cookie               | +1 (US)      | 7772228882  | Furkan Altun   | 7772228887779994 | 1222           | 777 |
-      | Paris       | 2        | 2        | 1          | Walking Tours  | Cycling        | Heating             | Baggage storage     | City Center Suites     | 1          | Emma      | Johnson  | emma.j@example.com      | No special requests  | +33 (France) | 33611223344 | Emma Johnson   | 5555444433331111 | 0523           | 123 |
-      | New York    | 4        | 1        | 3          | Skate Parkour  | Fitness        | 24-hour front desk  | Daily housekeeping  | Mountain Lodge Retreat | 3          | James     | Smith    | james.smith@example.com | Extra pillows please | +1 (US)      | 6465551234  | James Smith    | 4111111111111111 | 0624           | 456 |
+      | destination | adultnum | childnum | NumberRoom | FunThingsToDo1 | FunThingsToDo2 | AdditionalFeatures1 | AdditionalFeatures2 | Hotel                  | NumberRoom | firstName | lastName | contactEmail            | requests             | countryCode | phoneNumber | cardHolderName | cardNumber       | expirationDate | cvv |
+      | Amsterdam   | 3        | 4        | 2          | Bicycle rental | Fitness        | Free WiFi           | Elevator            | Coastal Breeze Inn     | 2          | Furkan    | Altun    | frknmail@gmail.com      | cookie               | +1 (US)     | 7772228882  | Furkan Altun   | 7772228887779994 | 1222           | 777 |
+      | Paris       | 2        | 2        | 1          | Walking Tours  | Cycling        | Heating             | Baggage storage     | City Center Suites     | 1          | Emma      | Johnson  | emma.j@example.com      | No special requests  | +33 (FR)    | 33611223344 | Emma Johnson   | 5555444433331111 | 0523           | 123 |
+      | New York    | 4        | 1        | 3          | Skate Parkour  | Fitness        | 24-hour front desk  | Daily housekeeping  | Mountain Lodge Retreat | 3          | James     | Smith    | james.smith@example.com | Extra pillows please | +1 (US)     | 6465551234  | James Smith    | 4111111111111111 | 0624           | 456 |
