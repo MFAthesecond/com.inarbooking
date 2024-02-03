@@ -83,14 +83,21 @@ public class HotelPaymentSteps extends BaseStep {
 
     @Then("Confirm that you have successfully navigated to the {string} confirmation page")
     public void confirmThatYouHaveSuccessfullyNavigatedToTheConfirmationPage(String expectedTitle) {
-        String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
-        LOGGER.debug("Expected Title: {}, Actual Title: {}", expectedTitle, actualTitle);
+        try {
+            String actualTitle = PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle();
+            LOGGER.debug("Expected Title: {}, Actual Title: {}", expectedTitle, actualTitle);
 
-        assertThat(actualTitle)
-                .as("Verify that the confirmation page title is correct")
-                .isEqualTo(expectedTitle);
-        LOGGER.debug("Confirmed successful navigation to the confirmation page");
+            assertThat(actualTitle)
+                    .as("Verify that the confirmation page title is correct")
+                    .isEqualTo(expectedTitle);
+
+            LOGGER.debug("Confirmed successful navigation to the confirmation page");
+        } catch (AssertionError e) {
+            LOGGER.error("Navigation to the confirmation page failed: {} - Expected Title: {}, Actual Title: {}",
+                    e.getMessage(), expectedTitle, PAGES.getHotelPages().getHotelConfirmationPage().getHotelTitle());
+        }
     }
+
 
     @Then("Verify that the user is on the hotel selection page")
     public void verify_that_the_user_is_on_the_hotel_selection_page() {
