@@ -53,7 +53,6 @@ public class CarConfigsRight extends BasePage {
 
 	public void sortByPriceLowest() {
 		BrowserUtils.scrollToElement(sortByButtons.get(0));
-
 		sortByButtons.get(0).click();
 	}
 

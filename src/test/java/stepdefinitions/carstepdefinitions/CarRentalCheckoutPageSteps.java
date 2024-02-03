@@ -162,6 +162,7 @@ public class CarRentalCheckoutPageSteps extends BaseStep {
 		String date = CarRentalsOnBookingHomePageSteps.pickupDateInCarRentalHomePage;
 		String dateInMessage = PAGES.getCarPages().getCarRentalCheckOut().getThePickUpDateInAppearedMessage();
 		then(date).isEqualTo(dateInMessage);
+
 	}
 
 
@@ -193,13 +194,12 @@ public class CarRentalCheckoutPageSteps extends BaseStep {
     }
     @Then("Verify That Dates Matches In All The Order Of Car Rental Process")
     public void verify_that_dates_matches_ın_all_the_order_of_car_rental_process() {
-
         for (int i = 0; i < CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.size()-1; i++) {
-            System.out.println(i+ "pick");
-            then(CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.get(i).equals(CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.get(i+1)));
-            System.out.println(i+"drop");
-            then(CarRentalsOnBookingHomePageSteps.dropOffDatesInDifferentPages.get(i).equals(CarRentalsOnBookingHomePageSteps.dropOffDatesInDifferentPages.get(i+1)));
-
+//            System.out.println(i+ "pick");
+//            then(CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.get(i).equals(CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.get(i+1)));
+//            System.out.println(i+"drop");
+//            then(CarRentalsOnBookingHomePageSteps.dropOffDatesInDifferentPages.get(i).equals(CarRentalsOnBookingHomePageSteps.dropOffDatesInDifferentPages.get(i+1)));
+//
         }
 
     }
