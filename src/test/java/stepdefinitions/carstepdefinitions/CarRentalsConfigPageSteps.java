@@ -46,17 +46,7 @@ public class CarRentalsConfigPageSteps extends BaseStep {
         BrowserUtils.scrollDownWithJavaScript(0, 600);
         PAGES.getCarPages().getCarConfigs().setTheTransmission(transmissionType);
     }
-    //
-    // @And("Select From Car Category The {string}")
-    // public void selectFromCarCategoryTheSmall(String carCategoryType) {
-    // <<<<<<<
-    // HEAD:src/test/java/stepdefinitions/carstepdefinitions/CarRentalsConfigPage.java
-    // // PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
-    // =======
-    // // PAGES.getCarPages().getCarConfigs().setCarCategory(carCategoryType);
-    // >>>>>>>
-    // main:src/test/java/stepdefinitions/carstepdefinitions/CarRentalsConfigPageSteps.java
-    // }
+
 
     @And("Select {string} {string} {string} {string}Car Specs")
     public void selectAutomaticTransmissionCarSpecs(String args1, String arg2, String arg3, String arg4) {
@@ -243,4 +233,5 @@ public class CarRentalsConfigPageSteps extends BaseStep {
     public void get_the_drop_off_date_as_ın_car_congig_page() {
         CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.add(PAGES.getCarPages().getCarConfigs().getTheDropOffDateInConfigurationPage());
     }
+
 }

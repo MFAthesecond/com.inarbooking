@@ -7,7 +7,7 @@ import stepdefinitions.BaseStep;
 import static org.assertj.core.api.BDDAssertions.then;
 
 public class CarRentalsInsurancePage extends BaseStep {
-    String locationHere;
+
 
     @When("Click On Go To Book Element From Car Insurance Page")
     public void clickOnGoToBookElementFromCarInsurancePage() {
@@ -33,28 +33,30 @@ public class CarRentalsInsurancePage extends BaseStep {
     }
 
 
-    @When("Get The Order Details As Location Date And Hour On Insurance Page")
-    public void getTheOrderDetailsAsLocationDateAndHourOnInsurancePage() {
-        locationHere = PAGES.getCarPages()
-                .getCarInsurancePage()
-                .getTheDropOffDate();
+	String locationHere;
 
-    }
+	@When("Get The Order Details As Location Date And Hour On Insurance Page")
+	public void getTheOrderDetailsAsLocationDateAndHourOnInsurancePage() {
+		locationHere = PAGES.getCarPages()
+			.getCarInsurancePage().getTheDropOffLocation();
 
-    @Then("Verify That Order Details Date Place Hour As Given")
-    public void verifyThatOrderDetailsDatePlaceHourAsGiven() {
-        then(locationHere).isEqualTo(CarRentalsOnBookingHomePageSteps.location);
-    }
+	}
 
-    static String nameOfCar = "";
+	@Then("Verify That Order Details Date Place Hour As Given")
+	public void verifyThatOrderDetailsDatePlaceHourAsGiven() {
+		then(locationHere).isEqualTo(CarRentalsOnBookingHomePageSteps.location);
+	}
 
-    @When("Get The Name Of Car In Insurance Page")
-    public void getTheNameOfCarInInsurancePage() {
-        nameOfCar = PAGES.getCarPages()
-                .getCarInsurancePage()
-                .getTheCarName()
-                .substring(0, PAGES.getCarPages().getCarInsurancePage().getTheCarName().indexOf("or similar") - 2);
-    }
+	static String nameOfCar = "";
+
+	@When("Get The Name Of Car In Insurance Page")
+	public void getTheNameOfCarInInsurancePage() {
+		nameOfCar = PAGES.getCarPages()
+			.getCarInsurancePage()
+			.getTheCarName()
+			.substring(0, PAGES.getCarPages().getCarInsurancePage().getTheCarName().indexOf("or similar") - 2);
+	}
+
 
     @Then("Verify That Program Passed To Insurance Page")
     public void verifyThatProgramPassedToInsurancePage() {

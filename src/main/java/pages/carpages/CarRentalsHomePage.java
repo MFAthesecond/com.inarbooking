@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CarRentalsHomePage extends BasePage {
+
 	Actions actions = new Actions(DriverManager.getDriver());
 
 	private HashMap<String, String> locationHourDateInfos;
