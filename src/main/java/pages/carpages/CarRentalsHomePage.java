@@ -64,18 +64,7 @@ public class CarRentalsHomePage extends BasePage {
 		}
 	}
 
-	public void setThePickUpDate(String value) {
-		pickAndDropDates.get(0).click();
-		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverManager.getDriver();
-		javascriptExecutor.executeScript("document.querySelector('." + "headerDateInput" + "').value='" + value + "'");
-	}
 
-	public void setTheDropOffDate(String value) {
-		pickAndDropDates.get(1).click();
-		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverManager.getDriver();
-		javascriptExecutor.executeScript("document.querySelector('."
-				+ "headerDateInput.form-control.fs-5.position-relative" + "').value='" + value + "'");
-	}
 
 	public void setThePickupHour(String pickUpHour_hh_mm_30min_intervals) {
 		pickHourAndDropHourSelection.get(0).click();
@@ -119,22 +108,7 @@ public class CarRentalsHomePage extends BasePage {
 		return pickHourAndDropHourSelection.get(1).getText();
 	}
 
-	public void setTheLocationHourDateInfos() {
-		locationHourDateInfos = new HashMap<>();
-		BrowserUtils.scrollToElement(pickUpLocationElement);
-		System.out.println("4");
-		locationHourDateInfos.put("PickupLocation", getThePickUpLocation());
-		locationHourDateInfos.put("PickupDate", getThePickupDate());
-		locationHourDateInfos.put("PickupHour", getThePickupHour());
-		locationHourDateInfos.put("DropoffDate", getTheDropOffDate());
-		locationHourDateInfos.put("DropoffHour", getTheDropOffHour());
-	}
 
-	public HashMap<String, String> getTheLocationHourDateInfos() {
-		setTheLocationHourDateInfos();
-		System.out.println("5");
-		return locationHourDateInfos;
-	}
 
 	public void enterThePickUpDate(String date) {
 		List<String> list = Arrays.asList(date.split("/"));

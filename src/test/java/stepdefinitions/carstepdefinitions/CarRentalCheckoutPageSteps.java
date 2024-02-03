@@ -7,13 +7,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
-
-import javax.sql.rowset.BaseRowSet;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+
 
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -164,10 +159,44 @@ public class CarRentalCheckoutPageSteps extends BaseStep {
     public void verifyThatPickUpDateMatchesWithCarRentalsHomePageGivenPickupDate() throws ParseException {
         String date = CarRentalsOnBookingHomePageSteps.pickupDateInCarRentalHomePage;
         String dateInMessage = PAGES.getCarPages().getCarRentalCheckOut().getThePickUpDateInAppearedMessage();
-        SimpleDateFormat inputDateFormat = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
-        SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        Date inputDate = inputDateFormat.parse(dateInMessage);
-        String outputDateString = outputDateFormat.format(inputDate);
-        then(date).isEqualTo(outputDateString);
+        then(date).isEqualTo(dateInMessage);
+    }
+
+    @Given("Verify That Drop Off Date Matches With Car Rentals Home Page Given Pickup Date")
+    public void verifyThatDropOffDateMatchesWithCarRentalsHomePageGivenPickupDate() {
+        String date = CarRentalsOnBookingHomePageSteps.dropOffDateInCarRentalPage;
+        String dateInMessage = PAGES.getCarPages().getCarRentalCheckOut().getTheDropOffDateInAppearedMessage();
+        then(date).isEqualTo(dateInMessage);
+    }
+    @When("Get The Pick Up Date  In Car Checkout Page")
+    public void get_the_pick_up_date_ın_car_checkout_page() {
+        CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.add(PAGES.getCarPages().getCarInsurancePage().getThePickupDate());
+
+    }
+    @When("Get The Drop Off Date As  In Car Checkout Page")
+    public void get_the_drop_off_date_as_ın_car_checkout_page() {
+        CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.add(PAGES.getCarPages().getCarInsurancePage().getTheDropOffDate());
+
+    }
+    @When("Get The Pick Up Date  In Car Given Message After Order Page")
+    public void get_the_pick_up_date_ın_car_given_message_after_order_page() {
+        CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.add(PAGES.getCarPages().getCarRentalCheckOut().getThePickUpDateInAppearedMessage());
+    }
+    @When("Get The Drop Off Date As  In Car Given Message After Order Page")
+    public void get_the_drop_off_date_as_ın_car_given_message_after_order_page() {
+        CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.add(PAGES.getCarPages().getCarRentalCheckOut().getTheDropOffDateInAppearedMessage());
+
+    }
+    @Then("Verify That Dates Matches In All The Order Of Car Rental Process")
+    public void verify_that_dates_matches_ın_all_the_order_of_car_rental_process() {
+
+        for (int i = 0; i < CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.size()-1; i++) {
+            System.out.println(i+ "pick");
+            then(CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.get(i).equals(CarRentalsOnBookingHomePageSteps.pickUpDateInDifferentPages.get(i+1)));
+            System.out.println(i+"drop");
+            then(CarRentalsOnBookingHomePageSteps.dropOffDatesInDifferentPages.get(i).equals(CarRentalsOnBookingHomePageSteps.dropOffDatesInDifferentPages.get(i+1)));
+
+        }
+
     }
 }
