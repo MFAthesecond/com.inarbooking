@@ -111,7 +111,7 @@ public class HotelSelectionSteps extends BaseStep {
 
     @And("Verify that {string} selected")
     public void verifyThatSelected(String arg0) {
-        assertThat(arg0.toString()).isEqualTo(PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
+        assertThat(arg0).isEqualTo(PAGES.getHotelPages().getHotelDetailsPage().getHotelName());
         LOGGER.debug("Verified that {} is selected", arg0);
     }
 
