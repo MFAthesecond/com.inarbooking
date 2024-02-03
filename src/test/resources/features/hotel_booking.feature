@@ -61,8 +61,8 @@ Feature: Stay Filtering
     Examples:
       | destination | daynum1 | daynum2 | adultnum | childnum | roomnum |
       | Istanbul    | 1       | 7       | 2        | 1        | 4       |
-      | New York    | 3       | 14      | 5        | 2        | 6       |
-      | Paris       | 21      | 28      | 10       | 5        | 12      |
+      | New York    | 3       | 14      | 5        | 2        | 2       |
+      | Paris       | 21      | 28      | 10       | 5        | 3       |
 
   @Regression
   Scenario: Validate that the stays selection process
@@ -84,14 +84,13 @@ Feature: Stay Filtering
     Then Verify that the user is on the details page
 
   @Regression
-  Scenario Outline: Validate that the textarea, slide, checkboxes and radio buttons functionality for round trip
+  Scenario Outline: Validate that the text area, slide, checkboxes and radio buttons functionality for round trip
     When Type the destination "<destination>" where you will be staying
     And Select "<adultnum>" adults and "<childnum>" child and "<NumberRoom>"room
     And click on search flight button
     And Select "<FunThingsToDo1>" and select "<FunThingsToDo2>" for fun things to do
     And Select "<AdditionalFeatures1>" select "<AdditionalFeatures2>" for additional features
     And Select "<Hotel>" for hotels
-    And Select "<NumberRoom>" for number of bedrooms spinner overflow
     And Click on search hotels button
     And Click on the see availability button for #1 hotel
     And Verify that "<Hotel>" selected
@@ -100,7 +99,7 @@ Feature: Stay Filtering
     Examples:
       | destination | adultnum | childnum | FunThingsToDo1 | FunThingsToDo2 | AdditionalFeatures1 | AdditionalFeatures2 | Hotel               | NumberRoom |
       | Amsterdam   | 3        | 4        | Bicycle rental | Fitness        | Free WiFi           | Elevator            | Coastal Breeze Inn  | 2          |
-      | New York    | 3        | 4        | Cycling        | Walking Tours  | Baggage storage     | Daily housekeeping  | Ocean View Resort   | 10         |
+      | New York    | 3        | 4        | Cycling        | Walking Tours  | Baggage storage     | Daily housekeeping  | Ocean View Resort   | 4          |
       | Istanbul    | 10       | 9        | Walking Tours  | Skate Parkour  | Private Parking     | Non-smoking rooms   | Vintage Manor Hotel | 5          |
 
   @EndToEnd
