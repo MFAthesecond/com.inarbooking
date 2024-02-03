@@ -1,7 +1,6 @@
 package pages.hotelpages;
 
 import lombok.Data;
-import pages.BasePage;
 
 @Data
 public class HotelPages {
@@ -14,7 +13,7 @@ public class HotelPages {
 
 	private HotelSelectionPage hotelSelectionPage;
 
-	private HotelsFinalStep hotelsFinalStep;
+	private HotelsPaymentPage hotelsPaymentPage;
 
 	private HotelsYourDetailsPage hotelsYourDetailsPage;
 
@@ -23,7 +22,7 @@ public class HotelPages {
 		hotelDetailsPage = new HotelDetailsPage();
 		hotelPage = new HotelPage();
 		hotelSelectionPage = new HotelSelectionPage();
-		hotelsFinalStep = new HotelsFinalStep();
+		hotelsPaymentPage = new HotelsPaymentPage();
 		hotelsYourDetailsPage = new HotelsYourDetailsPage();
 	}
 

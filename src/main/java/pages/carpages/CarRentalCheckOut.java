@@ -6,7 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import pages.BasePage;
 import utils.BrowserUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -127,5 +130,20 @@ public class CarRentalCheckOut extends BasePage {
 	public String getThePickUpDateInAppearedMessage() {
 		return datesInMessageAfterOrdering.get(0).getText();
 	}
+
+      public String getTheDropOffDateInAppearedMessage() {
+        return dateFormatterForGivenMessage(datesInMessageAfterOrdering.get(1).getText());
+    }
+    public  String dateFormatterForGivenMessage(String givenDate) {
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("d MMMM yyyy", Locale.ENGLISH);
+        SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        try {
+            Date date = inputDateFormat.parse(givenDate);
+            return outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

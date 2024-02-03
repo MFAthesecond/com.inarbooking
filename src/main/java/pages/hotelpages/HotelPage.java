@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
+import utils.BrowserUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,10 @@ public class HotelPage extends BasePage {
 		monthSelector.selectByIndex(index - 1);
 		findTheMonthDates();
 	}
-
+public String getHotelName(){
+	BrowserUtils.scrollToElement(hotelsField);
+		return hotelsField.getText();
+}
 	public void findTheMonthDates() {
 		daysOfTheMonth = allTheDays.stream()
 			.filter(button -> !button.getAttribute("class").contains("Passive"))

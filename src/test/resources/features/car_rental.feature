@@ -1,4 +1,4 @@
-@bilal
+@carRental
 Feature: Car Rental page verification
 
   Background:
@@ -6,6 +6,7 @@ Feature: Car Rental page verification
     Given Click on the Booking Link
     And Navigation to the Car Rentals page
 
+  @functional
   Scenario Outline: Tests Car Rentals On The Inar Booking HomePage
     When Enter Pickup Location As '<Pickup Location>'
     When Set The Pick Up Date As '<Pick up Date>' In Car Rental Home Page
@@ -17,7 +18,6 @@ Feature: Car Rental page verification
     And Verify That DropOff Date On The Inar Booking HomePage Is '<Drop-Off Hour>'
     And Verify That Pick Up Date Is '<Pick up Date>'
     And Verify That Drop Date Is As '<Drop off Date>'
-
     When click On Search Button On The Inar Booking HomePage
     Then Verify That Program Passed To Car Rental Config Page
     Examples:
@@ -25,6 +25,7 @@ Feature: Car Rental page verification
       | Grand Bazaar    | 00.30        | 05:00         | 03/15/2024   | 03/19/2024    |
       | Central Park    | 14:00        | 22:00         | 12/15/2024   | 12/25/2024    |
 
+  @functional
   Scenario: Tests Car Rentals Page For Some Configurations
     When click On Search Button On The Inar Booking HomePage
     When Select The Drivers Age as '35'
@@ -45,7 +46,7 @@ Feature: Car Rental page verification
     Then Verify That All Prices Are Within Given Range
     Then Verify That Transmission Is As Given
 
-
+  @functional
   Scenario: Test Cases for Insurance Page
     When click On Search Button On The Inar Booking HomePage
     When Set the Pickup Location On Configpage as 'Grand Bazaar'
@@ -62,8 +63,7 @@ Feature: Car Rental page verification
     Then Verify That Program Passed To CheckOut Page
 
 
-
-
+  @functional
   Scenario: Test Case for Configuration Process
     When Enter Pickup Location As 'Grand Bazaar'
     And Click On Pickup Hour And Choose '10:30'
@@ -124,14 +124,11 @@ Feature: Car Rental page verification
     And Click on '1' Car's View Deal Element
     Then Verify That Program Passed To Insurance Page
 
-
+  @smoke
   Scenario: Test Cases For Insurance Page
     When Enter Pickup Location As 'Grand Bazaar'
-
     When Get The Order Details As Location Date And Hour
-
     When click On Search Button On The Inar Booking HomePage
-
     When Select Car Category Via DataTable
       | Large   |
       | SUV     |
@@ -139,30 +136,19 @@ Feature: Car Rental page verification
       | Small   |
       | Medium  |
     When Click on search button In Car Rental Config Page
-
     And Get The Number Of Days For Rental In Config Page
-
     When Sort The Cars By Highest Price
-
     When Get The Price Of #'1' Car's In The Page
-
     And Get The Name Of #'1' Car's In Config Page
-
     And Click on '1' Car's View Deal Element
-
     When Get The Percentage Of Tax
-
     Then Verify That Total Car Price Breakdown Is Accurate In Insurance Page
-
     When Get The Order Details As Location Date And Hour On Insurance Page
-
     Then Verify That Order Details Date Place Hour As Given
 
-
+  @smoke
   Scenario Outline: Car Rentals Checkout Process Validation45879
-
     When click On Search Button On The Inar Booking HomePage
-
     When Select Car Category Via DataTable
       | Large   |
       | SUV     |
@@ -170,11 +156,8 @@ Feature: Car Rental page verification
       | Small   |
       | Medium  |
     When Click on search button In Car Rental Config Page
-
     And Click on '<nthCars>' Car's View Deal Element
-
     When Click On Go To Book Element From Car Insurance Page
-
     When Enter Your Name As '<Name>' In Car Rental Checkout Page
     And Enter Your LastName As '<LastName>' In Car Rental Checkout Page
     And Select The Country Code As '<countryCode>' For Telephone In Car Rental Checkout Page
@@ -191,14 +174,18 @@ Feature: Car Rental page verification
     Examples:
       | nthCars | Name | LastName  | countryCode | PhoneNumber | country | address     | city    | postalCode | CardHolderName | cardNumber       | expirationDate | CVV | numberOfExpectedFaultMessage |
       | 1       | eric | capona    | +61         | 1234567890  | Canada  | Hull Street | Quebec  | 9652       | Eric Capona    | 1234567891234567 | 12/25          | 456 | 0                            |
-      | 1       |      | Derenoğlu | +1          | 9632587412  |         | MCDaldre    | Chicago | 122563     | Han Derenoğlu  | 2587413697896541 | 10/32          | 450 | 2                            |
+      | 1       |      | Derenoğlu | +1          | 9632587412  |         | MCDaldre    | Chicago | 122563     | Han Derenoğlu  | 2587413697896541 | 10/32          | 450 | 3                            |
 
-
+  @EndToEnd
   Scenario: Test Cases About Given Message After Completation Of Order And Validations Of CustomerInformation And Demands
     When Get The Pickup Date In Car Rental Home Page
     When click On Search Button On The Inar Booking HomePage
+    And Get The Number Of Days For Rental In Config Page
+    When Get The Price Of #'1' Car's In The Page
     And Click on '0' Car's View Deal Element
     When Get The Name Of Car In Insurance Page
+    When Click On Extra Insurance Element In Car Rental Insurance Page
+    Then Verify That Calculation Is Accurate With Extra Insurance
     When Click On Go To Book Element From Car Insurance Page
     When Enter Your Name As 'Felix' In Car Rental Checkout Page
     And Enter Your LastName As 'Curt' In Car Rental Checkout Page
@@ -218,8 +205,8 @@ Feature: Car Rental page verification
     Given Verify That Name Of Car Is As Same As In Insurance Page
     Given Verify That Pick Up Date Matches With Car Rentals Home Page Given Pickup Date
 
-
-  Scenario:   Test Cases Firstly Inappropriate Then Appropriate Date Inputs
+  @functional
+  Scenario: Test Cases Firstly Inappropriate Then Appropriate Date Inputs
     When Set The Pick Up Date As '03/15/2024' In Car Rental Home Page
     And Set The Drop Off Date As '03/15/2023' In Car Rental Home Page
     When click On Search Button On The Inar Booking HomePage
@@ -230,21 +217,38 @@ Feature: Car Rental page verification
     When click On Search Button On The Inar Booking HomePage
     Then Verify That Program Passed To Car Rental Config Page
 
+  @functional
+  Scenario: Selected Pick Up Location Matches In All Pages
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    When Set The Pick Up Date As '03/07/2025' In Car Rental Home Page
+    And Set The Drop Off Date As '03/02/2032' In Car Rental Home Page
+    When Get The Pick Up Date  In Car Rental Home Page
+    And Get The Drop Off Date As  In Car Rental Home Page
+    When click On Search Button On The Inar Booking HomePage
+    When Get The Pick Up Date  In Car Config Page
+    And Get The Drop Off Date As  In Car Congig Page
+    And Click on '0' Car's View Deal Element
+    When Get The Pick Up Date  In Car Insurance Page
+    And Get The Drop Off Date As  In Car Insurance Page
+    When Click On Go To Book Element From Car Insurance Page
+    When Get The Pick Up Date  In Car Checkout Page
+    And Get The Drop Off Date As  In Car Checkout Page
+    When Enter Your Name As 'Felix' In Car Rental Checkout Page
+    And Enter Your LastName As 'Curt' In Car Rental Checkout Page
+    And Select The Country Code As '+1' For Telephone In Car Rental Checkout Page
+    And Enter Your Phone Number As '7895462130' In Car Rental Checkout Page
+    And Enter Your Country As 'USA' In Car Rental Checkout Page
+    And Enter Your Adress As 'New York' In Car Rental Checkout Page
+    And Enter Your City As 'New York' In Car Rental Checkout Page
+    And Enter Your As Postal Code '89747' In Car Rental Checkout Page
+    And Enter Your Card Holder Name As 'Felix Curt' In Car Rental Checkout Page
+    And Enter Your  Card Number As '2581473691236547' In Car Rental Checkout Page
+    And Enter Your Expriration Date As '12/35' In Car Rental Checkout Page
+    And Enter Your CVV As '458' In Car Rental Checkout Page
+    When Click On Book Now Element In Car Rental Checkout Page
+    When Get The Pick Up Date  In Car Given Message After Order Page
+    And Get The Drop Off Date As  In Car Given Message After Order Page
+    Then Verify That Dates Matches In All The Order Of Car Rental Process
 
 
 

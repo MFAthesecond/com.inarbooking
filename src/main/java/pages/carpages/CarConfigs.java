@@ -207,18 +207,6 @@ public class CarConfigs extends BasePage {
 		searchButton.click();
 	}
 
-	public void setTheLocationHourDateInfosInCarConfigsPage() {
-		locationHourDateInfosInCarConfigsPage = new HashMap<>();
-		locationHourDateInfosInCarConfigsPage.put("PickupLocation", getThePickUpLocationInConfigurationPage());
-		locationHourDateInfosInCarConfigsPage.put("PickupDate", getThePickUpDateInConfigurationPage());
-		locationHourDateInfosInCarConfigsPage.put("DropoffDate", getTheDropOffDateInConfigurationPage());
-	}
-
-	public HashMap<String, String> getTheLocationHourDateInfosInCarConfigsPage() {
-		setTheLocationHourDateInfosInCarConfigsPage();
-		return locationHourDateInfosInCarConfigsPage;
-	}
-
 	public int getTheNumberOfDaysInfos() {
 		String pickUpDate = getThePickUpDateInConfigurationPage();
 		String dropOffDate = getTheDropOffDateInConfigurationPage();

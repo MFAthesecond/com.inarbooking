@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
 import utils.BrowserUtils;
 
-public class HotelsFinalStep extends BasePage {
+public class HotelsPaymentPage extends BasePage {
 
 	@FindBy(css = "input[placeholder=\"Cardholder's Name\"]")
 	private WebElement cardHolderNameField;
@@ -47,6 +47,11 @@ public class HotelsFinalStep extends BasePage {
 	@FindBy(css = ".enter-your-info.mb-4 > h2")
 	WebElement infoTitle;
 
+	@FindBy(css = ".hotel-title")
+	WebElement hotelName;
+	public String getHotelName(){
+		return hotelName.getText();
+	}
 	public void fillCardHolderName(String name) {
 		cardHolderNameField.sendKeys(name);
 	}
