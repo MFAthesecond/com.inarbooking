@@ -245,7 +245,7 @@ Feature: Flight Pages Test Scenarios
     Then Validate the user is on confirmation page
 
 #    Tests with invalid credentials on the check and pay page
-  @Regression
+  @Smoke @Regression
   Scenario: Validate That CardHolder's Name Information During The Check And Pay Process
 
     When Click on the Flight Tab
@@ -268,7 +268,7 @@ Feature: Flight Pages Test Scenarios
     And Click on complete booking button
     Then Verify that the user is on Flight Check And Pay Page
 
-  @Regression
+  @Smoke @Regression
   Scenario: Validate That Expiration Date Of Card During The Check And Pay Process
 
     When Click on the Flight Tab
