@@ -9,6 +9,8 @@ import stepdefinitions.BaseStep;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+// Diğer import ifadeleri...
+
 public class HotelYoursDetailsSteps extends BaseStep {
 
 	private static final Logger LOGGER = LogManager.getLogger(HotelYoursDetailsSteps.class);
