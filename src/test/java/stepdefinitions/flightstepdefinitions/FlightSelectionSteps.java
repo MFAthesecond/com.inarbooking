@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.NoSuchElementException;
 import stepdefinitions.BaseStep;
 import utils.BrowserUtils;
@@ -111,6 +112,9 @@ public class FlightSelectionSteps extends BaseStep {
 	@Then("Verify that the the cheapest flight is the first flight")
 	public void verifyThatTheTheCheapestFlightIsTheFirstFlight() {
 		try {
+			if(flightRanking.size() < 1){
+				throw new RuntimeException("There is no flight");
+			}
 			LOGGER.debug("Verifying that the cheapest flight is the first flight.");
 			List<Double> flightPricesAfterCheapest = PAGES.getFlightPages().getFlightSelectionPage().getFlightPrices();
 			Collections.sort(flightRanking);
@@ -119,13 +123,16 @@ public class FlightSelectionSteps extends BaseStep {
 		}
 		catch (Exception e) {
 			LOGGER.error("Error occurred while verifying the cheapest flight.", e);
-			throw e;
+			Assertions.fail("There is no flight");
 		}
 	}
 
 	@Then("Verify that the the fastest flight is the first flight")
 	public void verifyThatTheTheFastestFlightIsTheFirstFlight() {
 		try {
+			if(flightRanking.size() < 1){
+				throw new RuntimeException("There is no flight");
+			}
 			LOGGER.debug("Verifying that the fastest flight is the first flight.");
 			List<Double> flightPricesAfterFastest = PAGES.getFlightPages().getFlightSelectionPage().getFlightHours();
 			Collections.sort(flightRanking);
@@ -134,7 +141,7 @@ public class FlightSelectionSteps extends BaseStep {
 		}
 		catch (Exception e) {
 			LOGGER.error("Error occurred while verifying the fastest flight.", e);
-			throw e;
+			Assertions.fail("There is no flight");
 		}
 	}
 

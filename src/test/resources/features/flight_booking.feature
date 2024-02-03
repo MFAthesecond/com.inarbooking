@@ -11,6 +11,7 @@ Feature: Flight Pages Test Scenarios
   Background:
     Given Navigation to the baseURL
     And Click on the Booking Link
+
   @Regression
   Scenario Outline: Validate that the successful flight search process
 
@@ -62,6 +63,7 @@ Feature: Flight Pages Test Scenarios
     And Click on search flight button
     And Click on "Cheapest" tab
     Then Verify that the the cheapest flight is the first flight
+
   @Smoke
   Scenario: Validate that the fastest functionality on flight selection page
 
@@ -80,6 +82,7 @@ Feature: Flight Pages Test Scenarios
     And Click on select ticket button for #1 flight
     And Click on select return ticket button for #1 flight
     Then Verify that the user on flight fare page
+
   @Regression
   Scenario Outline: Validate that the dropdowns , checkboxes and radio buttons functionality for round trip
 
@@ -264,6 +267,7 @@ Feature: Flight Pages Test Scenarios
     And Fill in "345" as the cvc code
     And Click on complete booking button
     Then Verify that the user is on Flight Check And Pay Page
+
   @Regression
   Scenario: Validate That Expiration Date Of Card During The Check And Pay Process
 
@@ -365,5 +369,5 @@ Feature: Flight Pages Test Scenarios
       | Flight class | Origin | Destination | First Date   | Last Date    | Adult Number | Child Number | Departure Fare Type | Return Fare Type | Gmail            | Country Code | Phone Number | Meal              | Extras1            | Extras2            | Name   | Card Number      | Expiration Date | CVC Code |
       | Business     | USA    | Canada      | Feb 14, 2024 | Feb 27, 2024 | 1            | 0            | Refundable Main     | Business         | bbb@gmail.com    | +44 (UK)     | 4444444444   | Kosher Meal - $20 | Extra Comfort Kit  | Extra Legroom Seat | Ben    | 4569875412365897 | 0424            | 325      |
       | First Class  | Spain  | Italy       | Mar 5, 2024  | Mar 30, 2024 | 2            | 1            | Main                | First Class      | Gmail@gmail.com  | +61 (AU)     | 2546987452   | Halal Meal - $16  | Travel Insurance   | Extra Legroom Seat | Furkan | 3658974521236589 | 1126            | 254      |
-      | Economy      | China  | Germany     | May 1, 2024  | May 31, 2024 | 2            | 0            | First Class         | Refundable Main  | berkan@gmail.com | +81 (JP)     | 9875641236   | Halal Meal - $16  | Extra Legroom Seat | Travel Insurance   | Nafiz  | 9632587412546987 | 1229            | 985      |
+      | Economy      | Brazil | Australia   | May 1, 2024  | May 31, 2024 | 2            | 0            | First Class         | Refundable Main  | berkan@gmail.com | +81 (JP)     | 9875641236   | Halal Meal - $16  | Extra Legroom Seat | Travel Insurance   | Nafiz  | 9632587412546987 | 1229            | 985      |
 

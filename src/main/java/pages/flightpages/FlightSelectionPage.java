@@ -236,12 +236,12 @@ public class FlightSelectionPage extends BasePage {
 	}
 
 	public List<Double> getFlightHours() {
-		return flightItemsList.stream()
-			.flatMap(parent -> parent.findElements(By.cssSelector(".my-2:nth-child(1)")).stream())
-			.map(WebElement::getText)
-			.map(element -> element.split(" ")[0])
-			.map(Double::parseDouble)
-			.collect(Collectors.toList());
+			return flightItemsList.stream()
+					.flatMap(parent -> parent.findElements(By.cssSelector(".my-2:nth-child(1)")).stream())
+					.map(WebElement::getText)
+					.map(element -> element.split(" ")[0])
+					.map(Double::parseDouble)
+					.collect(Collectors.toList());
 	}
 
 	private boolean isElementOnDropDownSelected(String elementName, WebElement dropDown) {
