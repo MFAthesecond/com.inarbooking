@@ -70,11 +70,10 @@ public class HotelYoursDetailsSteps extends BaseStep {
 		LOGGER.debug("Clicked on the next, final details button");
 	}
 
-	@Then("Verify that you can pass the final step page")
+	@Then("Verify that the user is on the payment page")
 	public void verify_that_you_can_pass_the_final_step_page() {
-		boolean isCountryCodeSelectDisplayed = PAGES.getHotelPages().getHotelsPaymentPage().countryCodeSelect
-			.isDisplayed();
-		assertThat(isCountryCodeSelectDisplayed).as("Verify that the final step page is passed successfully").isTrue();
+		assertThat(PAGES.getHotelPages().getHotelsPaymentPage().validateInfoTitle())
+				.as("Verify that the final step page is passed successfully").isTrue();
 		LOGGER.info("Final step passed successfully");
 	}
 

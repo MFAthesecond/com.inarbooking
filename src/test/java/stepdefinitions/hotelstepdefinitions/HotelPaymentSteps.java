@@ -14,7 +14,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 // Diğer import ifadeleri...
 
 public class HotelPaymentSteps extends BaseStep {
-
     private static final Logger LOGGER = LogManager.getLogger(HotelPaymentSteps.class);
 
     @Given("Navigation to the hotel yours details URL")
